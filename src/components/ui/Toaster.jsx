@@ -1,5 +1,5 @@
 import { Toast, ToastToggle } from "flowbite-react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { AlertTriangle, Check, Info, Send, X } from "lucide-react";
 import { useEffect } from "react";
 
@@ -62,7 +62,7 @@ export default function Toaster({
   }, [duration, onClose]);
 
   return (
-    <motion.div
+    <Motion.div
       initial={{ opacity: 0, x: align.includes("right") ? 20 : -20 }}
       animate={{ opacity: 1, x: 0 }}
       exit={{ opacity: 0, x: align.includes("right") ? 20 : -20 }}
@@ -89,10 +89,10 @@ export default function Toaster({
             onClick={onClose}
             className="ml-auto -mx-1.5 -my-1.5 rounded-lg p-1.5 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
-            <X className="h-5 w-5" />
+            {/* <X className="h-5 w-5" /> */}
           </button>
         )}
       </Toast>
-    </motion.div>
+    </Motion.div>
   );
 }
