@@ -1,22 +1,21 @@
-// import { useState } from 'react'
-// import reactLogo from './assets/react.svg'
 import { ThemeConfig } from "flowbite-react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import HomePage from "./pages/home/home";
+import AboutPage from "./pages/about/about";
+import { ToastProvider } from "./provider/ToastProvider"; // pastikan path benar
 
 function App() {
-  // const [count, setCount] = useState(0)
-
   return (
-    <>
+    <ToastProvider>
       <ThemeConfig dark={false} />
       <BrowserRouter>
         <Routes>
           <Route index element={<HomePage />} />
+          <Route path="/tentang" element={<AboutPage />} />
         </Routes>
       </BrowserRouter>
-    </>
+    </ToastProvider>
   );
 }
 
