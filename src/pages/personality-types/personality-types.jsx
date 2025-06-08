@@ -1,10 +1,9 @@
-"use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+
 import { Button } from "flowbite-react"
-import { Heart, Brain, User, Leaf, Sun, Moon, ArrowRight, Globe, BookOpen, Sparkles } from "lucide-react"
-import { Link } from "react-router-dom"
+import { motion } from "framer-motion"
+import { ArrowRight, BookOpen, Brain, Globe, Heart, Leaf, Moon, Sparkles, Sun, User } from "lucide-react"
+import { useEffect, useState } from "react"
 
 export default function PersonalityTypesPage() {
   const [darkMode, setDarkMode] = useState(false)
