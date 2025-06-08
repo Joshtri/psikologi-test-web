@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "question": "I enjoy being the center of attention at social gatherings.",
+        "type": "personality",
+        "options": [
+            {
+                "id": "a",
+                "text": "Strongly Disagree",
+                "score": 1
+            },
+            {
+                "id": "b",
+                "text": "Disagree",
+                "score": 2
+            },
+            {
+                "id": "c",
+                "text": "Neutral",
+                "score": 3
+            },
+            {
+                "id": "d",
+                "text": "Agree",
+                "score": 4
+            },
+            {
+                "id": "e",
+                "text": "Strongly Agree",
+                "score": 5
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "question": "I prefer to plan my activities well in advance.",
+        "type": "personality",
+        "options": [
+            {
+                "id": "a",
+                "text": "Strongly Disagree",
+                "score": 1
+            },
+            {
+                "id": "b",
+                "text": "Disagree",
+                "score": 2
+            },
+            {
+                "id": "c",
+                "text": "Neutral",
+                "score": 3
+            },
+            {
+                "id": "d",
+                "text": "Agree",
+                "score": 4
+            },
+            {
+                "id": "e",
+                "text": "Strongly Agree",
+                "score": 5
+            }
+        ]
+    }
+]
