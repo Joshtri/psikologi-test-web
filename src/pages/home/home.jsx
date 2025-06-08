@@ -1,6 +1,5 @@
 import { Button } from "flowbite-react";
 import Layout from "../../components/Layout";
-import Toaster from "../../components/ui/Toaster";
 import { useToast } from "../../provider/ToastProvider";
 
 export default function HomePage() {
