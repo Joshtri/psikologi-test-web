@@ -1,47 +1,43 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { Button, Card } from "flowbite-react"
+import { AnimatePresence, motion } from "framer-motion"
+import { ArrowLeft, ArrowRight, CheckCircle, Clock, Sun, Moon, Heart, Sparkles } from "lucide-react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { Button, Card, Progress } from "flowbite-react"
-import { motion, AnimatePresence } from "framer-motion"
-import { ArrowLeft, ArrowRight, CheckCircle, Clock } from "lucide-react"
-import Layout from "../../components/Layout"
 import { useToast } from "../../provider/ToastProvider"
+import questionsData from "../../../data/questions.json"
 
 export default function TestStartPage() {
   const navigate = useNavigate()
   const { showToast } = useToast()
+  const [darkMode, setDarkMode] = useState(false)
 
   const [currentPage, setCurrentPage] = useState(0)
   const [answers, setAnswers] = useState({})
   const [timeElapsed, setTimeElapsed] = useState(0)
 
-  // Mock questions data - mix all categories without showing which category
+  // Check system preference for dark mode on load
+  useEffect(() => {
+    if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setDarkMode(true)
+    }
+  }, [])
+
+  const toggleDarkMode = () => setDarkMode(!darkMode)
+
   const generateAllQuestions = () => {
-    const allQuestions = []
+    const test = questionsData.tests.find((t) => t.id === "heartland_forgiveness")
+    if (!test) return []
 
-    // Generate questions from all 4 categories mixed together
-    const categories = [
-      { id: 1, count: 18, prefix: "Pemaafan" },
-      { id: 2, count: 42, prefix: "Kesejahteraan" },
-      { id: 3, count: 85, prefix: "Kepribadian" },
-      { id: 4, count: 10, prefix: "Kehidupan" },
-    ]
-
-    categories.forEach((category) => {
-      for (let i = 1; i <= category.count; i++) {
-        allQuestions.push({
-          id: category.id * 1000 + i,
-          text: `Saya merasa ${category.prefix.toLowerCase()} adalah hal yang penting dalam hidup saya dan mempengaruhi cara saya berinteraksi dengan orang lain.`,
-          type: "likert",
-          scale: 5,
-          category: category.id, // Hidden from user, used for scoring
-        })
-      }
-    })
-
-    // Shuffle questions so categories are mixed
-    return allQuestions.sort(() => Math.random() - 0.5)
+    return test.questions.map((q) => ({
+      id: `heartland-${q.id}`,
+      text: q.text,
+      type: "likert",
+      scale: test.scale.max,
+      category: "heartland_forgiveness",
+      reverse: q.reverse,
+    }))
   }
 
   const allQuestions = generateAllQuestions()
@@ -92,7 +88,6 @@ export default function TestStartPage() {
     if (currentPage < totalPages - 1) {
       setCurrentPage((prev) => prev + 1)
     } else {
-      // Finish test
       navigate("/test/result", {
         state: {
           answers,
@@ -116,63 +111,119 @@ export default function TestStartPage() {
   }
 
   return (
-    <>
+    <div
+      className={`min-h-screen transition-colors duration-300 ${darkMode ? "bg-gray-900 text-gray-100" : "bg-gradient-to-br from-purple-50 via-white to-amber-50 text-gray-800"}`}
+    >
+      {/* Dark Mode Toggle */}
+      <div className="fixed top-4 right-4 z-50">
+        <button
+          onClick={toggleDarkMode}
+          className={`p-2 rounded-full transition-colors ${darkMode ? "bg-gray-700 text-yellow-300" : "bg-purple-100 text-purple-800"}`}
+          aria-label="Toggle dark mode"
+        >
+          {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+        </button>
+      </div>
 
-      <div className=" py-8">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 z-0 opacity-5">
+        <div
+          className="absolute inset-0 bg-repeat"
+          style={{
+            backgroundImage:
+              "url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48Y2lyY2xlIHN0cm9rZT0iI2E3ODJmZiIgc3Ryb2tlLXdpZHRoPSIxIiBjeD0iMTAiIGN5PSIxMCIgcj0iNSIvPjxwYXRoIGQ9Ik0xMCAyMEMxNS41MjMgMjAgMjAgMTUuNTIzIDIwIDEwUzE1LjUyMyAwIDEwIDBTMCA0LjQ3NyAwIDEwczQuNDc3IDEwIDEwIDEweiIgc3Ryb2tlPSIjZTlkNWZmIiBzdHJva2Utd2lkdGg9Ii41Ii8+PC9nPjwvc3ZnPg==')",
+            backgroundSize: "30px 30px",
+          }}
+        />
+      </div>
+
+      <div className="relative z-10 py-8">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
-              <div>
-                <h1 className="text-2xl font-bold text-gray-900">Tes Kepribadian</h1>
-                <p className="text-gray-600">Jawab setiap pertanyaan dengan jujur sesuai kondisi Anda</p>
-              </div>
-              <div className="flex items-center space-x-4 text-sm text-gray-600">
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`mb-8 sticky top-4 z-40 rounded-2xl shadow-xl backdrop-blur-sm border ${
+              darkMode ? "bg-gray-800/95 border-gray-700" : "bg-white/95 border-purple-200"
+            }`}
+          >
+            <div className="p-6 mt-10">
+              <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
-                  <Clock className="w-4 h-4 mr-1" />
-                  {formatTime(timeElapsed)}
+                  <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-amber-600 rounded-full flex items-center justify-center mr-4">
+                    <Heart className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h1 className={`text-2xl font-bold ${darkMode ? "text-white" : "text-gray-900"}`}>
+                      RaiReflect - Tes Pemaafan
+                    </h1>
+                    <p className={`${darkMode ? "text-gray-300" : "text-gray-600"}`}>
+                      Jawab setiap pertanyaan dengan jujur sesuai kondisi Anda
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-4 text-sm">
+                  <div
+                    className={`flex items-center px-3 py-2 rounded-lg ${
+                      darkMode ? "bg-gray-700 text-gray-300" : "bg-purple-100 text-purple-700"
+                    }`}
+                  >
+                    <Clock className="w-4 h-4 mr-2" />
+                    {formatTime(timeElapsed)}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Progress Bar */}
-            <div className="space-y-3">
-              <div>
-                <div className="flex justify-between text-sm text-gray-600 mb-1">
-                  <span>Progress Keseluruhan</span>
-                  <span>{getTotalProgress()}%</span>
-                </div>
-                <Progress progress={getTotalProgress()} color="blue" />
-              </div>
-            </div>
-
-            {/* Page Indicator */}
-            <div className="mt-6">
-              <div className="flex items-center justify-center space-x-2">
-                {Array.from({ length: Math.min(totalPages, 10) }, (_, i) => {
-                  const pageIndex = Math.floor(currentPage / 10) * 10 + i
-                  if (pageIndex >= totalPages) return null
-
-                  return (
+              {/* Progress Bar */}
+              <div className="space-y-4">
+                <div>
+                  <div className={`flex justify-between text-sm mb-2 ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
+                    <span>Progress Keseluruhan</span>
+                    <span className="font-semibold">{getTotalProgress()}%</span>
+                  </div>
+                  <div className={`w-full bg-gray-200 rounded-full h-3 ${darkMode ? "bg-gray-700" : "bg-gray-200"}`}>
                     <div
-                      key={pageIndex}
-                      className={`w-3 h-3 rounded-full transition-colors ${
-                        pageIndex === currentPage
-                          ? "bg-blue-600"
-                          : pageIndex < currentPage
-                            ? "bg-green-500"
-                            : "bg-gray-300"
-                      }`}
+                      className="bg-gradient-to-r from-purple-500 to-amber-500 h-3 rounded-full transition-all duration-500"
+                      style={{ width: `${getTotalProgress()}%` }}
                     />
-                  )
-                })}
-                {totalPages > 10 && <span className="text-gray-400">...</span>}
-              </div>
-              <div className="text-center text-sm text-gray-600 mt-2">
-                Halaman {currentPage + 1} dari {totalPages}
+                  </div>
+                </div>
+
+                {/* Page Indicator */}
+                <div className="flex flex-col items-center">
+                  <div className="flex items-center justify-center space-x-2 mb-2">
+                    {Array.from({ length: Math.min(totalPages, 10) }, (_, i) => {
+                      const pageIndex = Math.floor(currentPage / 10) * 10 + i
+                      if (pageIndex >= totalPages) return null
+
+                      return (
+                        <div
+                          key={pageIndex}
+                          className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                            pageIndex === currentPage
+                              ? "bg-gradient-to-r from-purple-500 to-amber-500 scale-125"
+                              : pageIndex < currentPage
+                                ? darkMode
+                                  ? "bg-green-400"
+                                  : "bg-green-500"
+                                : darkMode
+                                  ? "bg-gray-600"
+                                  : "bg-gray-300"
+                          }`}
+                        />
+                      )
+                    })}
+                    {totalPages > 10 && (
+                      <span className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>...</span>
+                    )}
+                  </div>
+                  <div className={`text-center text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+                    Halaman {currentPage + 1} dari {totalPages}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Questions */}
           <AnimatePresence mode="wait">
@@ -183,40 +234,131 @@ export default function TestStartPage() {
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <Card className="mb-8">
-                <div className="p-6">
-                  <div className="space-y-6">
-                    {currentQuestions.map((question, index) => (
-                      <div key={question.id} className="border-b border-gray-200 pb-6 last:border-b-0">
-                        <div className="mb-4">
-                          <h3 className="text-lg font-medium text-gray-900 mb-2">
-                            {currentPage * questionsPerPage + index + 1}. {question.text}
-                          </h3>
-                        </div>
+              <Card
+                className={`mb-8 shadow-xl border-2 ${
+                  darkMode ? "bg-gray-800 border-gray-700" : "bg-white border-purple-200"
+                }`}
+              >
+                <div className="p-8">
+                  <div className="space-y-8">
+                    {currentQuestions.map((question, index) => {
+                      const qIndex = currentPage * questionsPerPage + index + 1
+                      const isAnswered = answers[question.id] !== undefined
 
-                        <div className="space-y-2">
-                          <div className="flex justify-between text-sm text-gray-600 mb-3">
-                            <span>Sangat Tidak Setuju</span>
-                            <span>Sangat Setuju</span>
+                      return (
+                        <motion.div
+                          key={question.id}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: index * 0.1 }}
+                          className={`border-b pb-8 last:border-b-0 transition-all duration-300 ${
+                            darkMode ? "border-gray-700" : "border-gray-200"
+                          } ${
+                            isAnswered
+                              ? darkMode
+                                ? "bg-purple-900/10 rounded-lg p-4"
+                                : "bg-purple-50 rounded-lg p-4"
+                              : ""
+                          }`}
+                        >
+                          <div className="flex items-start mb-6">
+                            <div
+                              className={`w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0 ${
+                                isAnswered
+                                  ? "bg-gradient-to-r from-purple-500 to-amber-500 text-white"
+                                  : darkMode
+                                    ? "bg-gray-700 text-gray-300"
+                                    : "bg-gray-200 text-gray-600"
+                              }`}
+                            >
+                              {isAnswered ? <CheckCircle className="w-4 h-4" /> : qIndex}
+                            </div>
+                            <h3
+                              className={`text-lg font-medium leading-relaxed ${darkMode ? "text-white" : "text-gray-900"}`}
+                            >
+                              {question.text}
+                            </h3>
                           </div>
-                          <div className="flex justify-center space-x-4">
-                            {Array.from({ length: 5 }, (_, i) => (
-                              <label key={i} className="flex flex-col items-center cursor-pointer">
-                                <input
-                                  type="radio"
-                                  name={`question-${question.id}`}
-                                  value={i + 1}
-                                  checked={answers[question.id] === i + 1}
-                                  onChange={() => handleAnswer(question.id, i + 1)}
-                                  className="w-5 h-5 text-blue-600"
-                                />
-                                <span className="text-sm text-gray-600 mt-1">{i + 1}</span>
-                              </label>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    ))}
+
+                          {/* Likert Scale */}
+                          {question.type === "likert" && (
+                            <div className="ml-12">
+                              <div
+                                className={`flex justify-between text-sm mb-4 ${darkMode ? "text-gray-400" : "text-gray-600"}`}
+                              >
+                                <span>Sangat Tidak Setuju</span>
+                                <span>Sangat Setuju</span>
+                              </div>
+                              <div className="flex justify-center space-x-3">
+                                {Array.from({ length: question.scale }, (_, i) => (
+                                  <label key={i} className="flex flex-col items-center cursor-pointer group">
+                                    <input
+                                      type="radio"
+                                      name={`question-${question.id}`}
+                                      value={i + 1}
+                                      checked={answers[question.id] === i + 1}
+                                      onChange={() => handleAnswer(question.id, i + 1)}
+                                      className="w-6 h-6 text-purple-600 focus:ring-purple-500 focus:ring-2"
+                                    />
+                                    <span
+                                      className={`text-sm mt-2 transition-colors ${
+                                        answers[question.id] === i + 1
+                                          ? darkMode
+                                            ? "text-purple-300 font-semibold"
+                                            : "text-purple-600 font-semibold"
+                                          : darkMode
+                                            ? "text-gray-400 group-hover:text-gray-300"
+                                            : "text-gray-600 group-hover:text-gray-800"
+                                      }`}
+                                    >
+                                      {i + 1}
+                                    </span>
+                                  </label>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+
+                          {/* Yes/No Questions */}
+                          {question.type === "yesno" && (
+                            <div className="ml-12 flex space-x-4 justify-center">
+                              {["Ya", "Tidak"].map((label, idx) => (
+                                <Button
+                                  key={label}
+                                  className={`px-6 py-2 transition-all duration-300 ${
+                                    answers[question.id] === idx + 1
+                                      ? "bg-gradient-to-r from-purple-600 to-amber-600 text-white"
+                                      : darkMode
+                                        ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                  }`}
+                                  onClick={() => handleAnswer(question.id, idx + 1)}
+                                >
+                                  {label}
+                                </Button>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Text Questions */}
+                          {question.type === "text" && (
+                            <div className="ml-12">
+                              <textarea
+                                className={`w-full border rounded-lg p-4 transition-colors focus:ring-2 focus:ring-purple-500 ${
+                                  darkMode
+                                    ? "bg-gray-700 border-gray-600 text-white placeholder-gray-400"
+                                    : "bg-white border-gray-300 text-gray-900 placeholder-gray-500"
+                                }`}
+                                rows={3}
+                                placeholder="Tuliskan jawaban Anda di sini..."
+                                value={answers[question.id] || ""}
+                                onChange={(e) => handleAnswer(question.id, e.target.value)}
+                              />
+                            </div>
+                          )}
+                        </motion.div>
+                      )
+                    })}
                   </div>
                 </div>
               </Card>
@@ -224,21 +366,45 @@ export default function TestStartPage() {
           </AnimatePresence>
 
           {/* Navigation */}
-          <div className="flex justify-between items-center">
-            <Button color="light" onClick={handlePrevious} disabled={currentPage === 0} className="px-6 py-2">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className={`flex flex-col sm:flex-row justify-between items-center gap-4 p-6 rounded-2xl shadow-lg ${
+              darkMode ? "bg-gray-800 border border-gray-700" : "bg-white border border-purple-200"
+            }`}
+          >
+            <Button
+              color="light"
+              onClick={handlePrevious}
+              disabled={currentPage === 0}
+              className={`px-6 py-3 transition-all duration-300 ${
+                currentPage === 0
+                  ? "opacity-50 cursor-not-allowed"
+                  : darkMode
+                    ? "bg-gray-700 text-gray-300 hover:bg-gray-600 border-gray-600"
+                    : "bg-white text-gray-700 hover:bg-gray-50 border-gray-300"
+              }`}
+            >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Sebelumnya
             </Button>
 
-            <div className="text-sm text-gray-600">
-              {getCurrentPageAnswers()}/{currentQuestions.length} pertanyaan dijawab
+            <div className="text-center">
+              <div className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-600"}`}>
+                {getCurrentPageAnswers()}/{currentQuestions.length} pertanyaan dijawab
+              </div>
+              <div className={`text-xs mt-1 ${darkMode ? "text-gray-500" : "text-gray-500"}`}>
+                Total: {Object.keys(answers).length}/{allQuestions.length}
+              </div>
             </div>
 
             <Button
               onClick={handleNext}
               disabled={!canProceed()}
-              className={`px-6 py-2 ${
-                canProceed() ? "bg-blue-600 hover:bg-blue-700" : "bg-gray-400 cursor-not-allowed"
+              className={`px-6 py-3 transition-all duration-300 ${
+                canProceed()
+                  ? "bg-gradient-to-r from-purple-600 to-amber-600 hover:from-purple-700 hover:to-amber-700 text-white shadow-lg hover:shadow-xl"
+                  : "bg-gray-400 cursor-not-allowed text-gray-200"
               }`}
             >
               {currentPage === totalPages - 1 ? (
@@ -253,9 +419,24 @@ export default function TestStartPage() {
                 </>
               )}
             </Button>
-          </div>
+          </motion.div>
+
+          {/* Motivational Footer */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className={`mt-8 text-center p-4 rounded-lg ${darkMode ? "bg-gray-800/50" : "bg-purple-50/50"}`}
+          >
+            <div className="flex items-center justify-center mb-2">
+              <Sparkles className={`w-5 h-5 mr-2 ${darkMode ? "text-amber-300" : "text-amber-600"}`} />
+              <span className={`text-sm font-medium ${darkMode ? "text-gray-300" : "text-gray-700"}`}>
+                Tetap semangat! Setiap jawaban membawa Anda lebih dekat pada pemahaman diri yang mendalam.
+              </span>
+            </div>
+          </motion.div>
         </div>
       </div>
-    </>
+    </div>
   )
 }

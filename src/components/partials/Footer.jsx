@@ -77,7 +77,7 @@ export default function FooterCustom() {
                     <Sparkles className="w-7 h-7 text-white" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold">Tes Kepribadian</h3>
+                    <h3 className="text-2xl font-bold">RaiReflect</h3>
                     <p className="text-sm text-gray-300">Platform Tes Terpercaya</p>
                   </div>
                 </div>

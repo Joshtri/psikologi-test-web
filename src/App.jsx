@@ -9,6 +9,7 @@ import { ToastProvider } from "./provider/ToastProvider"; // pastikan path benar
 import TestStartPage from "./pages/test/start";
 import TestIndexPage from "./pages/test";
 import TestResultPage from "./pages/test/result";
+import PersonalityTypesPage from "./pages/personality-types/personality-types";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <Route path="/test" element={<TestIndexPage />} />
             <Route path="/test/start" element={<TestStartPage />} />
             <Route path="/test/result" element={<TestResultPage />} />
+            <Route path="/personality-type" element={<PersonalityTypesPage />} />
 
           </Routes>
         </Layout>
