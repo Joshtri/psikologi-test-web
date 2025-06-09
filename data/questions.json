@@ -1,0 +1,238 @@
+{
+  "tests": [
+    {
+      "id": "heartland_forgiveness",
+      "name": "Heartland Forgiveness Scale",
+      "instructions": "Beri nilai (1–7) sesuai dengan pernyataan yang menggambarkan Anda saat menghadapi pengalaman negatif.",
+      "scale": {
+        "min": 1,
+        "max": 7,
+        "labels": {
+          "1": "Sangat tidak sesuai dengan saya",
+          "7": "Sangat sesuai dengan saya"
+        }
+      },
+      "questions": [
+        {
+          "id": 1,
+          "text": "Walaupun mulanya saya merasa bersalah ketika melakukan kesalahan, saya dapat memaafkan diri saya sendiri seiring berjalannya waktu",
+          "reverse": true
+        },
+        {
+          "id": 2,
+          "text": "Saya menyesal atas kesalahan-kesalahan yang saya perbuat",
+          "reverse": false
+        },
+        {
+          "id": 3,
+          "text": "Mengambil pelajaran dari setiap kesalahan yang saya perbuat membuat saya untuk melakukannya lebih baik",
+          "reverse": true
+        },
+        {
+          "id": 4,
+          "text": "Sangat sulit bagi saya untuk bersikap adil serta memaklumi diri sendiri akan kesalahan",
+          "reverse": false
+        },
+        {
+          "id": 5,
+          "text": "Seiring berjalannya waktu, saya bisa memaklumi diri saya sendiri akan kesalahan-kesalahan yang saya perbuat",
+          "reverse": true
+        },
+        {
+          "id": 6,
+          "text": "Saya tidak henti-hentinya mengkritik diri sendiri akan hal-hal negatif yang saya rasakan, pikirkan, katakan, atau perbuat",
+          "reverse": false
+        },
+        {
+          "id": 7,
+          "text": "Saya terus-menerus menghukum orang yang telah melakukan sesuatu yang saya anggap pandangan buruk",
+          "reverse": false
+        },
+        {
+          "id": 8,
+          "text": "Seiring berjalannya waktu, saya bisa memaklumi orang lain akan kesalahan-kesalahan yang mereka perbuat",
+          "reverse": true
+        },
+        {
+          "id": 9,
+          "text": "Saya terus-menerus bersikap keras terhadap orang-orang yang telah menyakiti saya",
+          "reverse": false
+        },
+        {
+          "id": 10,
+          "text": "Walaupun ada orang-orang yang sebelumnya pernah menyakiti saya, saya perlahan-lahan bisa memandang mereka sebagai orang baik",
+          "reverse": true
+        },
+        {
+          "id": 11,
+          "text": "Apabila orang lain memperlakukan saya dengan baik, saya akan terus-menerus berpikir buruk tentang mereka",
+          "reverse": false
+        },
+        {
+          "id": 12,
+          "text": "Ketika seseorang mengecewakan saya, saya perlahan-lahan bisa melupakannya",
+          "reverse": true
+        },
+        {
+          "id": 13,
+          "text": "Ketika sesuatu tidak berjalan sesuai harapan karena situasi yang berada di luar kendali, saya akan terus berpikir negatif akannya",
+          "reverse": false
+        },
+        {
+          "id": 14,
+          "text": "Sering berjalannya waktu, saya bisa memaklumi hal-hal buruk yang terjadi di hidup saya",
+          "reverse": true
+        },
+        {
+          "id": 15,
+          "text": "Ketika saya merasa kecewa terhadap situasi yang berada di luar kendali, saya cenderung terus-menerus berpikir negatif tentang hal tersebut",
+          "reverse": false
+        },
+        {
+          "id": 16,
+          "text": "Saya perlahan-lahan dapat berdamai dengan hal-hal buruk yang terjadi dalam hidup saya",
+          "reverse": true
+        },
+        {
+          "id": 17,
+          "text": "Sangat sulit bagi saya untuk menerima kejadian buruk yang terjadi di luar kendali siapapun",
+          "reverse": false
+        },
+        {
+          "id": 18,
+          "text": "Perlahan-lahan, saya mampu meninggalkan pikiran-pikiran negatif akan kejadian-kejadian buruk yang terjadi di luar kendali",
+          "reverse": true
+        }
+      ]
+    },
+
+    {
+      "id": "psychological_well_being",
+      "name": "Psychological Well-Being Scale",
+      "instructions": "Pilih jawaban yang paling sesuai dengan pengalaman Anda. Skala jawaban terdiri dari TP (Tidak Pernah), KK (Kadang-kadang), S (Sering), SS (Selalu).",
+      "scale": {
+        "labels": {
+          "TP": "Tidak Pernah",
+          "KK": "Kadang-kadang",
+          "S": "Sering",
+          "SS": "Selalu"
+        },
+        "scoring": {
+          "reverse": {
+            "TP": 4,
+            "KK": 3,
+            "S": 2,
+            "SS": 1
+          },
+          "normal": {
+            "TP": 1,
+            "KK": 2,
+            "S": 3,
+            "SS": 4
+          }
+        }
+      },
+      "questions": [
+        { "id": 1, "text": "Saya berani mengemukakan pendapat saya meskipun bertentangan dengan pendapat orang-orang di sekitar saya", "reverse": false },
+        { "id": 2, "text": "Saya mampu beradaptasi dengan lingkungan yang baru", "reverse": false },
+        { "id": 3, "text": "Saya enggan mengikuti kegiatan yang dapat memperluas wawasan saya", "reverse": true },
+        { "id": 4, "text": "Kebanyakan orang melihat saya sebagai sosok yang penuh kasih sayang", "reverse": false },
+        { "id": 5, "text": "Saya hidup untuk saat ini dan tidak memikirkan masa depan", "reverse": true },
+        { "id": 6, "text": "Saya puas dengan apa yang telah terjadi dalam hidup saya", "reverse": false },
+        { "id": 7, "text": "Keputusan yang saya ambil bukan berdasarkan pengaruh orang lain", "reverse": false },
+        { "id": 8, "text": "Tuntutan dalam hidup seringkali membuat saya down", "reverse": true },
+        { "id": 9, "text": "Saya suka mengikuti kegiatan yang dapat membuat hidup saya lebih bermakna", "reverse": false },
+        { "id": 10, "text": "Saya sulit mempertahankan hubungan pertemanan saya dengan orang lain", "reverse": true },
+        { "id": 11, "text": "Saya berorientasi untuk mencapai masa depan yang saya inginkan", "reverse": false },
+        { "id": 12, "text": "Saya merasa percaya diri dan berpikir positif terhadap diri saya", "reverse": false },
+        { "id": 13, "text": "Saya cemas dengan pandangan orang lain terhadap saya", "reverse": true },
+        { "id": 14, "text": "Saya merasa tidak cocok dengan lingkungan di sekitar saya", "reverse": true },
+        { "id": 15, "text": "Saya tidak memiliki banyak perbaikan seperti yang kebanyakan orang lakukan", "reverse": true },
+        { "id": 16, "text": "Saya merasa kesepian karena tidak memiliki banyak teman dekat", "reverse": true },
+        { "id": 17, "text": "Kegiatan saya sehari-hari biasa saja dan tidak penting", "reverse": true },
+        { "id": 18, "text": "Saya minder ketika melihat teman-teman saya yang lebih baik dari saya", "reverse": true },
+        { "id": 19, "text": "Saya mudah terpengaruh oleh pendapat orang lain", "reverse": true },
+        { "id": 20, "text": "Saya memiliki tanggung jawab yang baik dalam kegiatan sehari-hari", "reverse": false },
+        { "id": 21, "text": "Saya lebih mengembangkan potensi yang saya miliki melalui aktivitas yang saya ikuti", "reverse": false },
+        { "id": 22, "text": "Saya menikmati komunikasi yang terjalin bersama orang-orang di sekitar saya", "reverse": false },
+        { "id": 23, "text": "Saya sulit membuat target dalam hidup saya", "reverse": true },
+        { "id": 24, "text": "Saya menyukai segala aspek dalam hidup saya", "reverse": false },
+        { "id": 25, "text": "Saya yakin dengan pendapat saya meskipun tidak sama dengan pendapat pada umumnya", "reverse": false },
+        { "id": 26, "text": "Saya meremehkan tugas-tugas yang menjadi tanggung jawab saya", "reverse": true },
+        { "id": 27, "text": "Saya enggan mencoba hal baru selama hidup saya masih nyaman", "reverse": true },
+        { "id": 28, "text": "Orang-orang melihat saya sebagai sosok yang murah hati dan rela mengorbankan waktu untuk berbagi cerita", "reverse": false },
+        { "id": 29, "text": "Saya senang membuat perencanaan dalam hidup saya", "reverse": false },
+        { "id": 30, "text": "Saya merasa kecewa dengan pencapaian saya selama ini", "reverse": true },
+        { "id": 31, "text": "Saya kesulitan menerima pendapat orang yang bertentangan dengan orang lain", "reverse": true },
+        { "id": 32, "text": "Saya merasa kesulitan menata hidup yang memuaskan", "reverse": true },
+        { "id": 33, "text": "Saya merasa bahwa hidup ini merupakan sebuah proses pembelajaran", "reverse": false },
+        { "id": 34, "text": "Saya tidak tertarik untuk menjalin hubungan yang hangat dan saling percaya dengan orang lain", "reverse": true },
+        { "id": 35, "text": "Saya mengingat hal-hal yang saya inginkan saya raih dalam hidup saya", "reverse": false },
+        { "id": 36, "text": "Sikap saya terhadap diri saya sendiri tidak sespositif orang lain terhadap sikap mereka", "reverse": true },
+        { "id": 37, "text": "Saya menilai diri saya berdasarkan apa yang saya anggap penting bukan karena orang lain", "reverse": false },
+        { "id": 38, "text": "Saya mampu mengatur gaya hidup sesuai dengan keinginan saya", "reverse": false },
+        { "id": 39, "text": "Saya sudah lebih membuat perubahan dalam hidup sejak waktu yang lama", "reverse": false },
+        { "id": 40, "text": "Saya dan orang-orang di sekitar saya saling percaya satu sama lain", "reverse": false },
+        { "id": 41, "text": "Saya merasa telah menjalani hidup saya sesuai dengan perencanaan saya", "reverse": false },
+        { "id": 42, "text": "Saya merasa nyaman dengan diri saya apa adanya saat ini", "reverse": false }
+      ]
+    },
+    
+    {
+      "id": "pdq_4",
+      "name": "Personality Diagnostic Questionnaire (PDQ-4)",
+      "instructions": "Jawablah setiap pernyataan dengan jujur apakah BENAR atau SALAH sesuai dengan diri Anda.",
+      "scale": {
+        "labels": {
+          "true": "Benar",
+          "false": "Salah"
+        },
+        "scoring": {
+          "true": 1,
+          "false": 2
+        }
+      },
+      "questions": [
+        { "id": 1, "text": "Saya ingin menjadi pusat perhatian" },
+        { "id": 2, "text": "Saya memiliki pencapaian yang jauh lebih besar daripada yang orang ketahui" },
+        { "id": 3, "text": "Saya akan melakukan tindakan berbahaya untuk mencegah orang yang saya cintai meninggalkan saya" },
+        { "id": 4, "text": "Beberapa kali saya pernah bermasalah dengan hukum" },
+        { "id": 5, "text": "Saya lebih menarik dibandingkan orang lain" },
+        { "id": 6, "text": "Saya berpikir tentang betapa hebatnya diri saya, baik sekarang maupun di masa depan" },
+        { "id": 7, "text": "Saya hanya bisa mencintai seseorang atau membenci mereka, tidak ada perasaan netral" },
+        { "id": 8, "text": "Saya banyak terlibat dalam perkelahian fisik" },
+        { "id": 9, "text": "Saya mudah mengekspresikan emosi atau perasaan" },
+        { "id": 10, "text": "Hanya orang-orang tertentu yang dapat menghargai dan memahami saya" },
+        { "id": 11, "text": "Saya sering bertanya-tanya mengenai jati diri saya" },
+        { "id": 12, "text": "Saya mengalami kesulitan dalam membayar tagihan karena saya tidak bertahan lama di satu pekerjaan" },
+        { "id": 13, "text": "Saya suka berpura-pura “pemain” untuk mendapatkan perhatian yang saya butuhkan" },
+        { "id": 14, "text": "Saya sangat membutuhkan perhatian atau pujian dari orang lain" },
+        { "id": 15, "text": "Saya pernah mencoba menyakiti atau membunuh diri saya" },
+        { "id": 16, "text": "Saya melakukan banyak hal tanpa mempertimbangkan konsekuensinya" },
+        { "id": 17, "text": "Meskipun saya banyak bicara, orang-orang mengatakan bahwa saya kesulitan untuk langsung ke inti pembicaraan" },
+        { "id": 18, "text": "Saya merasa orang lain mau membantu saya meskipun saya tidak selalu memberi mereka perhatian" },
+        { "id": 19, "text": "Suasana hati saya mudah berubah secara tiba-tiba" },
+        { "id": 20, "text": "Berbohong adalah hal yang mudah bagi saya, dan saya sering melakukannya" },
+        { "id": 21, "text": "Saya memiliki bakat untuk bersikap dramatis" },
+        { "id": 22, "text": "Beberapa orang berpikir bahwa saya suka memanfaatkan orang lain" },
+        { "id": 23, "text": "Saya merasa hidup saya membosankan dan tidak bermakna" },
+        { "id": 24, "text": "Orang-orang sering mengeluh bahwa saya tidak menyadari saat mereka sedang marah" },
+        { "id": 25, "text": "Saya suka melakukan hal-hal yang berisiko" },
+        { "id": 26, "text": "Saya kesulitan mengendalikan amarah atau temperamen saya" },
+        { "id": 27, "text": "Sebagian orang merasa iri pada saya" },
+        { "id": 28, "text": "Saya mudah dipengaruhi oleh orang lain" },
+        { "id": 29, "text": "Saya lebih serius dalam menjalin hubungan dibandingkan dengan orang yang menjalin hubungan dengan saya" },
+        { "id": 30, "text": "Orang lain menganggap saya sombong" },
+        { "id": 31, "text": "Saat saya stres, hal-hal tak terduga terjadi. Misalnya saya menjadi paranoid (ketakutan dan curiga berlebihan) atau tiba-tiba kehilangan kesadaran" },
+        { "id": 32, "text": "Saya tidak peduli jika orang lain terluka, selama keinginan saya terpenuhi" },
+        { "id": 33, "text": "Saya pernah melakukan sesuatu secara impulsif (seperti hal-hal di bawah ini) yang bisa membuat saya dalam masalah" },
+        { "id": 34, "text": "Menghabiskan lebih banyak uang dari pada yang saya miliki" },
+        { "id": 35, "text": "Berhubungan intim dengan orang yang belum saya kenal baik" },
+        { "id": 36, "text": "Terlalu banyak mengonsumsi alkohol" },
+        { "id": 37, "text": "Mengonsumsi obat-obatan terlarang" },
+        { "id": 38, "text": "Makan secara berlebihan hingga kehilangan kontrol" },
+        { "id": 39, "text": "Berkendara secara ugal-ugalan" }
+      ]
+    }
+  ]
+}
