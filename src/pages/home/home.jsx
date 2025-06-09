@@ -287,39 +287,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className={`py-16 md:py-24 ${darkMode ? "bg-gray-900" : "bg-white"}`}>
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.8 }}>
-            <div
-              className={`p-8 md:p-12 rounded-2xl ${
-                darkMode
-                  ? "bg-gradient-to-br from-gray-800 to-gray-700"
-                  : "bg-gradient-to-br from-purple-100 to-amber-100"
-              } shadow-xl`}
-            >
-              <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-amber-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Heart className="w-10 h-10 text-white" />
-              </div>
-              <h3 className={`text-3xl font-bold mb-4 ${darkMode ? "text-white" : "text-gray-900"}`}>
-                Siap Memulai Perjalanan Refleksi Diri?
-              </h3>
-              <p className={`text-lg mb-8 ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
-                Temukan pemahaman diri yang lebih dalam melalui tes kepribadian yang menghormati nilai-nilai budaya dan
-                kearifan lokal Anda.
-              </p>
-              <Button
-                size="xl"
-                className="bg-gradient-to-r from-purple-600 to-amber-600 hover:from-purple-700 hover:to-amber-700 border-0 px-8 py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                onClick={handleStartTest}
-              >
-                <Play className="w-5 h-5 mr-2" />
-                Mulai Tes Gratis Sekarang
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+    
     </div>
   )
 }

@@ -367,37 +367,6 @@ const TestIndexPage = () => {
             </Card>
           </motion.div>
 
-          {/* Call to Action */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.1 }}
-            className="text-center mt-16"
-          >
-            <div
-              className={`p-8 rounded-2xl ${
-                darkMode
-                  ? "bg-gradient-to-br from-gray-800 to-gray-700"
-                  : "bg-gradient-to-br from-purple-100 to-amber-100"
-              } shadow-xl`}
-            >
-              <h3 className={`text-2xl font-bold mb-4 ${darkMode ? "text-white" : "text-gray-900"}`}>
-                Siap Memulai Perjalanan Refleksi Diri?
-              </h3>
-              <p className={`text-lg mb-6 ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
-                Temukan pemahaman diri yang lebih dalam melalui tes kepribadian yang menghormati nilai-nilai budaya dan
-                kearifan lokal Anda.
-              </p>
-              <Button
-                size="xl"
-                className="bg-gradient-to-r from-purple-600 to-amber-600 hover:from-purple-700 hover:to-amber-700 border-0 px-8 py-3 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                onClick={handleStartTest}
-              >
-                <Play className="w-5 h-5 mr-2" />
-                Mulai Tes RaiReflect
-              </Button>
-            </div>
-          </motion.div>
         </div>
       </div>
     </div>

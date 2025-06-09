@@ -61,6 +61,7 @@ export default function TestResultPage() {
           totalQuestions: scale.questions.length,
         }
       }) || []
+    return results.filter((result) => result.answeredQuestions > 0
     )
   }
 
