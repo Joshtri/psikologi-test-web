@@ -31,7 +31,15 @@ export default function TestResultPage() {
   const calculateResults = () => {
     const results =
       testScales?.map((scale) => {
-        const scaleAnswers = scale.questions.map((q) => answers[q.id]).filter(Boolean)
+        const scaleAnswers = scale.questions
+          .map((q) => {
+            const answer = answers[q.id];
+            if (q.reverse && answer !== undefined) {
+              return 6 - answer; // Assuming a 1-5 scale, reverse mapping formula
+            }
+            return answer;
+          })
+          .filter(Boolean);
         const average = scaleAnswers.reduce((sum, val) => sum + val, 0) / scaleAnswers.length
         const percentage = Math.round((average / 5) * 100) // Assuming 5-point scale
 
