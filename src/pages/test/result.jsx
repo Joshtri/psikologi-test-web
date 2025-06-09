@@ -59,11 +59,10 @@ export default function TestResultPage() {
           totalQuestions: scale.questions.length,
         }
       }) || []
-
-    return results
+    )
   }
 
-  const results = calculateResults()
+  const results = useMemo(() => calculateResults(), [answers, testScales])
   const totalQuestions = results.reduce((sum, r) => sum + r.totalQuestions, 0)
   const totalAnswered = results.reduce((sum, r) => sum + r.answeredQuestions, 0)
   const completionRate = Math.round((totalAnswered / totalQuestions) * 100)
