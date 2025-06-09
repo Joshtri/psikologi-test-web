@@ -40,7 +40,9 @@ export default function TestResultPage() {
             return answer;
           })
           .filter(Boolean);
-        const average = scaleAnswers.reduce((sum, val) => sum + val, 0) / scaleAnswers.length
+        const average = scaleAnswers.length > 0 
+          ? scaleAnswers.reduce((sum, val) => sum + val, 0) / scaleAnswers.length 
+          : 0
         const percentage = Math.round((average / 5) * 100) // Assuming 5-point scale
 
         let interpretation = ""
