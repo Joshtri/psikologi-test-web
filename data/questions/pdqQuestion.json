@@ -1,0 +1,125 @@
+{
+  "id": "pdq_4",
+  "name": "Personality Diagnostic Questionnaire (PDQ-4)",
+  "instructions": "Jawablah setiap pernyataan dengan jujur apakah BENAR atau SALAH sesuai dengan diri Anda.",
+  "scale": {
+    "labels": {
+      "true": "Benar",
+      "false": "Salah"
+    },
+    "scoring": {
+      "true": 1,
+      "false": 2
+    }
+  },
+  "questions": [
+    { "id": 1, "text": "Saya ingin menjadi pusat perhatian" },
+    {
+      "id": 2,
+      "text": "Saya memiliki pencapaian yang jauh lebih besar daripada yang orang ketahui"
+    },
+    {
+      "id": 3,
+      "text": "Saya akan melakukan tindakan berbahaya untuk mencegah orang yang saya cintai meninggalkan saya"
+    },
+    { "id": 4, "text": "Beberapa kali saya pernah bermasalah dengan hukum" },
+    { "id": 5, "text": "Saya lebih menarik dibandingkan orang lain" },
+    {
+      "id": 6,
+      "text": "Saya berpikir tentang betapa hebatnya diri saya, baik sekarang maupun di masa depan"
+    },
+    {
+      "id": 7,
+      "text": "Saya hanya bisa mencintai seseorang atau membenci mereka, tidak ada perasaan netral"
+    },
+    { "id": 8, "text": "Saya banyak terlibat dalam perkelahian fisik" },
+    { "id": 9, "text": "Saya mudah mengekspresikan emosi atau perasaan" },
+    {
+      "id": 10,
+      "text": "Hanya orang-orang tertentu yang dapat menghargai dan memahami saya"
+    },
+    { "id": 11, "text": "Saya sering bertanya-tanya mengenai jati diri saya" },
+    {
+      "id": 12,
+      "text": "Saya mengalami kesulitan dalam membayar tagihan karena saya tidak bertahan lama di satu pekerjaan"
+    },
+    {
+      "id": 13,
+      "text": "Saya suka berpura-pura “pemain” untuk mendapatkan perhatian yang saya butuhkan"
+    },
+    {
+      "id": 14,
+      "text": "Saya sangat membutuhkan perhatian atau pujian dari orang lain"
+    },
+    {
+      "id": 15,
+      "text": "Saya pernah mencoba menyakiti atau membunuh diri saya"
+    },
+    {
+      "id": 16,
+      "text": "Saya melakukan banyak hal tanpa mempertimbangkan konsekuensinya"
+    },
+    {
+      "id": 17,
+      "text": "Meskipun saya banyak bicara, orang-orang mengatakan bahwa saya kesulitan untuk langsung ke inti pembicaraan"
+    },
+    {
+      "id": 18,
+      "text": "Saya merasa orang lain mau membantu saya meskipun saya tidak selalu memberi mereka perhatian"
+    },
+    { "id": 19, "text": "Suasana hati saya mudah berubah secara tiba-tiba" },
+    {
+      "id": 20,
+      "text": "Berbohong adalah hal yang mudah bagi saya, dan saya sering melakukannya"
+    },
+    { "id": 21, "text": "Saya memiliki bakat untuk bersikap dramatis" },
+    {
+      "id": 22,
+      "text": "Beberapa orang berpikir bahwa saya suka memanfaatkan orang lain"
+    },
+    {
+      "id": 23,
+      "text": "Saya merasa hidup saya membosankan dan tidak bermakna"
+    },
+    {
+      "id": 24,
+      "text": "Orang-orang sering mengeluh bahwa saya tidak menyadari saat mereka sedang marah"
+    },
+    { "id": 25, "text": "Saya suka melakukan hal-hal yang berisiko" },
+    {
+      "id": 26,
+      "text": "Saya kesulitan mengendalikan amarah atau temperamen saya"
+    },
+    { "id": 27, "text": "Sebagian orang merasa iri pada saya" },
+    { "id": 28, "text": "Saya mudah dipengaruhi oleh orang lain" },
+    {
+      "id": 29,
+      "text": "Saya lebih serius dalam menjalin hubungan dibandingkan dengan orang yang menjalin hubungan dengan saya"
+    },
+    { "id": 30, "text": "Orang lain menganggap saya sombong" },
+    {
+      "id": 31,
+      "text": "Saat saya stres, hal-hal tak terduga terjadi. Misalnya saya menjadi paranoid (ketakutan dan curiga berlebihan) atau tiba-tiba kehilangan kesadaran"
+    },
+    {
+      "id": 32,
+      "text": "Saya tidak peduli jika orang lain terluka, selama keinginan saya terpenuhi"
+    },
+    {
+      "id": 33,
+      "text": "Saya pernah melakukan sesuatu secara impulsif (seperti hal-hal di bawah ini) yang bisa membuat saya dalam masalah"
+    },
+    {
+      "id": 34,
+      "text": "Menghabiskan lebih banyak uang dari pada yang saya miliki"
+    },
+    {
+      "id": 35,
+      "text": "Berhubungan intim dengan orang yang belum saya kenal baik"
+    },
+    { "id": 36, "text": "Terlalu banyak mengonsumsi alkohol" },
+    { "id": 37, "text": "Mengonsumsi obat-obatan terlarang" },
+    { "id": 38, "text": "Makan secara berlebihan hingga kehilangan kontrol" },
+    { "id": 39, "text": "Berkendara secara ugal-ugalan" }
+  ]
+}
