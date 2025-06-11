@@ -2,43 +2,70 @@
 
 import { Button, Card } from "flowbite-react"
 import { AnimatePresence, motion } from "framer-motion"
-import { ArrowLeft, ArrowRight, CheckCircle, Clock, Sun, Moon, Heart, Sparkles } from "lucide-react"
+import { ArrowLeft, ArrowRight, CheckCircle, Clock, Heart, Moon, Sparkles, Sun } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { useToast } from "../../provider/ToastProvider"
 import questionsData from "../../../data/questions.json"
+import { useToast } from "../../provider/ToastProvider"
+
+const testSequence = ["ace_scale", ""]
 
 export default function TestStartPage() {
   const navigate = useNavigate()
   const { showToast } = useToast()
   const [darkMode, setDarkMode] = useState(false)
 
+  const [currentTestIndex, setCurrentTestIndex] = useState(0)
   const [currentPage, setCurrentPage] = useState(0)
   const [answers, setAnswers] = useState({})
+  const [allAnswers, setAllAnswers] = useState({})
   const [timeElapsed, setTimeElapsed] = useState(0)
 
-  // Check system preference for dark mode on load
+  const currentTestId = testSequence[currentTestIndex]
+  const currentTest = questionsData.tests.find((t) => t.id === currentTestId)
+
   useEffect(() => {
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
       setDarkMode(true)
     }
   }, [])
 
+  useEffect(() => {
+    const timer = setInterval(() => setTimeElapsed((prev) => prev + 1), 1000)
+    return () => clearInterval(timer)
+  }, [])
+
   const toggleDarkMode = () => setDarkMode(!darkMode)
+  
 
-  const generateAllQuestions = () => {
-    const test = questionsData.tests.find((t) => t.id === "heartland_forgiveness")
-    if (!test) return []
+  
 
-    return test.questions.map((q) => ({
-      id: `heartland-${q.id}`,
+const generateAllQuestions = () => {
+  if (!currentTest) return []
+
+  const yesNoTypes = [
+    "yes_no",
+    "emotional_neglect",
+    "physical_neglect",
+    "abuse",
+    "contact_sexual_abuse",
+    "community_violence",
+    "collective_violence",
+  ]
+
+  return currentTest.questions.map((q) => {
+    const type = yesNoTypes.includes(q.type) ? "yesno" : q.type === "text" ? "text" : "likert"
+
+    return {
+      id: `${currentTest.id}-${q.id}`,
       text: q.text,
-      type: "likert",
-      scale: test.scale.max,
-      category: "heartland_forgiveness",
-      reverse: q.reverse,
-    }))
-  }
+      type,
+      scale: currentTest.scale?.max ?? 4,
+      category: currentTest.id,
+      reverse: q.reverse ?? false,
+    }
+  })
+}
 
   const allQuestions = generateAllQuestions()
   const questionsPerPage = 10
@@ -325,7 +352,7 @@ export default function TestStartPage() {
                           {/* Yes/No Questions */}
                           {question.type === "yesno" && (
                             <div className="ml-12 flex space-x-4 justify-center">
-                              {["Ya", "Tidak"].map((label, idx) => (
+                              {(currentTest?.scale?.labels?.YA ? ["YA", "TIDAK"] : ["Ya", "Tidak"]).map((label, idx) => (
                                 <Button
                                   key={label}
                                   className={`px-6 py-2 transition-all duration-300 ${

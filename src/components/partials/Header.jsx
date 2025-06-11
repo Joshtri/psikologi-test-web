@@ -22,9 +22,9 @@ export default function Header() {
 
   const navItems = [
     { to: "/", label: "Beranda" },
-    { to: "/test", label: "Mulai Tes" },
-    { to: "/personality-types", label: "Tipe Kepribadian" },
-    { to: "/about", label: "Tentang Kami" },
+    { to: "/test", label: "Mulai Tes" },  
+    // { to: "/personality-types", label: "Tipe Kepribadian" },
+    // { to: "/about", label: "Tentang Kami" },
   ]
 
   return (

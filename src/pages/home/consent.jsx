@@ -47,7 +47,7 @@ export default function ConsentPage({ onBack }) {
         align: "top-right",
         duration: 3000,
       })
-      navigate("/test")
+      navigate("/test/start")
     } else {
       showToast({
         type: "error",
