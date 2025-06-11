@@ -286,7 +286,10 @@ export default function TestStartPage() {
                               <div
                                 className={`flex justify-between text-sm mb-4 ${darkMode ? "text-gray-400" : "text-gray-600"}`}
                               >
-                                <span>Sangat Tidak Setuju</span>
+                                {question.scale > 1 && <span>Sangat tidak sesuai dengan saya</span>}
+                                {question.scale > 3 && <span>Agak tidak sesuai</span>}
+                                {question.scale > 5 && <span>Agak sesuai</span>}
+                                {question.scale > 7 && <span>Sangat sesuai dengan saya</span>}
                                 <span>Sangat Setuju</span>
                               </div>
                               <div className="flex justify-center space-x-3">

@@ -9,6 +9,8 @@
         "max": 7,
         "labels": {
           "1": "Sangat tidak sesuai dengan saya",
+          "3": "Agak tidak sesuai",
+          "5": "Agak sesuai",
           "7": "Sangat sesuai dengan saya"
         }
       },
