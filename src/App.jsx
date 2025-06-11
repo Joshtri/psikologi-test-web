@@ -19,13 +19,13 @@ function App() {
         <Layout>
           <Routes>
             <Route index element={<HomePage />} />
-            <Route path="/tentang" element={<AboutPage />} />
+            {/* <Route path="/about" element={<AboutPage />} /> */}
 
 
             <Route path="/test" element={<TestIndexPage />} />
             <Route path="/test/start" element={<TestStartPage />} />
             <Route path="/test/result" element={<TestResultPage />} />
-            <Route path="/personality-type" element={<PersonalityTypesPage />} />
+            <Route path="/personality-types" element={<PersonalityTypesPage />} />
 
           </Routes>
         </Layout>

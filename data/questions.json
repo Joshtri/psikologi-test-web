@@ -133,51 +133,229 @@
         }
       },
       "questions": [
-        { "id": 1, "text": "Saya berani mengemukakan pendapat saya meskipun bertentangan dengan pendapat orang-orang di sekitar saya", "reverse": false },
-        { "id": 2, "text": "Saya mampu beradaptasi dengan lingkungan yang baru", "reverse": false },
-        { "id": 3, "text": "Saya enggan mengikuti kegiatan yang dapat memperluas wawasan saya", "reverse": true },
-        { "id": 4, "text": "Kebanyakan orang melihat saya sebagai sosok yang penuh kasih sayang", "reverse": false },
-        { "id": 5, "text": "Saya hidup untuk saat ini dan tidak memikirkan masa depan", "reverse": true },
-        { "id": 6, "text": "Saya puas dengan apa yang telah terjadi dalam hidup saya", "reverse": false },
-        { "id": 7, "text": "Keputusan yang saya ambil bukan berdasarkan pengaruh orang lain", "reverse": false },
-        { "id": 8, "text": "Tuntutan dalam hidup seringkali membuat saya down", "reverse": true },
-        { "id": 9, "text": "Saya suka mengikuti kegiatan yang dapat membuat hidup saya lebih bermakna", "reverse": false },
-        { "id": 10, "text": "Saya sulit mempertahankan hubungan pertemanan saya dengan orang lain", "reverse": true },
-        { "id": 11, "text": "Saya berorientasi untuk mencapai masa depan yang saya inginkan", "reverse": false },
-        { "id": 12, "text": "Saya merasa percaya diri dan berpikir positif terhadap diri saya", "reverse": false },
-        { "id": 13, "text": "Saya cemas dengan pandangan orang lain terhadap saya", "reverse": true },
-        { "id": 14, "text": "Saya merasa tidak cocok dengan lingkungan di sekitar saya", "reverse": true },
-        { "id": 15, "text": "Saya tidak memiliki banyak perbaikan seperti yang kebanyakan orang lakukan", "reverse": true },
-        { "id": 16, "text": "Saya merasa kesepian karena tidak memiliki banyak teman dekat", "reverse": true },
-        { "id": 17, "text": "Kegiatan saya sehari-hari biasa saja dan tidak penting", "reverse": true },
-        { "id": 18, "text": "Saya minder ketika melihat teman-teman saya yang lebih baik dari saya", "reverse": true },
-        { "id": 19, "text": "Saya mudah terpengaruh oleh pendapat orang lain", "reverse": true },
-        { "id": 20, "text": "Saya memiliki tanggung jawab yang baik dalam kegiatan sehari-hari", "reverse": false },
-        { "id": 21, "text": "Saya lebih mengembangkan potensi yang saya miliki melalui aktivitas yang saya ikuti", "reverse": false },
-        { "id": 22, "text": "Saya menikmati komunikasi yang terjalin bersama orang-orang di sekitar saya", "reverse": false },
-        { "id": 23, "text": "Saya sulit membuat target dalam hidup saya", "reverse": true },
-        { "id": 24, "text": "Saya menyukai segala aspek dalam hidup saya", "reverse": false },
-        { "id": 25, "text": "Saya yakin dengan pendapat saya meskipun tidak sama dengan pendapat pada umumnya", "reverse": false },
-        { "id": 26, "text": "Saya meremehkan tugas-tugas yang menjadi tanggung jawab saya", "reverse": true },
-        { "id": 27, "text": "Saya enggan mencoba hal baru selama hidup saya masih nyaman", "reverse": true },
-        { "id": 28, "text": "Orang-orang melihat saya sebagai sosok yang murah hati dan rela mengorbankan waktu untuk berbagi cerita", "reverse": false },
-        { "id": 29, "text": "Saya senang membuat perencanaan dalam hidup saya", "reverse": false },
-        { "id": 30, "text": "Saya merasa kecewa dengan pencapaian saya selama ini", "reverse": true },
-        { "id": 31, "text": "Saya kesulitan menerima pendapat orang yang bertentangan dengan orang lain", "reverse": true },
-        { "id": 32, "text": "Saya merasa kesulitan menata hidup yang memuaskan", "reverse": true },
-        { "id": 33, "text": "Saya merasa bahwa hidup ini merupakan sebuah proses pembelajaran", "reverse": false },
-        { "id": 34, "text": "Saya tidak tertarik untuk menjalin hubungan yang hangat dan saling percaya dengan orang lain", "reverse": true },
-        { "id": 35, "text": "Saya mengingat hal-hal yang saya inginkan saya raih dalam hidup saya", "reverse": false },
-        { "id": 36, "text": "Sikap saya terhadap diri saya sendiri tidak sespositif orang lain terhadap sikap mereka", "reverse": true },
-        { "id": 37, "text": "Saya menilai diri saya berdasarkan apa yang saya anggap penting bukan karena orang lain", "reverse": false },
-        { "id": 38, "text": "Saya mampu mengatur gaya hidup sesuai dengan keinginan saya", "reverse": false },
-        { "id": 39, "text": "Saya sudah lebih membuat perubahan dalam hidup sejak waktu yang lama", "reverse": false },
-        { "id": 40, "text": "Saya dan orang-orang di sekitar saya saling percaya satu sama lain", "reverse": false },
-        { "id": 41, "text": "Saya merasa telah menjalani hidup saya sesuai dengan perencanaan saya", "reverse": false },
-        { "id": 42, "text": "Saya merasa nyaman dengan diri saya apa adanya saat ini", "reverse": false }
+        {
+          "id": 1,
+          "text": "Saya berani mengemukakan pendapat saya meskipun bertentangan dengan pendapat orang-orang di sekitar saya",
+          "reverse": false
+        },
+        {
+          "id": 2,
+          "text": "Saya mampu beradaptasi dengan lingkungan yang baru",
+          "reverse": false
+        },
+        {
+          "id": 3,
+          "text": "Saya enggan mengikuti kegiatan yang dapat memperluas wawasan saya",
+          "reverse": true
+        },
+        {
+          "id": 4,
+          "text": "Kebanyakan orang melihat saya sebagai sosok yang penuh kasih sayang",
+          "reverse": false
+        },
+        {
+          "id": 5,
+          "text": "Saya hidup untuk saat ini dan tidak memikirkan masa depan",
+          "reverse": true
+        },
+        {
+          "id": 6,
+          "text": "Saya puas dengan apa yang telah terjadi dalam hidup saya",
+          "reverse": false
+        },
+        {
+          "id": 7,
+          "text": "Keputusan yang saya ambil bukan berdasarkan pengaruh orang lain",
+          "reverse": false
+        },
+        {
+          "id": 8,
+          "text": "Tuntutan dalam hidup seringkali membuat saya down",
+          "reverse": true
+        },
+        {
+          "id": 9,
+          "text": "Saya suka mengikuti kegiatan yang dapat membuat hidup saya lebih bermakna",
+          "reverse": false
+        },
+        {
+          "id": 10,
+          "text": "Saya sulit mempertahankan hubungan pertemanan saya dengan orang lain",
+          "reverse": true
+        },
+        {
+          "id": 11,
+          "text": "Saya berorientasi untuk mencapai masa depan yang saya inginkan",
+          "reverse": false
+        },
+        {
+          "id": 12,
+          "text": "Saya merasa percaya diri dan berpikir positif terhadap diri saya",
+          "reverse": false
+        },
+        {
+          "id": 13,
+          "text": "Saya cemas dengan pandangan orang lain terhadap saya",
+          "reverse": true
+        },
+        {
+          "id": 14,
+          "text": "Saya merasa tidak cocok dengan lingkungan di sekitar saya",
+          "reverse": true
+        },
+        {
+          "id": 15,
+          "text": "Saya tidak memiliki banyak perbaikan seperti yang kebanyakan orang lakukan",
+          "reverse": true
+        },
+        {
+          "id": 16,
+          "text": "Saya merasa kesepian karena tidak memiliki banyak teman dekat",
+          "reverse": true
+        },
+        {
+          "id": 17,
+          "text": "Kegiatan saya sehari-hari biasa saja dan tidak penting",
+          "reverse": true
+        },
+        {
+          "id": 18,
+          "text": "Saya minder ketika melihat teman-teman saya yang lebih baik dari saya",
+          "reverse": true
+        },
+        {
+          "id": 19,
+          "text": "Saya mudah terpengaruh oleh pendapat orang lain",
+          "reverse": true
+        },
+        {
+          "id": 20,
+          "text": "Saya memiliki tanggung jawab yang baik dalam kegiatan sehari-hari",
+          "reverse": false
+        },
+        {
+          "id": 21,
+          "text": "Saya lebih mengembangkan potensi yang saya miliki melalui aktivitas yang saya ikuti",
+          "reverse": false
+        },
+        {
+          "id": 22,
+          "text": "Saya menikmati komunikasi yang terjalin bersama orang-orang di sekitar saya",
+          "reverse": false
+        },
+        {
+          "id": 23,
+          "text": "Saya sulit membuat target dalam hidup saya",
+          "reverse": true
+        },
+        {
+          "id": 24,
+          "text": "Saya menyukai segala aspek dalam hidup saya",
+          "reverse": false
+        },
+        {
+          "id": 25,
+          "text": "Saya yakin dengan pendapat saya meskipun tidak sama dengan pendapat pada umumnya",
+          "reverse": false
+        },
+        {
+          "id": 26,
+          "text": "Saya meremehkan tugas-tugas yang menjadi tanggung jawab saya",
+          "reverse": true
+        },
+        {
+          "id": 27,
+          "text": "Saya enggan mencoba hal baru selama hidup saya masih nyaman",
+          "reverse": true
+        },
+        {
+          "id": 28,
+          "text": "Orang-orang melihat saya sebagai sosok yang murah hati dan rela mengorbankan waktu untuk berbagi cerita",
+          "reverse": false
+        },
+        {
+          "id": 29,
+          "text": "Saya senang membuat perencanaan dalam hidup saya",
+          "reverse": false
+        },
+        {
+          "id": 30,
+          "text": "Saya merasa kecewa dengan pencapaian saya selama ini",
+          "reverse": true
+        },
+        {
+          "id": 31,
+          "text": "Saya kesulitan menerima pendapat orang yang bertentangan dengan orang lain",
+          "reverse": true
+        },
+        {
+          "id": 32,
+          "text": "Saya merasa kesulitan menata hidup yang memuaskan",
+          "reverse": true
+        },
+        {
+          "id": 33,
+          "text": "Saya merasa bahwa hidup ini merupakan sebuah proses pembelajaran",
+          "reverse": false
+        },
+        {
+          "id": 34,
+          "text": "Saya tidak tertarik untuk menjalin hubungan yang hangat dan saling percaya dengan orang lain",
+          "reverse": true
+        },
+        {
+          "id": 35,
+          "text": "Saya mengingat hal-hal yang saya inginkan saya raih dalam hidup saya",
+          "reverse": false
+        },
+        {
+          "id": 36,
+          "text": "Sikap saya terhadap diri saya sendiri tidak sespositif orang lain terhadap sikap mereka",
+          "reverse": true
+        },
+        {
+          "id": 37,
+          "text": "Saya menilai diri saya berdasarkan apa yang saya anggap penting bukan karena orang lain",
+          "reverse": false
+        },
+        {
+          "id": 38,
+          "text": "Saya mampu mengatur gaya hidup sesuai dengan keinginan saya",
+          "reverse": false,
+          "response": "KK",
+          "score": 2
+        },
+        {
+          "id": 39,
+          "text": "Saya sudah lebih membuat perubahan dalam hidup sejak waktu yang lama",
+          "reverse": false,
+          "response": "KK",
+          "score": 2
+        },
+        {
+          "id": 40,
+          "text": "Saya dan orang-orang di sekitar saya saling percaya satu sama lain",
+          "reverse": false,
+          "response": "TP",
+          "score": 1
+        },
+        {
+          "id": 41,
+          "text": "Saya merasa telah menjalani hidup saya sesuai dengan perencanaan saya",
+          "reverse": false,
+          "response": "S",
+          "score": 3
+        },
+        {
+          "id": 42,
+          "text": "Saya merasa nyaman dengan diri saya apa adanya saat ini",
+          "reverse": false,
+          "response": "SS",
+          "score": 1
+        }
       ]
     },
-    
+
     {
       "id": "pdq_4",
       "name": "Personality Diagnostic Questionnaire (PDQ-4)",
@@ -193,45 +371,392 @@
         }
       },
       "questions": [
-        { "id": 1, "text": "Saya ingin menjadi pusat perhatian" },
-        { "id": 2, "text": "Saya memiliki pencapaian yang jauh lebih besar daripada yang orang ketahui" },
-        { "id": 3, "text": "Saya akan melakukan tindakan berbahaya untuk mencegah orang yang saya cintai meninggalkan saya" },
-        { "id": 4, "text": "Beberapa kali saya pernah bermasalah dengan hukum" },
-        { "id": 5, "text": "Saya lebih menarik dibandingkan orang lain" },
-        { "id": 6, "text": "Saya berpikir tentang betapa hebatnya diri saya, baik sekarang maupun di masa depan" },
-        { "id": 7, "text": "Saya hanya bisa mencintai seseorang atau membenci mereka, tidak ada perasaan netral" },
-        { "id": 8, "text": "Saya banyak terlibat dalam perkelahian fisik" },
-        { "id": 9, "text": "Saya mudah mengekspresikan emosi atau perasaan" },
-        { "id": 10, "text": "Hanya orang-orang tertentu yang dapat menghargai dan memahami saya" },
-        { "id": 11, "text": "Saya sering bertanya-tanya mengenai jati diri saya" },
-        { "id": 12, "text": "Saya mengalami kesulitan dalam membayar tagihan karena saya tidak bertahan lama di satu pekerjaan" },
-        { "id": 13, "text": "Saya suka berpura-pura “pemain” untuk mendapatkan perhatian yang saya butuhkan" },
-        { "id": 14, "text": "Saya sangat membutuhkan perhatian atau pujian dari orang lain" },
-        { "id": 15, "text": "Saya pernah mencoba menyakiti atau membunuh diri saya" },
-        { "id": 16, "text": "Saya melakukan banyak hal tanpa mempertimbangkan konsekuensinya" },
-        { "id": 17, "text": "Meskipun saya banyak bicara, orang-orang mengatakan bahwa saya kesulitan untuk langsung ke inti pembicaraan" },
-        { "id": 18, "text": "Saya merasa orang lain mau membantu saya meskipun saya tidak selalu memberi mereka perhatian" },
-        { "id": 19, "text": "Suasana hati saya mudah berubah secara tiba-tiba" },
-        { "id": 20, "text": "Berbohong adalah hal yang mudah bagi saya, dan saya sering melakukannya" },
-        { "id": 21, "text": "Saya memiliki bakat untuk bersikap dramatis" },
-        { "id": 22, "text": "Beberapa orang berpikir bahwa saya suka memanfaatkan orang lain" },
-        { "id": 23, "text": "Saya merasa hidup saya membosankan dan tidak bermakna" },
-        { "id": 24, "text": "Orang-orang sering mengeluh bahwa saya tidak menyadari saat mereka sedang marah" },
-        { "id": 25, "text": "Saya suka melakukan hal-hal yang berisiko" },
-        { "id": 26, "text": "Saya kesulitan mengendalikan amarah atau temperamen saya" },
-        { "id": 27, "text": "Sebagian orang merasa iri pada saya" },
-        { "id": 28, "text": "Saya mudah dipengaruhi oleh orang lain" },
-        { "id": 29, "text": "Saya lebih serius dalam menjalin hubungan dibandingkan dengan orang yang menjalin hubungan dengan saya" },
-        { "id": 30, "text": "Orang lain menganggap saya sombong" },
-        { "id": 31, "text": "Saat saya stres, hal-hal tak terduga terjadi. Misalnya saya menjadi paranoid (ketakutan dan curiga berlebihan) atau tiba-tiba kehilangan kesadaran" },
-        { "id": 32, "text": "Saya tidak peduli jika orang lain terluka, selama keinginan saya terpenuhi" },
-        { "id": 33, "text": "Saya pernah melakukan sesuatu secara impulsif (seperti hal-hal di bawah ini) yang bisa membuat saya dalam masalah" },
-        { "id": 34, "text": "Menghabiskan lebih banyak uang dari pada yang saya miliki" },
-        { "id": 35, "text": "Berhubungan intim dengan orang yang belum saya kenal baik" },
-        { "id": 36, "text": "Terlalu banyak mengonsumsi alkohol" },
-        { "id": 37, "text": "Mengonsumsi obat-obatan terlarang" },
-        { "id": 38, "text": "Makan secara berlebihan hingga kehilangan kontrol" },
-        { "id": 39, "text": "Berkendara secara ugal-ugalan" }
+        {
+          "id": 1,
+          "text": "Saya ingin menjadi pusat perhatian",
+          "category": "Histrionic"
+        },
+        {
+          "id": 2,
+          "text": "Saya memiliki pencapaian yang jauh lebih besar daripada yang orang ketahui",
+          "category": "Narcissistic"
+        },
+        {
+          "id": 3,
+          "text": "Saya akan melakukan tindakan berbahaya untuk mencegah orang yang saya cintai meninggalkan saya",
+          "category": "Borderline"
+        },
+        {
+          "id": 4,
+          "text": "Beberapa kali saya pernah bermasalah dengan hukum",
+          "category": "Antisocial"
+        },
+        {
+          "id": 5,
+          "text": "Saya lebih menarik dibandingkan orang lain",
+          "category": "Narcissistic"
+        },
+        {
+          "id": 6,
+          "text": "Saya berpikir tentang betapa hebatnya diri saya, baik sekarang maupun di masa depan",
+          "category": "Narcissistic"
+        },
+        {
+          "id": 7,
+          "text": "Saya hanya bisa mencintai seseorang atau membenci mereka, tidak ada perasaan netral",
+          "category": "Borderline"
+        },
+        {
+          "id": 8,
+          "text": "Saya banyak terlibat dalam perkelahian fisik",
+          "category": "Antisocial"
+        },
+        {
+          "id": 9,
+          "text": "Saya mudah mengekspresikan emosi atau perasaan",
+          "category": null
+        },
+        {
+          "id": 10,
+          "text": "Hanya orang-orang tertentu yang dapat menghargai dan memahami saya",
+          "category": "Narcissistic"
+        },
+        {
+          "id": 11,
+          "text": "Saya sering bertanya-tanya mengenai jati diri saya",
+          "category": "Borderline"
+        },
+        {
+          "id": 12,
+          "text": "Saya mengalami kesulitan dalam membayar tagihan karena saya tidak bertahan lama di satu pekerjaan",
+          "category": "Borderline"
+        },
+        {
+          "id": 13,
+          "text": "Saya suka berpura-pura “pemain” untuk mendapatkan perhatian yang saya butuhkan",
+          "category": "Histrionic"
+        },
+        {
+          "id": 14,
+          "text": "Saya sangat membutuhkan perhatian atau pujian dari orang lain",
+          "category": "Narcissistic"
+        },
+        {
+          "id": 15,
+          "text": "Saya pernah mencoba menyakiti atau membunuh diri saya",
+          "category": "Borderline"
+        },
+        {
+          "id": 16,
+          "text": "Saya melakukan banyak hal tanpa mempertimbangkan konsekuensinya",
+          "category": "Borderline"
+        },
+        {
+          "id": 17,
+          "text": "Meskipun saya banyak bicara, orang-orang mengatakan bahwa saya kesulitan untuk langsung ke inti pembicaraan",
+          "category": "Histrionic"
+        },
+        {
+          "id": 18,
+          "text": "Saya merasa orang lain mau membantu saya meskipun saya tidak selalu memberi mereka perhatian",
+          "category": "Narcissistic"
+        },
+        {
+          "id": 19,
+          "text": "Suasana hati saya mudah berubah secara tiba-tiba",
+          "category": "Borderline"
+        },
+        {
+          "id": 20,
+          "text": "Berbohong adalah hal yang mudah bagi saya, dan saya sering melakukannya",
+          "category": "Antisocial"
+        },
+        {
+          "id": 21,
+          "text": "Saya memiliki bakat untuk bersikap dramatis",
+          "category": "Histrionic"
+        },
+        {
+          "id": 22,
+          "text": "Beberapa orang berpikir bahwa saya suka memanfaatkan orang lain",
+          "category": "Antisocial"
+        },
+        {
+          "id": 23,
+          "text": "Saya merasa hidup saya membosankan dan tidak bermakna",
+          "category": "Borderline"
+        },
+        {
+          "id": 24,
+          "text": "Orang-orang sering mengeluh bahwa saya tidak menyadari saat mereka sedang marah",
+          "category": "Narcissistic"
+        },
+        {
+          "id": 25,
+          "text": "Saya suka melakukan hal-hal yang berisiko",
+          "category": "Antisocial"
+        },
+        {
+          "id": 26,
+          "text": "Saya kesulitan mengendalikan amarah atau temperamen saya",
+          "category": "Borderline"
+        },
+        {
+          "id": 27,
+          "text": "Sebagian orang merasa iri pada saya",
+          "category": "Narcissistic"
+        },
+        {
+          "id": 28,
+          "text": "Saya mudah dipengaruhi oleh orang lain",
+          "category": "Borderline"
+        },
+        {
+          "id": 29,
+          "text": "Saya lebih serius dalam menjalin hubungan dibandingkan dengan orang yang menjalin hubungan dengan saya",
+          "category": "Borderline"
+        },
+        {
+          "id": 30,
+          "text": "Orang lain menganggap saya sombong",
+          "category": "Narcissistic"
+        },
+        {
+          "id": 31,
+          "text": "Saat saya stres, hal-hal tak terduga terjadi. Misalnya saya menjadi paranoid (ketakutan dan curiga berlebihan) atau tiba-tiba kehilangan kesadaran",
+          "category": "Borderline"
+        },
+        {
+          "id": 32,
+          "text": "Saya tidak peduli jika orang lain terluka, selama keinginan saya terpenuhi",
+          "category": "Antisocial"
+        },
+        {
+          "id": 33,
+          "text": "Saya pernah melakukan sesuatu secara impulsif (seperti hal-hal di bawah ini) yang bisa membuat saya dalam masalah",
+          "category": "Borderline"
+        },
+        {
+          "id": 34,
+          "text": "Menghabiskan lebih banyak uang dari pada yang saya miliki",
+          "category": "Borderline"
+        },
+        {
+          "id": 35,
+          "text": "Berhubungan intim dengan orang yang belum saya kenal baik",
+          "category": "Borderline"
+        },
+        {
+          "id": 36,
+          "text": "Terlalu banyak mengonsumsi alkohol",
+          "category": "Borderline"
+        },
+        {
+          "id": 37,
+          "text": "Mengonsumsi obat-obatan terlarang",
+          "category": "Borderline"
+        },
+        {
+          "id": 38,
+          "text": "Makan secara berlebihan hingga kehilangan kontrol",
+          "category": "Borderline"
+        },
+        {
+          "id": 39,
+          "text": "Berkendara secara ugal-ugalan",
+          "category": "Borderline"
+        }
+      ]
+    },
+
+    {
+      "id": "ace_scale",
+      "name": "Adverse Childhood Experience Scale",
+      "instructions": "Jawablah setiap pernyataan berdasarkan pengalaman Anda sampai usia 18 tahun. Skoring tergantung pada frekuensi atau keberadaan pengalaman tersebut.",
+      "scale": {
+        "labels": {
+          "SELALU": "Selalu",
+          "SERING": "Sering",
+          "KADANG-KADANG": "Kadang-kadang",
+          "JARANG": "Jarang",
+          "TIDAK PERNAH": "Tidak Pernah",
+          "SERINGKALI": "Seringkali",
+          "BEBERAPA KALI": "Beberapa kali",
+          "SATU KALI": "Satu kali",
+          "YA": "Ya",
+          "TIDAK": "Tidak"
+        },
+        "scoring": {
+          "emotional_neglect": { "JARANG": 1, "TIDAK PERNAH": 1 },
+          "physical_neglect": { "SERINGKALI": 1 },
+          "abuse": {
+            "SERINGKALI": 1,
+            "BEBERAPA KALI": 1
+          },
+          "contact_sexual_abuse": {
+            "SERINGKALI": 1,
+            "BEBERAPA KALI": 1,
+            "SATU KALI": 1
+          },
+          "yes_no": { "YA": 1, "TIDAK": 0 },
+          "community_violence": {
+            "SERINGKALI": 1,
+            "BEBERAPA KALI": 1,
+            "SATU KALI": 1
+          },
+          "collective_violence": {
+            "SERINGKALI": 1,
+            "BEBERAPA KALI": 1,
+            "SATU KALI": 1
+          }
+        }
+      },
+      "questions": [
+        {
+          "id": 1,
+          "text": "Apakah orangtua/wali Anda memahami masalah yang tengah Anda rasakan?",
+          "type": "emotional_neglect"
+        },
+        {
+          "id": 2,
+          "text": "Apakah orangtua/wali Anda mengetahui kegiatan yang Anda lakukan di luar sekolah atau tempat kerja Anda?",
+          "type": "emotional_neglect"
+        },
+        {
+          "id": 3,
+          "text": "Seberapa sering orangtua/wali Anda tidak memberikan makanan yang cukup meskipun mereka dapat melakukan hal tersebut dengan mudah?",
+          "type": "physical_neglect"
+        },
+        {
+          "id": 4,
+          "text": "Apakah orangtua/wali Anda mabuk atau berada di bawah pengaruh obat-obatan terlarang sehingga tidak dapat mengurus Anda?",
+          "type": "physical_neglect"
+        },
+        {
+          "id": 5,
+          "text": "Seberapa sering orangtua/wali Anda tidak menyekolahkan Anda meskipun hal tersebut bisa dilakukan?",
+          "type": "physical_neglect"
+        },
+        {
+          "id": 6,
+          "text": "Apakah orangtua, wali, atau anggota keluarga lain membentak, menyumpahi dengan kata-kata kasar, mempermalukan atau menghina Anda?",
+          "type": "emotional_abuse"
+        },
+        {
+          "id": 7,
+          "text": "Apakah orangtua, wali, atau anggota keluarga lain mengancam, secara sengaja menelantarkan, atau mengusir Anda dari rumah?",
+          "type": "emotional_abuse"
+        },
+        {
+          "id": 8,
+          "text": "Apakah orangtua, wali, atau anggota keluarga lain memukul pantat, menampar, menendang, meninju, atau memukuli Anda?",
+          "type": "physical_abuse"
+        },
+        {
+          "id": 9,
+          "text": "Apakah orangtua, wali, atau anggota keluarga lain memukul atau melukai Anda dengan benda seperti tongkat, botol, gada, pisau, cambuk, dsbnya?",
+          "type": "physical_abuse"
+        },
+        {
+          "id": 10,
+          "text": "Apakah seseorang pernah menyentuh atau membelai Anda secara seksual meskipun Anda tidak menginginkannya?",
+          "type": "contact_sexual_abuse"
+        },
+        {
+          "id": 11,
+          "text": "Apakah seseorang pernah membuat Anda menyentuh bagian tubuhnya secara seksual meskipun Anda tidak menginginkannya?",
+          "type": "contact_sexual_abuse"
+        },
+        {
+          "id": 12,
+          "text": "Apakah seseorang pernah melakukan percobaan hubungan seksual secara oral, anal, atau vaginal dengan Anda meskipun Anda tidak menginginkannya?",
+          "type": "contact_sexual_abuse"
+        },
+        {
+          "id": 13,
+          "text": "Apakah seseorang pernah melakukan hubungan seksual secara oral, anal, atau vaginal dengan Anda meskipun Anda tidak menginginkannya?",
+          "type": "contact_sexual_abuse"
+        },
+        {
+          "id": 14,
+          "text": "Apakah Anda tinggal bersama anggota keluarga yang bermasalah dengan penyalahgunaan alkohol atau obat-obatan?",
+          "type": "yes_no"
+        },
+        {
+          "id": 15,
+          "text": "Apakah Anda tinggal bersama anggota keluarga yang mengalami depresi, gangguan mental atau memiliki kecenderungan bunuh diri?",
+          "type": "yes_no"
+        },
+        {
+          "id": 16,
+          "text": "Apakah Anda tinggal bersama anggota keluarga yang pernah dipenjara?",
+          "type": "yes_no"
+        },
+        {
+          "id": 17,
+          "text": "Apakah orangtua Anda bercerai?",
+          "type": "yes_no"
+        },
+        {
+          "id": 18,
+          "text": "Apakah ibu, ayah, atau wali Anda meninggal dunia?",
+          "type": "yes_no"
+        },
+        {
+          "id": 19,
+          "text": "Apakah Anda melihat atau mendengar orangtua atau anggota keluarga di rumah Anda diteriaki, dihardik, disumpahi dengan kata-kata kasar, dihina, atau dipermalukan?",
+          "type": "abuse"
+        },
+        {
+          "id": 20,
+          "text": "Apakah Anda melihat atau mendengar orangtua atau anggota keluarga di rumah Anda ditampar, ditendang, ditinju, atau dipukuli?",
+          "type": "abuse"
+        },
+        {
+          "id": 21,
+          "text": "Apakah Anda melihat atau mendengar orangtua atau anggota keluarga di rumah Anda dipukul atau dilukai dengan benda, seperti tongkat, botol, gada, pisau, cambuk, dsb?",
+          "type": "abuse"
+        },
+        {
+          "id": 22,
+          "text": "Seberapa sering Anda menjadi sasaran perundungan/bullying?",
+          "type": "abuse"
+        },
+        {
+          "id": 23,
+          "text": "Apakah Anda melihat atau mendengar seseorang dipukuli dalam kehidupan nyata?",
+          "type": "community_violence"
+        },
+        {
+          "id": 24,
+          "text": "Apakah Anda melihat atau mendengar seseorang ditusuk atau ditembak dalam kehidupan nyata?",
+          "type": "community_violence"
+        },
+        {
+          "id": 25,
+          "text": "Apakah Anda melihat atau mendengar seseorang diancam dengan pisau atau ditodong pistol dalam kehidupan nyata?",
+          "type": "community_violence"
+        },
+        {
+          "id": 26,
+          "text": "Apakah Anda pernah terpaksa pergi dan tinggal di tempat lain karena salah satu (atau lebih) kejadian tersebut?",
+          "type": "collective_violence"
+        },
+        {
+          "id": 27,
+          "text": "Apakah Anda pernah mengalami kerusakan di rumah Anda karena salah satu (atau lebih) kejadian tersebut?",
+          "type": "collective_violence"
+        },
+        {
+          "id": 28,
+          "text": "Apakah Anda pernah dipukuli oleh tentara, polisi, militer, atau geng?",
+          "type": "collective_violence"
+        },
+        {
+          "id": 29,
+          "text": "Apakah ada pernah anggota keluarga atau teman Anda dibunuh atau dipukuli oleh tentara, polisi, militer, atau geng?",
+          "type": "collective_violence"
+        }
       ]
     }
   ]
