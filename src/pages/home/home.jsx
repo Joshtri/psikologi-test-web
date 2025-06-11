@@ -1,36 +1,36 @@
-"use client"
+"use client";
 
-import { Button } from "flowbite-react"
-import { motion } from "framer-motion"
-import { BookOpen, Play, Sparkles, Heart, Brain, User, Leaf, Sun, Moon, Globe } from "lucide-react"
-import { useState, useEffect } from "react"
-import { useToast } from "../../provider/ToastProvider"
-import ConsentPage from "./consent"
+import { Button } from "flowbite-react";
+import { motion } from "framer-motion";
+import { BookOpen, Play, Sparkles, Heart, Brain, User, Leaf, Sun, Moon, Globe } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useToast } from "../../provider/ToastProvider";
+import ConsentPage from "./consent";
 
 export default function HomePage() {
-  const { showToast } = useToast()
-  const [showConsent, setShowConsent] = useState(false)
-  const [darkMode, setDarkMode] = useState(false)
+  const { showToast } = useToast();
+  const [showConsent, setShowConsent] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   // Check system preference for dark mode on load
   useEffect(() => {
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setDarkMode(true)
+      setDarkMode(true);
     }
-  }, [])
+  }, []);
 
-  const toggleDarkMode = () => setDarkMode(!darkMode)
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
-  const handleStartTest = () => setShowConsent(true)
+  const handleStartTest = () => setShowConsent(true);
   const handleLearnMore = () =>
     showToast({
       type: "info",
       message: "Fitur panduan akan segera hadir!",
       align: "top-right",
       duration: 3000,
-    })
+    });
 
-  if (showConsent) return <ConsentPage onBack={() => setShowConsent(false)} />
+  if (showConsent) return <ConsentPage onBack={() => setShowConsent(false)} />;
 
   const features = [
     {
@@ -50,26 +50,30 @@ export default function HomePage() {
     },
     {
       icon: Leaf,
-      title: "Makna Hidup",
+      title: "Masa Kecil",
       description: "Merefleksikan nilai-nilai dan tujuan hidup yang bermakna sesuai dengan kearifan lokal",
     },
-  ]
+  ];
 
   const stats = [
     { value: "155", label: "Pertanyaan Tervalidasi" },
     { value: "4", label: "Aspek Kepribadian" },
     { value: "100%", label: "Peka Budaya" },
-  ]
+  ];
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-300 ${darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"}`}
+      className={`min-h-screen transition-colors duration-300 ${
+        darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"
+      }`}
     >
       {/* Dark Mode Toggle */}
       <div className="fixed top-4 right-4 z-50">
         <button
           onClick={toggleDarkMode}
-          className={`p-2 rounded-full transition-colors ${darkMode ? "bg-gray-700 text-yellow-300" : "bg-purple-100 text-purple-800"}`}
+          className={`p-2 rounded-full transition-colors ${
+            darkMode ? "bg-gray-700 text-yellow-300" : "bg-purple-100 text-purple-800"
+          }`}
           aria-label="Toggle dark mode"
         >
           {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -78,7 +82,9 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section
-        className={`relative overflow-hidden ${darkMode ? "bg-gray-800" : "bg-gradient-to-br from-purple-50 via-white to-amber-50"}`}
+        className={`relative overflow-hidden ${
+          darkMode ? "bg-gray-800" : "bg-gradient-to-br from-purple-50 via-white to-amber-50"
+        }`}
       >
         {/* Background Pattern */}
         <div className="absolute inset-0 z-0 opacity-20">
@@ -93,25 +99,20 @@ export default function HomePage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 py-24 md:py-32 text-center relative z-10">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <motion.div
-              className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-purple-600 to-amber-600 rounded-full mb-8 shadow-lg"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.3, type: "spring", stiffness: 200 }}
-            >
-              <Sparkles className="w-12 h-12 text-white" />
-            </motion.div>
-
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
             <motion.h1
               className={`text-5xl md:text-6xl font-bold mb-6 ${darkMode ? "text-white" : "text-gray-900"}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Selamat Datang di{" "}
+              Selamat Datang di <br />
               <span className="bg-gradient-to-r from-purple-600 to-amber-600 bg-clip-text text-transparent">
-                RaiReflect
+                Nama Website
               </span>
             </motion.h1>
 
@@ -148,7 +149,7 @@ export default function HomePage() {
                 <Play className="w-5 h-5 mr-2" />
                 Mulai Tes Sekarang
               </Button>
-              <Button
+              {/* <Button
                 color="light"
                 size="xl"
                 className={`px-8 py-4 text-lg border-2 transition-all duration-300 ${
@@ -160,11 +161,11 @@ export default function HomePage() {
               >
                 <BookOpen className="w-5 h-5 mr-2" />
                 Pelajari Lebih Lanjut
-              </Button>
+              </Button> */}
             </motion.div>
 
-            {/* Cultural Elements */}
-            <motion.div
+            {/* icon icon dibawah tombol start */}
+            {/* <motion.div
               className="flex justify-center items-center gap-8 mt-12 text-sm"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -174,20 +175,24 @@ export default function HomePage() {
                 <Globe className="w-4 h-4 mr-2" />
                 <span>Peka Budaya</span>
               </div>
+              
               <div className={`flex items-center ${darkMode ? "text-purple-300" : "text-purple-700"}`}>
                 <Brain className="w-4 h-4 mr-2" />
                 <span>Berbasis Riset</span>
               </div>
+
               <div className={`flex items-center ${darkMode ? "text-amber-300" : "text-amber-700"}`}>
                 <Heart className="w-4 h-4 mr-2" />
                 <span>Kearifan Lokal</span>
               </div>
-            </motion.div>
+            </motion.div> */}
           </motion.div>
         </div>
 
         <div
-          className={`absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t ${darkMode ? "from-gray-900 to-transparent" : "from-white to-transparent"}`}
+          className={`absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t ${
+            darkMode ? "from-gray-900 to-transparent" : "from-white to-transparent"
+          }`}
         />
       </section>
 
@@ -204,8 +209,8 @@ export default function HomePage() {
               4 Aspek Kepribadian yang Diukur
             </h2>
             <p className={`text-xl max-w-3xl mx-auto ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
-              RaiReflect menganalisis kepribadian Anda melalui empat dimensi utama yang mencerminkan kearifan psikologi
-              modern dan budaya lokal
+              Nama Website menganalisis kondisi mental Anda melalui empat dimensi utama: Pemaafan, Kesejahteraan,
+              Kepribadian, dan Masa Kecil.
             </p>
           </motion.div>
 
@@ -234,8 +239,8 @@ export default function HomePage() {
                           ? "text-purple-300"
                           : "text-purple-600"
                         : darkMode
-                          ? "text-amber-300"
-                          : "text-amber-600"
+                        ? "text-amber-300"
+                        : "text-amber-600"
                     }`}
                   />
                 </div>
@@ -250,7 +255,8 @@ export default function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className={`py-16 md:py-24 ${darkMode ? "bg-gray-800" : "bg-amber-50"}`}>
+      {/* bagian tidak perlu ditampilkan */}
+      {/* <section className={`py-16 md:py-24 ${darkMode ? "bg-gray-800" : "bg-amber-50"}`}>
         <div className="max-w-7xl mx-auto px-6">
           <motion.div
             className={`rounded-3xl shadow-xl p-8 md:p-12 ${
@@ -262,6 +268,7 @@ export default function HomePage() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1.4 }}
           >
+
             <div className="text-center mb-8">
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Platform Tes Terpercaya</h2>
               <p className="text-lg text-white/90 max-w-2xl mx-auto">
@@ -285,9 +292,7 @@ export default function HomePage() {
             </div>
           </motion.div>
         </div>
-      </section>
-
-    
+      </section> */}
     </div>
-  )
+  );
 }

@@ -1,35 +1,35 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Link, useLocation } from "react-router-dom"
-import { Menu, X, Sparkles, Sun, Moon } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X, Sparkles, Sun, Moon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
-  const location = useLocation()
-  const pathname = location.pathname
-  const [isOpen, setIsOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(false)
+  const location = useLocation();
+  const pathname = location.pathname;
+  const [isOpen, setIsOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
 
   // Check system preference for dark mode on load
   useEffect(() => {
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setDarkMode(true)
+      setDarkMode(true);
     }
-  }, [])
+  }, []);
 
-  const toggleDarkMode = () => setDarkMode(!darkMode)
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
   const navItems = [
     { to: "/", label: "Beranda" },
-    { to: "/test", label: "Mulai Tes" },
+    // { to: "/test", label: "Mulai Tes" },
     { to: "/personality-types", label: "Tipe Kepribadian" },
-    { to: "/about", label: "Tentang Kami" },
-  ]
+    // { to: "/about", label: "Tentang Kami" },
+  ];
 
   return (
     <header
-      className={`sticky top-0 z-50 shadow-lg relative overflow-hidden backdrop-blur-md transition-colors duration-300 ${
+      className={`sticky top-0 z-50 shadow-lg overflow-hidden backdrop-blur-md transition-colors duration-300 ${
         darkMode
           ? "bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white border-b border-gray-800"
           : "bg-gradient-to-r from-purple-600 via-purple-500 to-amber-600 text-white"
@@ -51,7 +51,10 @@ export default function Header() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center relative z-10">
         {/* Logo */}
-        <Link to="/" className="flex items-center space-x-3 group">
+        <Link
+          to="/"
+          className="flex items-center space-x-3 group"
+        >
           <div
             className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all duration-300 ${
               darkMode ? "bg-gray-800 group-hover:bg-gray-700" : "bg-white/20 group-hover:bg-white/30"
@@ -60,8 +63,10 @@ export default function Header() {
             <Sparkles className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-bold">RaiReflect</h1>
-            <p className={`text-xs ${darkMode ? "text-gray-400" : "text-purple-100"}`}>Refleksi Diri Bermakna</p>
+            <h1 className="text-xl font-bold">Nama Website</h1>
+            <p className={`text-xs ${darkMode ? "text-gray-400" : "text-purple-100"}`}>
+              Website Skrining Kesehatan Mental
+            </p>
           </div>
         </Link>
 
@@ -91,7 +96,7 @@ export default function Header() {
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-1">
           {navItems.map((item) => {
-            const isActive = pathname === item.to
+            const isActive = pathname === item.to;
             return (
               <Link
                 key={item.to}
@@ -102,8 +107,8 @@ export default function Header() {
                       ? "bg-gray-700 text-white font-semibold shadow-lg"
                       : "bg-white/20 text-white font-semibold shadow-lg"
                     : darkMode
-                      ? "text-gray-300 hover:text-white hover:bg-gray-700"
-                      : "text-purple-100 hover:text-white hover:bg-white/10"
+                    ? "text-gray-300 hover:text-white hover:bg-gray-700"
+                    : "text-purple-100 hover:text-white hover:bg-white/10"
                 }`}
               >
                 {item.label}
@@ -116,7 +121,7 @@ export default function Header() {
                   />
                 )}
               </Link>
-            )
+            );
           })}
         </nav>
       </div>
@@ -135,7 +140,7 @@ export default function Header() {
           >
             <div className="px-4 py-4 space-y-2">
               {navItems.map((item, index) => {
-                const isActive = pathname === item.to
+                const isActive = pathname === item.to;
                 return (
                   <motion.div
                     key={item.to}
@@ -152,19 +157,19 @@ export default function Header() {
                             ? "bg-gray-800 text-white font-semibold"
                             : "bg-white/20 text-white font-semibold"
                           : darkMode
-                            ? "text-gray-300 hover:text-white hover:bg-gray-800"
-                            : "text-purple-100 hover:text-white hover:bg-white/10"
+                          ? "text-gray-300 hover:text-white hover:bg-gray-800"
+                          : "text-purple-100 hover:text-white hover:bg-white/10"
                       }`}
                     >
                       {item.label}
                     </Link>
                   </motion.div>
-                )
+                );
               })}
             </div>
           </motion.div>
         )}
       </AnimatePresence>
     </header>
-  )
+  );
 }

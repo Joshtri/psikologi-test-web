@@ -1,16 +1,16 @@
-"use client"
+"use client";
 
-import { Button } from "flowbite-react"
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { useToast } from "../../provider/ToastProvider"
-import { useNavigate } from "react-router-dom"
-import { FileText, Shield, Heart, CheckCircle, ArrowLeft, ArrowRight, Sun, Moon, Info } from "lucide-react"
+import { Button } from "flowbite-react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { useToast } from "../../provider/ToastProvider";
+import { useNavigate } from "react-router-dom";
+import { FileText, Shield, Heart, CheckCircle, ArrowLeft, ArrowRight, Sun, Moon, Info } from "lucide-react";
 
 export default function ConsentPage({ onBack }) {
-  const { showToast } = useToast()
-  const navigate = useNavigate()
-  const [darkMode, setDarkMode] = useState(false)
+  const { showToast } = useToast();
+  const navigate = useNavigate();
+  const [darkMode, setDarkMode] = useState(false);
   const [agreements, setAgreements] = useState({
     participation: false,
     risks: false,
@@ -19,25 +19,25 @@ export default function ConsentPage({ onBack }) {
     confidentiality: false,
     voluntary: false,
     finalConsent: false,
-  })
+  });
 
   // Check system preference for dark mode on load
   useEffect(() => {
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setDarkMode(true)
+      setDarkMode(true);
     }
-  }, [])
+  }, []);
 
-  const toggleDarkMode = () => setDarkMode(!darkMode)
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
   const handleCheckboxChange = (key) => {
     setAgreements((prev) => ({
       ...prev,
       [key]: !prev[key],
-    }))
-  }
+    }));
+  };
 
-  const allAgreed = Object.values(agreements).every(Boolean)
+  const allAgreed = Object.values(agreements).every(Boolean);
 
   const handleProceed = () => {
     if (allAgreed) {
@@ -46,17 +46,17 @@ export default function ConsentPage({ onBack }) {
         message: "Terima kasih! Anda akan diarahkan ke tes.",
         align: "top-right",
         duration: 3000,
-      })
-      navigate("/test")
+      });
+      navigate("/test/start");
     } else {
       showToast({
         type: "error",
         message: "Mohon centang semua persetujuan untuk melanjutkan.",
         align: "top-right",
         duration: 3000,
-      })
+      });
     }
-  }
+  };
 
   const consentItems = [
     {
@@ -100,17 +100,21 @@ export default function ConsentPage({ onBack }) {
       title: "Persetujuan Sukarela",
       label: "Saya secara sukarela dan tanpa paksaan setuju untuk berpartisipasi dalam penelitian ini.",
     },
-  ]
+  ];
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-300 ${darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"}`}
+      className={`min-h-screen transition-colors duration-300 ${
+        darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"
+      }`}
     >
       {/* Dark Mode Toggle */}
       <div className="fixed top-4 right-4 z-50">
         <button
           onClick={toggleDarkMode}
-          className={`p-2 rounded-full transition-colors ${darkMode ? "bg-gray-700 text-yellow-300" : "bg-purple-100 text-purple-800"}`}
+          className={`p-2 rounded-full transition-colors ${
+            darkMode ? "bg-gray-700 text-yellow-300" : "bg-purple-100 text-purple-800"
+          }`}
           aria-label="Toggle dark mode"
         >
           {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -148,7 +152,7 @@ export default function ConsentPage({ onBack }) {
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold">Informed Consent</h1>
-                  <p className="text-white/90">Persetujuan Partisipasi Penelitian RaiReflect</p>
+                  <p className="text-white/90">Persetujuan Partisipasi Penelitian</p>
                 </div>
               </div>
             </div>
@@ -173,7 +177,7 @@ export default function ConsentPage({ onBack }) {
                     <Info className={`w-6 h-6 mr-3 mt-1 ${darkMode ? "text-amber-300" : "text-amber-600"}`} />
                     <div>
                       <h3 className={`font-semibold mb-2 ${darkMode ? "text-amber-200" : "text-amber-800"}`}>
-                        Selamat Datang di Penelitian RaiReflect
+                        Selamat Datang di Penelitian Nama Penelitian
                       </h3>
                       <p className={darkMode ? "text-amber-100" : "text-amber-700"}>
                         Mohon untuk mengisi formulir di bawah ini setelah Saudara/i membaca lembar penjelasan penelitian
@@ -208,8 +212,8 @@ export default function ConsentPage({ onBack }) {
                           ? "bg-purple-900/20 border-purple-600/50"
                           : "bg-purple-50 border-purple-200"
                         : darkMode
-                          ? "bg-gray-700/50 border-gray-600"
-                          : "bg-gray-50 border-gray-200"
+                        ? "bg-gray-700/50 border-gray-600"
+                        : "bg-gray-50 border-gray-200"
                     } hover:shadow-md`}
                   >
                     <div className="flex items-start space-x-4">
@@ -231,8 +235,8 @@ export default function ConsentPage({ onBack }) {
                                   ? "text-purple-300"
                                   : "text-purple-600"
                                 : darkMode
-                                  ? "text-gray-400"
-                                  : "text-gray-500"
+                                ? "text-gray-400"
+                                : "text-gray-500"
                             }`}
                           />
                           <h4
@@ -242,8 +246,8 @@ export default function ConsentPage({ onBack }) {
                                   ? "text-purple-200"
                                   : "text-purple-800"
                                 : darkMode
-                                  ? "text-gray-300"
-                                  : "text-gray-700"
+                                ? "text-gray-300"
+                                : "text-gray-700"
                             }`}
                           >
                             {item.title}
@@ -274,8 +278,8 @@ export default function ConsentPage({ onBack }) {
                           ? "bg-gradient-to-r from-purple-900/30 to-amber-900/30 border-purple-500"
                           : "bg-gradient-to-r from-purple-50 to-amber-50 border-purple-300"
                         : darkMode
-                          ? "bg-gray-700/50 border-gray-600 border-dashed"
-                          : "bg-gray-50 border-gray-300 border-dashed"
+                        ? "bg-gray-700/50 border-gray-600 border-dashed"
+                        : "bg-gray-50 border-gray-300 border-dashed"
                     }`}
                   >
                     <div className="flex items-start space-x-4">
@@ -296,8 +300,8 @@ export default function ConsentPage({ onBack }) {
                                   ? "text-purple-200"
                                   : "text-purple-800"
                                 : darkMode
-                                  ? "text-gray-300"
-                                  : "text-gray-700"
+                                ? "text-gray-300"
+                                : "text-gray-700"
                             }`}
                           >
                             Persetujuan Final
@@ -309,7 +313,7 @@ export default function ConsentPage({ onBack }) {
                             }`}
                           >
                             Saya telah membaca dan memahami informasi pada Lembar Penjelasan Penelitian sebelumnya dan
-                            menyetujui untuk berpartisipasi dalam penelitian RaiReflect.
+                            menyetujui untuk berpartisipasi dalam penelitian Nama Penelitian.
                           </label>
                         </div>
                       </div>
@@ -337,7 +341,9 @@ export default function ConsentPage({ onBack }) {
                   <div
                     className="bg-gradient-to-r from-purple-500 to-amber-500 h-2 rounded-full transition-all duration-500"
                     style={{
-                      width: `${(Object.values(agreements).filter(Boolean).length / Object.keys(agreements).length) * 100}%`,
+                      width: `${
+                        (Object.values(agreements).filter(Boolean).length / Object.keys(agreements).length) * 100
+                      }%`,
                     }}
                   />
                 </div>
@@ -392,5 +398,5 @@ export default function ConsentPage({ onBack }) {
         </div>
       </div>
     </div>
-  )
+  );
 }

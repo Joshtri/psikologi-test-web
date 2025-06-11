@@ -1,34 +1,34 @@
-"use client"
+"use client";
 
-import { Button, Card } from "flowbite-react"
-import { AnimatePresence, motion } from "framer-motion"
-import { ArrowLeft, ArrowRight, CheckCircle, Clock, Sun, Moon, Heart, Sparkles } from "lucide-react"
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { useToast } from "../../provider/ToastProvider"
-import questionsData from "../../../data/questions.json"
+import { Button, Card } from "flowbite-react";
+import { AnimatePresence, motion } from "framer-motion";
+import { ArrowLeft, ArrowRight, CheckCircle, Clock, Sun, Moon, Heart, Sparkles } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "../../provider/ToastProvider";
+import questionsData from "../../../data/questions.json";
 
 export default function TestStartPage() {
-  const navigate = useNavigate()
-  const { showToast } = useToast()
-  const [darkMode, setDarkMode] = useState(false)
+  const navigate = useNavigate();
+  const { showToast } = useToast();
+  const [darkMode, setDarkMode] = useState(false);
 
-  const [currentPage, setCurrentPage] = useState(0)
-  const [answers, setAnswers] = useState({})
-  const [timeElapsed, setTimeElapsed] = useState(0)
+  const [currentPage, setCurrentPage] = useState(0);
+  const [answers, setAnswers] = useState({});
+  const [timeElapsed, setTimeElapsed] = useState(0);
 
   // Check system preference for dark mode on load
   useEffect(() => {
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setDarkMode(true)
+      setDarkMode(true);
     }
-  }, [])
+  }, []);
 
-  const toggleDarkMode = () => setDarkMode(!darkMode)
+  const toggleDarkMode = () => setDarkMode(!darkMode);
 
   const generateAllQuestions = () => {
-    const test = questionsData.tests.find((t) => t.id === "heartland_forgiveness")
-    if (!test) return []
+    const test = questionsData.tests.find((t) => t.id === "heartland_forgiveness");
+    if (!test) return [];
 
     return test.questions.map((q) => ({
       id: `heartland-${q.id}`,
@@ -37,42 +37,42 @@ export default function TestStartPage() {
       scale: test.scale.max,
       category: "heartland_forgiveness",
       reverse: q.reverse,
-    }))
-  }
+    }));
+  };
 
-  const allQuestions = generateAllQuestions()
-  const questionsPerPage = 10
-  const totalPages = Math.ceil(allQuestions.length / questionsPerPage)
-  const currentQuestions = allQuestions.slice(currentPage * questionsPerPage, (currentPage + 1) * questionsPerPage)
+  const allQuestions = generateAllQuestions();
+  const questionsPerPage = 10;
+  const totalPages = Math.ceil(allQuestions.length / questionsPerPage);
+  const currentQuestions = allQuestions.slice(currentPage * questionsPerPage, (currentPage + 1) * questionsPerPage);
 
   // Timer
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeElapsed((prev) => prev + 1)
-    }, 1000)
-    return () => clearInterval(timer)
-  }, [])
+      setTimeElapsed((prev) => prev + 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
   const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60)
-    const secs = seconds % 60
-    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`
-  }
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
+  };
 
   const handleAnswer = (questionId, answer) => {
     setAnswers((prev) => ({
       ...prev,
       [questionId]: answer,
-    }))
-  }
+    }));
+  };
 
   const getCurrentPageAnswers = () => {
-    return currentQuestions.filter((q) => answers[q.id] !== undefined).length
-  }
+    return currentQuestions.filter((q) => answers[q.id] !== undefined).length;
+  };
 
   const canProceed = () => {
-    return getCurrentPageAnswers() === currentQuestions.length
-  }
+    return getCurrentPageAnswers() === currentQuestions.length;
+  };
 
   const handleNext = () => {
     if (!canProceed()) {
@@ -81,12 +81,12 @@ export default function TestStartPage() {
         message: "Mohon jawab semua pertanyaan sebelum melanjutkan!",
         align: "top-right",
         duration: 3000,
-      })
-      return
+      });
+      return;
     }
 
     if (currentPage < totalPages - 1) {
-      setCurrentPage((prev) => prev + 1)
+      setCurrentPage((prev) => prev + 1);
     } else {
       navigate("/test/result", {
         state: {
@@ -94,31 +94,35 @@ export default function TestStartPage() {
           allQuestions,
           timeElapsed,
         },
-      })
+      });
     }
-  }
+  };
 
   const handlePrevious = () => {
     if (currentPage > 0) {
-      setCurrentPage((prev) => prev - 1)
+      setCurrentPage((prev) => prev - 1);
     }
-  }
+  };
 
   const getTotalProgress = () => {
-    const totalAnswered = Object.keys(answers).length
-    const totalQuestions = allQuestions.length
-    return Math.round((totalAnswered / totalQuestions) * 100)
-  }
+    const totalAnswered = Object.keys(answers).length;
+    const totalQuestions = allQuestions.length;
+    return Math.round((totalAnswered / totalQuestions) * 100);
+  };
 
   return (
     <div
-      className={`min-h-screen transition-colors duration-300 ${darkMode ? "bg-gray-900 text-gray-100" : "bg-gradient-to-br from-purple-50 via-white to-amber-50 text-gray-800"}`}
+      className={`min-h-screen transition-colors duration-300 ${
+        darkMode ? "bg-gray-900 text-gray-100" : "bg-gradient-to-br from-purple-50 via-white to-amber-50 text-gray-800"
+      }`}
     >
       {/* Dark Mode Toggle */}
       <div className="fixed top-4 right-4 z-50">
         <button
           onClick={toggleDarkMode}
-          className={`p-2 rounded-full transition-colors ${darkMode ? "bg-gray-700 text-yellow-300" : "bg-purple-100 text-purple-800"}`}
+          className={`p-2 rounded-full transition-colors ${
+            darkMode ? "bg-gray-700 text-yellow-300" : "bg-purple-100 text-purple-800"
+          }`}
           aria-label="Toggle dark mode"
         >
           {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
@@ -143,34 +147,38 @@ export default function TestStartPage() {
           <motion.div
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            className={`mb-8 sticky top-4 z-40 rounded-2xl shadow-xl backdrop-blur-sm border ${
+            className={`mb-8 top-4 z-40 rounded-2xl shadow-xl backdrop-blur-sm border ${
               darkMode ? "bg-gray-800/95 border-gray-700" : "bg-white/95 border-purple-200"
             }`}
           >
             <div className="p-6 mt-10">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-amber-600 rounded-full flex items-center justify-center mr-4">
-                    <Heart className="w-6 h-6 text-white" />
-                  </div>
                   <div>
                     <h1 className={`text-2xl font-bold ${darkMode ? "text-white" : "text-gray-900"}`}>
-                      RaiReflect - Tes Pemaafan
+                      Skala Pemaafan - Heartland Forgiveness Scale
                     </h1>
-                    <p className={`${darkMode ? "text-gray-300" : "text-gray-600"}`}>
-                      Jawab setiap pertanyaan dengan jujur sesuai kondisi Anda
+                    <p className={`mt-4 ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
+                      Dalam hidup, kita sering berhadapan dengan hal-hal negatif yang terjadi baik akibat perbuatan kita
+                      sendiri, orang lain, ataupun hal-hal yang berada di luar kendali kita. Untuk beberapa saat setelah
+                      peristiwa negatif terjadi, kita sering memiliki pikiran atau perasaan buruk baik terhadap diri
+                      kita sendiri, orang lain, maupun lingkungan. Pikirkanlah bagaimana biasanya kita merespon kejadian
+                      semacam itu. <br /> <br />
+                      Pada tempat yang sudah disediakan, berikanlah nilai (1-7 sesuai skala di bawah) yang secara tepat
+                      menggambarkan bagaimana biasanya respon kita terhadap situasi negatif yang kita alami. Tidak ada
+                      jawaban yang benar atau salah. Berusahalah sejujur mungkin dalam memberikan jawaban.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4 text-sm">
-                  <div
+                  {/* <div
                     className={`flex items-center px-3 py-2 rounded-lg ${
                       darkMode ? "bg-gray-700 text-gray-300" : "bg-purple-100 text-purple-700"
                     }`}
                   >
                     <Clock className="w-4 h-4 mr-2" />
                     {formatTime(timeElapsed)}
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
@@ -193,8 +201,8 @@ export default function TestStartPage() {
                 <div className="flex flex-col items-center">
                   <div className="flex items-center justify-center space-x-2 mb-2">
                     {Array.from({ length: Math.min(totalPages, 10) }, (_, i) => {
-                      const pageIndex = Math.floor(currentPage / 10) * 10 + i
-                      if (pageIndex >= totalPages) return null
+                      const pageIndex = Math.floor(currentPage / 10) * 10 + i;
+                      if (pageIndex >= totalPages) return null;
 
                       return (
                         <div
@@ -203,15 +211,15 @@ export default function TestStartPage() {
                             pageIndex === currentPage
                               ? "bg-gradient-to-r from-purple-500 to-amber-500 scale-125"
                               : pageIndex < currentPage
-                                ? darkMode
-                                  ? "bg-green-400"
-                                  : "bg-green-500"
-                                : darkMode
-                                  ? "bg-gray-600"
-                                  : "bg-gray-300"
+                              ? darkMode
+                                ? "bg-green-400"
+                                : "bg-green-500"
+                              : darkMode
+                              ? "bg-gray-600"
+                              : "bg-gray-300"
                           }`}
                         />
-                      )
+                      );
                     })}
                     {totalPages > 10 && (
                       <span className={`text-sm ${darkMode ? "text-gray-400" : "text-gray-500"}`}>...</span>
@@ -242,8 +250,8 @@ export default function TestStartPage() {
                 <div className="p-8">
                   <div className="space-y-8">
                     {currentQuestions.map((question, index) => {
-                      const qIndex = currentPage * questionsPerPage + index + 1
-                      const isAnswered = answers[question.id] !== undefined
+                      const qIndex = currentPage * questionsPerPage + index + 1;
+                      const isAnswered = answers[question.id] !== undefined;
 
                       return (
                         <motion.div
@@ -251,14 +259,10 @@ export default function TestStartPage() {
                           initial={{ opacity: 0, y: 20 }}
                           animate={{ opacity: 1, y: 0 }}
                           transition={{ delay: index * 0.1 }}
-                          className={`border-b pb-8 last:border-b-0 transition-all duration-300 ${
+                          className={`border-b last:border-b-0 transition-all duration-300 p-4 ${
                             darkMode ? "border-gray-700" : "border-gray-200"
                           } ${
-                            isAnswered
-                              ? darkMode
-                                ? "bg-purple-900/10 rounded-lg p-4"
-                                : "bg-purple-50 rounded-lg p-4"
-                              : ""
+                            isAnswered ? (darkMode ? "bg-purple-900/10 rounded-lg" : "bg-purple-50 rounded-lg") : ""
                           }`}
                         >
                           <div className="flex items-start mb-6">
@@ -267,14 +271,16 @@ export default function TestStartPage() {
                                 isAnswered
                                   ? "bg-gradient-to-r from-purple-500 to-amber-500 text-white"
                                   : darkMode
-                                    ? "bg-gray-700 text-gray-300"
-                                    : "bg-gray-200 text-gray-600"
+                                  ? "bg-gray-700 text-gray-300"
+                                  : "bg-gray-200 text-gray-600"
                               }`}
                             >
                               {isAnswered ? <CheckCircle className="w-4 h-4" /> : qIndex}
                             </div>
                             <h3
-                              className={`text-lg font-medium leading-relaxed ${darkMode ? "text-white" : "text-gray-900"}`}
+                              className={`text-lg font-medium leading-relaxed ${
+                                darkMode ? "text-white" : "text-gray-900"
+                              }`}
                             >
                               {question.text}
                             </h3>
@@ -283,15 +289,46 @@ export default function TestStartPage() {
                           {/* Likert Scale */}
                           {question.type === "likert" && (
                             <div className="ml-12">
-                              <div
-                                className={`flex justify-between text-sm mb-4 ${darkMode ? "text-gray-400" : "text-gray-600"}`}
-                              >
-                                <span>Sangat Tidak Setuju</span>
-                                <span>Sangat Setuju</span>
-                              </div>
-                              <div className="flex justify-center space-x-3">
+                              {/* Grid Layout - 7 columns, 2 rows */}
+                              <div className="grid grid-cols-7 gap-y-6 mb-6">
+                                {/* Top row - Scale descriptions */}
+                                <div
+                                  className={`text-xs text-center flex items-center justify-center ${
+                                    darkMode ? "text-gray-400" : "text-gray-600"
+                                  }`}
+                                >
+                                  Sangat Tidak Sesuai Dengan Saya
+                                </div>
+                                <div></div> {/* Empty column 2 */}
+                                <div
+                                  className={`text-xs text-center flex items-center justify-center ${
+                                    darkMode ? "text-gray-400" : "text-gray-600"
+                                  }`}
+                                >
+                                  Agak Tidak Sesuai Dengan Saya
+                                </div>
+                                <div></div> {/* Empty column 4 */}
+                                <div
+                                  className={`text-xs text-center flex items-center justify-center ${
+                                    darkMode ? "text-gray-400" : "text-gray-600"
+                                  }`}
+                                >
+                                  Agak Sesuai Dengan Saya
+                                </div>
+                                <div></div> {/* Empty column 6 */}
+                                <div
+                                  className={`text-xs text-center flex items-center justify-center ${
+                                    darkMode ? "text-gray-400" : "text-gray-600"
+                                  }`}
+                                >
+                                  Sangat Sesuai Dengan Saya
+                                </div>
+                                {/* Bottom row - Radio buttons with numbers */}
                                 {Array.from({ length: question.scale }, (_, i) => (
-                                  <label key={i} className="flex flex-col items-center cursor-pointer group">
+                                  <label
+                                    key={i}
+                                    className="flex flex-col items-center cursor-pointer group justify-center"
+                                  >
                                     <input
                                       type="radio"
                                       name={`question-${question.id}`}
@@ -300,19 +337,19 @@ export default function TestStartPage() {
                                       onChange={() => handleAnswer(question.id, i + 1)}
                                       className="w-6 h-6 text-purple-600 focus:ring-purple-500 focus:ring-2"
                                     />
-                                    <span
-                                      className={`text-sm mt-2 transition-colors ${
+                                    {/* <span
+                                      className={`text-sm transition-colors ${
                                         answers[question.id] === i + 1
                                           ? darkMode
                                             ? "text-purple-300 font-semibold"
                                             : "text-purple-600 font-semibold"
                                           : darkMode
-                                            ? "text-gray-400 group-hover:text-gray-300"
-                                            : "text-gray-600 group-hover:text-gray-800"
+                                          ? "text-gray-400 group-hover:text-gray-300"
+                                          : "text-gray-600 group-hover:text-gray-800"
                                       }`}
                                     >
                                       {i + 1}
-                                    </span>
+                                    </span> */}
                                   </label>
                                 ))}
                               </div>
@@ -329,8 +366,8 @@ export default function TestStartPage() {
                                     answers[question.id] === idx + 1
                                       ? "bg-gradient-to-r from-purple-600 to-amber-600 text-white"
                                       : darkMode
-                                        ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
-                                        : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+                                      ? "bg-gray-700 text-gray-300 hover:bg-gray-600"
+                                      : "bg-gray-200 text-gray-700 hover:bg-gray-300"
                                   }`}
                                   onClick={() => handleAnswer(question.id, idx + 1)}
                                 >
@@ -357,7 +394,7 @@ export default function TestStartPage() {
                             </div>
                           )}
                         </motion.div>
-                      )
+                      );
                     })}
                   </div>
                 </div>
@@ -381,8 +418,8 @@ export default function TestStartPage() {
                 currentPage === 0
                   ? "opacity-50 cursor-not-allowed"
                   : darkMode
-                    ? "bg-gray-700 text-gray-300 hover:bg-gray-600 border-gray-600"
-                    : "bg-white text-gray-700 hover:bg-gray-50 border-gray-300"
+                  ? "bg-gray-700 text-gray-300 hover:bg-gray-600 border-gray-600"
+                  : "bg-white text-gray-700 hover:bg-gray-50 border-gray-300"
               }`}
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
@@ -438,5 +475,5 @@ export default function TestStartPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
