@@ -1,13 +1,13 @@
 import React from "react";
-import hfsData from "../../../data/questions/hfsQuestion.json"; // sesuaikan path
+import hfsData from "../../../data/questions/hfsQuestion.json";
 import TestHeader from "@/components/test/TestHeader";
 
 export default function HfsScale({
+  questions,
   answers,
   setAnswers,
-  currentPage,
-  questionsPerPage = 10,
   timeElapsed,
+  totalQuestions,
 }) {
   const scaleValues = [1, 2, 3, 4, 5, 6, 7];
   const scaleLabels = {
@@ -16,10 +16,6 @@ export default function HfsScale({
     5: "Agak sesuai",
     7: "Sangat sesuai",
   };
-
-  const startIndex = currentPage * questionsPerPage;
-  const endIndex = startIndex + questionsPerPage;
-  const currentQuestions = hfsData.questions.slice(startIndex, endIndex);
 
   const handleChange = (id, value) => {
     setAnswers((prev) => ({ ...prev, [id]: value }));
@@ -32,11 +28,11 @@ export default function HfsScale({
         description={hfsData.instructions}
         timeElapsed={timeElapsed}
         progress={Math.round(
-          (Object.keys(answers).length / hfsData.questions.length) * 100
+          (Object.keys(answers).length / totalQuestions) * 100
         )}
       />
 
-      {currentQuestions.map((q) => (
+      {questions.map((q) => (
         <div key={q.id} className="bg-white p-4 rounded-xl shadow border">
           <p className="mb-2 font-medium">
             {q.id}. {q.text}

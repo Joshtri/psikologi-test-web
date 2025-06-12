@@ -1,0 +1,275 @@
+{
+  "id": "pwb",
+  "name": "Psychological Well-Being Scale",
+  "instructions": "Jawablah sesuai dengan kondisi selama 1 bulan terakhir. Tidak ada jawaban benar atau salah. Pilih jawaban yang sesuai dengan pengalaman Anda.",
+  "scale": {
+    "labels": {
+      "TP": "Tidak Pernah",
+      "KK": "Kadang-kadang",
+      "S": "Sering",
+      "SS": "Selalu"
+    },
+    "scoring": {
+      "favorable": {
+        "TP": 1,
+        "KK": 2,
+        "S": 3,
+        "SS": 4
+      },
+      "unfavorable": {
+        "TP": 4,
+        "KK": 3,
+        "S": 2,
+        "SS": 1
+      }
+    }
+  },
+  "questions": [
+    {
+      "id": 1,
+      "text": "Saya berani mengemukakan pendapat saya meskipun bertentangan dengan pendapat orang-orang di sekitar saya",
+      "label": "favorable",
+      "category": "Kemandirian"
+    },
+    {
+      "id": 2,
+      "text": "Saya mampu beradaptasi dengan lingkungan yang baru",
+      "label": "favorable",
+      "category": "Penguasaan Lingkungan"
+    },
+    {
+      "id": 3,
+      "text": "Saya mengikuti kegiatan yang sebetulnya tidak memperluas wawasan saya",
+      "label": "unfavorable",
+      "category": "Pertumbuhan Pribadi"
+    },
+    {
+      "id": 4,
+      "text": "Saya merasa orang melihat saya sebagai sosok yang penuh kasih sayang",
+      "label": "favorable",
+      "category": "Relasi Positif"
+    },
+    {
+      "id": 5,
+      "text": "Saya bingung untuk saat ini dan tidak memiliki rencana masa depan",
+      "label": "unfavorable",
+      "category": "Tujuan Hidup"
+    },
+    {
+      "id": 6,
+      "text": "Saya puas dengan apa yang telah terjadi dalam hidup saya",
+      "label": "favorable",
+      "category": "Penerimaan Diri"
+    },
+    {
+      "id": 7,
+      "text": "Saya yakin saya adalah pribadi yang memiliki pengaruh orang lain",
+      "label": "favorable",
+      "category": "Relasi Positif"
+    },
+    {
+      "id": 8,
+      "text": "Tuntutan dalam hidup seringkali membuat saya down",
+      "label": "unfavorable",
+      "category": "Penguasaan Lingkungan"
+    },
+    {
+      "id": 9,
+      "text": "Saya suka mengikuti kegiatan yang dapat membuat hidup saya lebih bermakna",
+      "label": "favorable",
+      "category": "Tujuan Hidup"
+    },
+    {
+      "id": 10,
+      "text": "Saya sulit mempertahankan hubungan pertemanan saya dengan orang lain",
+      "label": "unfavorable",
+      "category": "Relasi Positif"
+    },
+    {
+      "id": 11,
+      "text": "Saya berorientasi untuk mencapai masa depan yang saya inginkan",
+      "label": "favorable",
+      "category": "Tujuan Hidup"
+    },
+    {
+      "id": 12,
+      "text": "Saya merasa percaya diri dan berpikir positif terhadap diri saya",
+      "label": "favorable",
+      "category": "Penerimaan Diri"
+    },
+    {
+      "id": 13,
+      "text": "Saya merasa tidak cocok dengan lingkungan di sekitar saya",
+      "label": "unfavorable",
+      "category": "Penguasaan Lingkungan"
+    },
+    {
+      "id": 14,
+      "text": "Saya merasa tidak banyak perbedaan seperti yang kebanyakan orang lakukan",
+      "label": "unfavorable",
+      "category": "Kemandirian"
+    },
+    {
+      "id": 15,
+      "text": "Saya merasa kesepian karena tidak memiliki banyak teman dekat",
+      "label": "unfavorable",
+      "category": "Relasi Positif"
+    },
+    {
+      "id": 16,
+      "text": "Kegiatan saya sehari-hari biasa saja dan tidak penting",
+      "label": "unfavorable",
+      "category": "Tujuan Hidup"
+    },
+    {
+      "id": 17,
+      "text": "Saya minder ketika melihat teman-teman saya yang lebih baik dari saya",
+      "label": "unfavorable",
+      "category": "Penerimaan Diri"
+    },
+    {
+      "id": 18,
+      "text": "Saya mudah terpengaruh oleh pendapat orang lain",
+      "label": "unfavorable",
+      "category": "Kemandirian"
+    },
+    {
+      "id": 19,
+      "text": "Saya kurang tanggung jawab yang baik dalam kegiatan sehari-hari",
+      "label": "unfavorable",
+      "category": "Penguasaan Lingkungan"
+    },
+    {
+      "id": 20,
+      "text": "Saya dapat mengembangkan potensi yang saya miliki melalui aktivitas yang saya ikuti",
+      "label": "favorable",
+      "category": "Pertumbuhan Pribadi"
+    },
+    {
+      "id": 21,
+      "text": "Saya merasa senang ketika menjalankan kegiatan bersama orang-orang di sekitar saya",
+      "label": "favorable",
+      "category": "Relasi Positif"
+    },
+    {
+      "id": 22,
+      "text": "Saya mampu melakukan komunikasi yang efektif",
+      "label": "favorable",
+      "category": "Relasi Positif"
+    },
+    {
+      "id": 23,
+      "text": "Saya menyukai segala aspek dalam hidup saya",
+      "label": "favorable",
+      "category": "Penerimaan Diri"
+    },
+    {
+      "id": 24,
+      "text": "Saya tidak yakin pendapat saya mungkin tidak sama dengan pendapat pada umumnya",
+      "label": "unfavorable",
+      "category": "Kemandirian"
+    },
+    {
+      "id": 25,
+      "text": "Saya menghindari tugas-tugas yang menjadi tanggung jawab saya",
+      "label": "unfavorable",
+      "category": "Penguasaan Lingkungan"
+    },
+    {
+      "id": 26,
+      "text": "Saya enggan mencoba hal baru selama hidup saya masih nyaman",
+      "label": "unfavorable",
+      "category": "Pertumbuhan Pribadi"
+    },
+    {
+      "id": 27,
+      "text": "Orang-orang melihat saya sebagai sosok yang murah hati dan mudah berinteraksi dengan orang lain",
+      "label": "favorable",
+      "category": "Relasi Positif"
+    },
+    {
+      "id": 28,
+      "text": "Saya mampu membuat perencanaan dalam hidup saya",
+      "label": "favorable",
+      "category": "Tujuan Hidup"
+    },
+    {
+      "id": 29,
+      "text": "Saya merasa kecewa dengan pencapaian saya selama ini",
+      "label": "unfavorable",
+      "category": "Penerimaan Diri"
+    },
+    {
+      "id": 30,
+      "text": "Saya kesulitan menyuarakan pendapat saya yang bertentangan dengan orang lain",
+      "label": "unfavorable",
+      "category": "Kemandirian"
+    },
+    {
+      "id": 31,
+      "text": "Saya merasa kesulitan menetap dalam hidup yang memuaskan",
+      "label": "unfavorable",
+      "category": "Penguasaan Lingkungan"
+    },
+    {
+      "id": 32,
+      "text": "Saya merasa bahwa hidup ini merupakan sebuah proses pembelajaran",
+      "label": "favorable",
+      "category": "Pertumbuhan Pribadi"
+    },
+    {
+      "id": 33,
+      "text": "Saya tidak tertarik untuk menjalin hubungan yang hangat dan saling percaya dengan orang lain",
+      "label": "unfavorable",
+      "category": "Relasi Positif"
+    },
+    {
+      "id": 34,
+      "text": "Saya mengetahui hal-hal yang saya ingin saya raih dalam hidup",
+      "label": "favorable",
+      "category": "Tujuan Hidup"
+    },
+    {
+      "id": 35,
+      "text": "Sikap saya terhadap diri saya sendiri tidak sepositif orang lain terhadap sikap mereka",
+      "label": "unfavorable",
+      "category": "Penerimaan Diri"
+    },
+    {
+      "id": 36,
+      "text": "Saya menilai diri saya berdasarkan apa yang saya anggap penting bukan karena orang lain",
+      "label": "favorable",
+      "category": "Kemandirian"
+    },
+    {
+      "id": 37,
+      "text": "Saya mampu mengatur gaya hidup sesuai dengan keinginan saya",
+      "label": "favorable",
+      "category": "Penguasaan Lingkungan"
+    },
+    {
+      "id": 38,
+      "text": "Saya sudah berhenti membuat perubahan dalam hidup sejak waktu yang lama",
+      "label": "unfavorable",
+      "category": "Pertumbuhan Pribadi"
+    },
+    {
+      "id": 39,
+      "text": "Saya dan orang-orang di sekitar saya saling percaya satu sama lain",
+      "label": "favorable",
+      "category": "Relasi Positif"
+    },
+    {
+      "id": 40,
+      "text": "Saya merasa telah menjalani hidup saya sesuai dengan perencanaan yang saya buat",
+      "label": "favorable",
+      "category": "Tujuan Hidup"
+    },
+    {
+      "id": 41,
+      "text": "Saya merasa nyaman dengan diri saya apa adanya saat ini",
+      "label": "favorable",
+      "category": "Penerimaan Diri"
+    }
+  ]
+}

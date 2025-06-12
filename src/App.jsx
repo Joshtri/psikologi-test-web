@@ -9,6 +9,7 @@ import { ToastProvider } from "./provider/ToastProvider"; // pastikan path benar
 import TestIndexPage from "./pages/test/index";
 import PersonalityTypesPage from "./pages/personality-types/personality-types";
 import ScrollToTop from "./utils/ScrollToTop";
+import NotFoundPage from "./pages/404";
 
 function App() {
   return (
@@ -28,6 +29,8 @@ function App() {
               path="/personality-types"
               element={<PersonalityTypesPage />}
             />
+
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Layout>
       </BrowserRouter>
