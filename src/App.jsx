@@ -11,6 +11,7 @@ import PersonalityTypesPage from "./pages/personality-types/personality-types";
 import ScrollToTop from "./utils/ScrollToTop";
 import NotFoundPage from "./pages/404";
 import RespondentFormPage from "./pages/home/respondent-form";
+import LoginPage from "./pages/login";
 
 function App() {
   return (
@@ -27,11 +28,16 @@ function App() {
             {/* <Route path="/test/start" element={<TestStartPage />} />
             <Route path="/test/result" element={<TestResultPage />} /> */}
 
-            <Route path="/respondent-fill-form" element={<RespondentFormPage />} />
+            <Route
+              path="/respondent-fill-form"
+              element={<RespondentFormPage />}
+            />
             <Route
               path="/personality-types"
               element={<PersonalityTypesPage />}
             />
+
+            <Route path="/sys/g/login" element={<LoginPage />} />
 
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

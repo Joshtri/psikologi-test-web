@@ -1,20 +1,18 @@
 "use client";
 
+import { consentItems } from '@/constants/consentItems';
 import { Button } from "flowbite-react";
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { useToast } from "../../provider/ToastProvider";
-import { useNavigate } from "react-router-dom";
 import {
-  FileText,
-  Shield,
-  Heart,
-  CheckCircle,
   ArrowLeft,
   ArrowRight,
-  Info,
+  CheckCircle,
+  FileText,
+  Info
 } from "lucide-react";
-import { consentItems } from '@/constants/consentItems';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useToast } from "../../provider/ToastProvider";
 
 export default function ConsentPage({ onBack }) {
   const { showToast } = useToast();

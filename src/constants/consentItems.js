@@ -1,6 +1,5 @@
 import { Shield, Info, CheckCircle, Heart } from "lucide-react"; // contoh impor icon
 
-
 export const consentItems = [
   {
     key: "participation",
@@ -28,7 +27,7 @@ export const consentItems = [
     icon: Heart,
     title: "Insentif Penelitian",
     label:
-      "Saya memahami bahwa saya akan mendapatkan insentif berupa finansial sebesar Rp 50,000,- (lima puluh ribu rupiah) dan akses gratis pada artikel ilmiah terkait topik pada studi ini.",
+      "Saya memahami bahwa saya akan mendapatkan insentif berupa finansial sebesar Rp 25,000,- (dua puluh ribu rupiah) untuk 10 orang peserta random dari ovo. - tambah 1 poin tentang kesediaan diwawancara lebih lanjut",
   },
   {
     key: "confidentiality",

@@ -1,59 +1,23 @@
+import { features, stats } from "@/constants/common";
 import { Button } from "flowbite-react";
 import { motion } from "framer-motion";
 import {
-  BookOpen,
-  Play,
-  Sparkles,
-  Heart,
   Brain,
-  User,
-  Leaf,
   Globe,
+  Heart,
+  Play,
+  Sparkles
 } from "lucide-react";
 import { useState } from "react";
-import { useToast } from "../../provider/ToastProvider";
 import ConsentPage from "./consent";
 
 export default function HomePage() {
-  const { showToast } = useToast();
-  const [showConsent, setShowConsent] = useState(false);
+   const [showConsent, setShowConsent] = useState(false);
 
   const handleStartTest = () => setShowConsent(true);
 
   if (showConsent) return <ConsentPage onBack={() => setShowConsent(false)} />;
 
-  const features = [
-    {
-      icon: Heart,
-      title: "Pemaafan",
-      description:
-        "Mengukur kemampuan dalam memaafkan diri sendiri dan orang lain dengan pendekatan yang peka budaya",
-    },
-    {
-      icon: Sparkles,
-      title: "Kesejahteraan",
-      description:
-        "Mengevaluasi tingkat kesejahteraan psikologis secara holistik berdasarkan nilai-nilai lokal",
-    },
-    {
-      icon: User,
-      title: "Kepribadian",
-      description:
-        "Mengidentifikasi pola kepribadian dan karakteristik unik dengan mempertimbangkan konteks budaya",
-    },
-    {
-      icon: Leaf,
-      title: "Makna Hidup",
-      description:
-        "Merefleksikan nilai-nilai dan tujuan hidup yang bermakna sesuai dengan kearifan lokal",
-    },
-  ];
-
-  const stats = [
-    { value: "155", label: "Pertanyaan Tervalidasi" },
-    { value: "4", label: "Aspek Kepribadian" },
-    { value: "100%", label: "Peka Budaya" },
-  ];
 
   return (
     <div className="min-h-screen bg-white text-gray-800">
