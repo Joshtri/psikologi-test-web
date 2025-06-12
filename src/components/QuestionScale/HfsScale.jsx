@@ -1,6 +1,6 @@
 import React from "react";
 import hfsData from "../../../data/questions/hfsQuestion.json";
-import TestHeader from "@/components/test/TestHeader";
+import TestHeader from "@/components/Test/TestHeader";
 
 export default function HfsScale({
   questions,

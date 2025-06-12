@@ -1,6 +1,6 @@
 import React from "react";
 import pdqData from "../../../data/questions/pdqQuestion.json";
-import TestHeader from "@/components/test/TestHeader";
+import TestHeader from "@/components/Test/TestHeader";
 import { Flame, Star, HeartPulse, ShieldAlert, HelpCircle } from "lucide-react";
 
 export default function PdqScale({
