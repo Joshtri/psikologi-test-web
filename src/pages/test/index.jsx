@@ -8,8 +8,8 @@ import { useToast } from "../../provider/ToastProvider";
 import VerticalStepper from "@/components/ui/VerticalStepper";
 import PdqScale from "@/components/QuestionScale/PdqScale";
 import HfsScale from "@/components/QuestionScale/HfsScale";
-import TestNavigationButtons from "@/components/test/TestNavigationButtons";
-import QuestionPagination from "@/components/test/TestPaginationIndicator";
+import TestNavigationButtons from "@/components/Test/TestNavigationButtons";
+import QuestionPagination from "@/components/Test/TestPaginationIndicator";
 
 const testSequence = ["hfs", "pdq_4"];
 const steps = ["Heartland Forgiveness Scale", "PDQ Scale", "Selesai"];
