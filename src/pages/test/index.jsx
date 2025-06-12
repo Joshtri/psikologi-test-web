@@ -10,10 +10,17 @@ import PdqScale from "@/components/QuestionScale/PdqScale";
 import HfsScale from "@/components/QuestionScale/HfsScale";
 import TestNavigationButtons from "@/components/Test/TestNavigationButtons";
 import QuestionPagination from "@/components/Test/TestPaginationIndicator";
+import PwbScale from "@/components/QuestionScale/PwbScale";
+import pwbData from "../../../data/questions/pwbQuestion.json";
 
-const testSequence = ["hfs", "pdq_4"];
-const steps = ["Heartland Forgiveness Scale", "PDQ Scale", "Selesai"];
-const dataMap = { hfs: hfsData, pdq_4: pdqData };
+const testSequence = ["pwb", "pdq_4", "hfs"];
+const steps = [
+  "Heartland Forgiveness Scale",
+  "PDQ Scale",
+  "PWB Scale",
+  "Selesai",
+];
+const dataMap = { hfs: hfsData, pdq_4: pdqData, pwb: pwbData };
 
 export default function TestIndexPage() {
   const navigate = useNavigate();
@@ -94,7 +101,7 @@ export default function TestIndexPage() {
                     timeElapsed={timeElapsed}
                     totalQuestions={allQuestions.length}
                   />
-                ) : (
+                ) : currentTestId === "hfs" ? (
                   <HfsScale
                     questions={currentQuestions}
                     answers={answers}
@@ -102,6 +109,19 @@ export default function TestIndexPage() {
                     timeElapsed={timeElapsed}
                     totalQuestions={allQuestions.length}
                   />
+                ) : currentTestId === "pwb" ? (
+                  <PwbScale
+                    questions={currentQuestions}
+                    answers={answers}
+                    setAnswers={setAnswers}
+                    timeElapsed={timeElapsed}
+                    currentPage={currentPage}
+                    questionsPerPage={questionsPerPage}
+                  />
+                ) : (
+                  <div className="text-center text-gray-500 italic">
+                    Skala untuk tes ini belum tersedia.
+                  </div>
                 )}
               </Card>
             </motion.div>

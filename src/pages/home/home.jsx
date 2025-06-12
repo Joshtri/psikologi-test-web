@@ -19,13 +19,6 @@ export default function HomePage() {
   const [showConsent, setShowConsent] = useState(false);
 
   const handleStartTest = () => setShowConsent(true);
-  const handleLearnMore = () =>
-    showToast({
-      type: "info",
-      message: "Fitur panduan akan segera hadir!",
-      align: "top-right",
-      duration: 3000,
-    });
 
   if (showConsent) return <ConsentPage onBack={() => setShowConsent(false)} />;
 

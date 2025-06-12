@@ -9,14 +9,18 @@ export default function Header() {
   const location = useLocation();
   const pathname = location.pathname;
   const [isOpen, setIsOpen] = useState(false);
+  const [showConsent, setShowConsent] = useState(false);
+  const handleStartTest = () => setShowConsent(true);
+
+  if (showConsent) return <ConsentPage onBack={() => setShowConsent(false)} />;
 
   const navItems = [
     { to: "/", label: "Beranda" },
-    { to: "/test", label: "Mulai Tes" },
+    // { to: "/test", label: "Mulai Tes", onClick: handleStartTest },
   ];
 
   return (
-    <header className="sticky top-0 z-50 shadow-md relative overflow-hidden backdrop-blur-md bg-gradient-to-r from-white via-purple-100 to-amber-100 text-gray-800 transition-colors duration-300">
+    <header className="top-0 z-50 shadow-md relative overflow-hidden backdrop-blur-md bg-gradient-to-r from-white via-purple-100 to-amber-100 text-gray-800 transition-colors duration-300">
       {/* Background Decoration */}
       <div className="absolute inset-0 bg-gradient-to-r from-purple-100/30 to-amber-100/30" />
       <div className="absolute top-0 left-0 w-full h-full pointer-events-none">
@@ -55,6 +59,7 @@ export default function Header() {
               <Link
                 key={item.to}
                 to={item.to}
+                onClick={item.onClick}
                 className={`relative px-4 py-2 rounded-lg transition-all duration-300 group ${
                   isActive
                     ? "bg-purple-200 text-purple-900 font-semibold shadow-md"

@@ -10,6 +10,7 @@ import TestIndexPage from "./pages/test/index";
 import PersonalityTypesPage from "./pages/personality-types/personality-types";
 import ScrollToTop from "./utils/ScrollToTop";
 import NotFoundPage from "./pages/404";
+import RespondentFormPage from "./pages/home/respondent-form";
 
 function App() {
   return (
@@ -25,6 +26,8 @@ function App() {
             <Route path="/test" element={<TestIndexPage />} />
             {/* <Route path="/test/start" element={<TestStartPage />} />
             <Route path="/test/result" element={<TestResultPage />} /> */}
+
+            <Route path="/respondent-fill-form" element={<RespondentFormPage />} />
             <Route
               path="/personality-types"
               element={<PersonalityTypesPage />}
