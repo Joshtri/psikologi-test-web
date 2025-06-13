@@ -1,6 +1,6 @@
 import React from "react";
 import pwbData from "../../../data/questions/pwbQuestion.json"; // sesuaikan path jika beda
-import TestHeader from "@/components/test/TestHeader";
+import TestHeader from "@/components/Test/TestHeader";
 
 export default function PwbScale({
   answers,
