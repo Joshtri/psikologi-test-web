@@ -14,6 +14,8 @@ import PwbScale from "@/components/QuestionScale/PwbScale";
 import pwbData from "../../../data/questions/pwbQuestion.json";
 import aceData from "../../../data/questions/aceQuestion.json";
 import AceScale from "@/components/QuestionScale/AceScale";
+import LeavePagePrompt from "@/components/common/LeavePagePrompt"; // pastikan path sesuai
+
 const testSequence = ["ace", "pwb", "pdq_4", "hfs"];
 const steps = ["Bagian 1", "Bagian 2", "Bagian 3", "Bagian 4", "Selesai"];
 const dataMap = {
@@ -98,91 +100,99 @@ export default function TestIndexPage() {
       setCurrentPage(0);
     }
   };
+  
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-amber-50 text-gray-800">
-      <div className="relative z-10 py-8">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <VerticalStepper
-            steps={steps}
-            currentStep={currentTestIndex}
-            onStepClick={handleStepClick}
-            visitedSteps={visitedSteps}
-          />
+    <>
+      <LeavePagePrompt when={Object.keys(answers).length > 0} />
 
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`${currentTestId}-${currentPage}`}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Card className="mb-8 shadow-xl border-2 bg-white border-purple-200 p-6">
-                {currentTestId === "ace" ? (
-                  <AceScale
-                    questions={currentQuestions}
-                    answers={answers}
-                    setAnswers={setAnswers}
-                    timeElapsed={timeElapsed}
-                    sectionInfo={currentTest.full.sections.find((s) =>
-                      s.questions.some((q) => q.id === currentQuestions[0]?.id)
-                    )}
-                  />
-                ) : currentTestId === "pdq_4" ? (
-                  <PdqScale
-                    questions={currentQuestions}
-                    answers={answers}
-                    setAnswers={setAnswers}
-                    timeElapsed={timeElapsed}
-                    totalQuestions={allQuestions.length}
-                  />
-                ) : currentTestId === "hfs" ? (
-                  <HfsScale
-                    questions={currentQuestions}
-                    answers={answers}
-                    setAnswers={setAnswers}
-                    timeElapsed={timeElapsed}
-                    totalQuestions={allQuestions.length}
-                  />
-                ) : currentTestId === "pwb" ? (
-                  <PwbScale
-                    questions={currentQuestions}
-                    answers={answers}
-                    setAnswers={setAnswers}
-                    timeElapsed={timeElapsed}
-                    currentPage={currentPage}
-                    questionsPerPage={questionsPerPage}
-                  />
-                ) : (
-                  <div className="text-center text-gray-500 italic">
-                    Skala untuk tes ini belum tersedia.
-                  </div>
-                )}
-              </Card>
-            </motion.div>
-          </AnimatePresence>
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-amber-50 text-gray-800">
+        <div className="relative z-10 py-8">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <VerticalStepper
+              steps={steps}
+              currentStep={currentTestIndex}
+              onStepClick={handleStepClick}
+              visitedSteps={visitedSteps}
+            />
 
-          <TestNavigationButtons
-            currentPage={currentPage}
-            totalPages={totalPages}
-            canProceed={canProceed}
-            handleNext={handleNext}
-            handlePrevious={handlePrevious}
-          />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`${currentTestId}-${currentPage}`}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <Card className="mb-8 shadow-xl border-2 bg-white border-purple-200 p-6">
+                  {currentTestId === "ace" ? (
+                    <AceScale
+                      questions={currentQuestions}
+                      answers={answers}
+                      setAnswers={setAnswers}
+                      timeElapsed={timeElapsed}
+                      sectionInfo={currentTest.full.sections.find((s) =>
+                        s.questions.some(
+                          (q) => q.id === currentQuestions[0]?.id
+                        )
+                      )}
+                    />
+                  ) : currentTestId === "pdq_4" ? (
+                    <PdqScale
+                      questions={currentQuestions}
+                      answers={answers}
+                      setAnswers={setAnswers}
+                      timeElapsed={timeElapsed}
+                      totalQuestions={allQuestions.length}
+                    />
+                  ) : currentTestId === "hfs" ? (
+                    <HfsScale
+                      questions={currentQuestions}
+                      answers={answers}
+                      setAnswers={setAnswers}
+                      timeElapsed={timeElapsed}
+                      totalQuestions={allQuestions.length}
+                    />
+                  ) : currentTestId === "pwb" ? (
+                    <PwbScale
+                      questions={currentQuestions}
+                      answers={answers}
+                      setAnswers={setAnswers}
+                      timeElapsed={timeElapsed}
+                      currentPage={currentPage}
+                      questionsPerPage={questionsPerPage}
+                    />
+                  ) : (
+                    <div className="text-center text-gray-500 italic">
+                      Skala untuk tes ini belum tersedia.
+                    </div>
+                  )}
+                </Card>
+              </motion.div>
+            </AnimatePresence>
 
-          <QuestionPagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            currentQuestions={currentQuestions}
-            allQuestions={allQuestions}
-            answers={answers}
-            canProceed={canProceed}
-            handleNext={handleNext}
-            handlePrevious={handlePrevious}
-            handlePageClick={(pageIndex) => setCurrentPage(pageIndex)}
-          />
+            <TestNavigationButtons
+              currentPage={currentPage}
+              totalPages={totalPages}
+              canProceed={canProceed}
+              allQuestions={allQuestions} // ✅ Pastikan ini ada
+              handleNext={handleNext}
+              handlePrevious={handlePrevious}
+            />
+
+            <QuestionPagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              currentQuestions={currentQuestions}
+              allQuestions={allQuestions}
+              answers={answers}
+              canProceed={canProceed}
+              handleNext={handleNext}
+              handlePrevious={handlePrevious}
+              handlePageClick={(pageIndex) => setCurrentPage(pageIndex)}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

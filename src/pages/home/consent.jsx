@@ -1,6 +1,6 @@
 "use client";
 
-import { consentItems } from '@/constants/consentItems';
+import { consentItems } from "@/constants/consentItems";
 import { Button } from "flowbite-react";
 import { motion } from "framer-motion";
 import {
@@ -8,7 +8,7 @@ import {
   ArrowRight,
   CheckCircle,
   FileText,
-  Info
+  Info,
 } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -40,11 +40,11 @@ export default function ConsentPage({ onBack }) {
     if (allAgreed) {
       showToast({
         type: "success",
-        message: "Terima kasih! Anda akan diarahkan ke tes.",
+        message: "Terima kasih! Anda akan diarahkan ke formulir isian.",
         align: "top-right",
         duration: 3000,
       });
-      navigate("/test");
+      navigate("/respondent-fill-form"); // ✅ arahkan ke halaman isian
     } else {
       showToast({
         type: "error",
@@ -54,8 +54,6 @@ export default function ConsentPage({ onBack }) {
       });
     }
   };
-
-
 
   return (
     <div className="min-h-screen bg-white text-gray-800">

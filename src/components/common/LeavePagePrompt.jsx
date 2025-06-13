@@ -5,6 +5,7 @@ export default function LeavePagePrompt({
   message = "Apakah Anda yakin ingin meninggalkan halaman ini? Perubahan belum disimpan akan hilang.",
 }) {
   const [showDialog, setShowDialog] = useState(false);
+  const [shouldLeave, setShouldLeave] = useState(false);
 
   useEffect(() => {
     const handleBeforeUnload = (e) => {
@@ -15,9 +16,9 @@ export default function LeavePagePrompt({
     };
 
     const handlePopState = () => {
-      if (when) {
+      if (when && !shouldLeave) {
         setShowDialog(true);
-        window.history.pushState(null, "", window.location.href); // block back
+        window.history.pushState(null, "", window.location.href); // push ulang supaya tetap stay
       }
     };
 
@@ -31,12 +32,12 @@ export default function LeavePagePrompt({
       window.removeEventListener("beforeunload", handleBeforeUnload);
       window.removeEventListener("popstate", handlePopState);
     };
-  }, [when, message]);
+  }, [when, message, shouldLeave]);
 
   const confirmLeave = () => {
     setShowDialog(false);
-    window.removeEventListener("popstate", () => {});
-    history.back(); // allow back
+    setShouldLeave(true);
+    window.history.back(); // now allow back
   };
 
   const cancelLeave = () => {

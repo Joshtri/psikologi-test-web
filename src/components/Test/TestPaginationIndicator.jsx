@@ -6,6 +6,10 @@ export default function TestPaginationIndicator({
   currentPage,
   totalPages,
   handlePageClick,
+  canProceed,
+  currentQuestions,
+  allQuestions,
+  answers,
 }) {
   const groupSize = 10;
   const currentGroup = Math.floor(currentPage / groupSize);
@@ -14,6 +18,22 @@ export default function TestPaginationIndicator({
 
   const canGoPrev = startIndex > 0;
   const canGoNext = endIndex < totalPages;
+
+  const isPageAnswered = (pageIndex) => {
+    const start = pageIndex * currentQuestions.length;
+    const end = start + currentQuestions.length;
+    const pageQuestions = allQuestions.slice(start, end);
+
+    return pageQuestions.every((question) => {
+      const key =
+        question.category === "PDQ"
+          ? `pdq_4-${question.id}`
+          : question.category === "ACE"
+          ? `ace-${question.id}`
+          : question.id;
+      return answers[key];
+    });
+  };
 
   return (
     <div className="flex flex-col items-center mt-8 mb-4">
@@ -34,13 +54,21 @@ export default function TestPaginationIndicator({
           return (
             <button
               key={pageIndex}
-              onClick={() => handlePageClick(pageIndex)}
+              onClick={() => {
+                if (pageIndex <= currentPage || isPageAnswered(pageIndex - 1)) {
+                  handlePageClick(pageIndex);
+                }
+              }}
               className={`w-4 h-4 rounded-full transition-all duration-300 ${
                 pageIndex === currentPage
                   ? "bg-gradient-to-r from-purple-500 to-amber-500 scale-125"
                   : pageIndex < currentPage
                   ? "bg-green-500"
                   : "bg-gray-300"
+              } ${
+                pageIndex > currentPage && !isPageAnswered(pageIndex - 1)
+                  ? "cursor-not-allowed opacity-50"
+                  : ""
               }`}
             ></button>
           );
