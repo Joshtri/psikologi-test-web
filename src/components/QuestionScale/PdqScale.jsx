@@ -81,12 +81,6 @@ export default function PdqScale({
               isSub ? "ml-6 border-dashed border-gray-300" : ""
             }`}
           >
-            <div
-              className={`absolute top-2 right-2 px-2 py-0.5 rounded-full text-xs font-medium flex items-center ${labelInfo.color}`}
-            >
-              {labelInfo.icon}
-              {q.label || "Tidak Diketahui"}
-            </div>
             <p className="mb-2 text-sm text-gray-800">
               {index + 1}. {q.text}
             </p>

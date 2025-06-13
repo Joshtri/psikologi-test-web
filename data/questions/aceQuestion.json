@@ -1,0 +1,360 @@
+{
+  "id": "ace_full",
+  "name": "Adverse Childhood Experiences (ACE)",
+  "instructions": "Jawablah pertanyaan berikut berdasarkan pengalaman Anda hingga usia 18 tahun.",
+  "sections": [
+    {
+      "title": "Neglect & Parenting Awareness",
+      "instructions": "Pertanyaan-pertanyaan berikut adalah mengenai kondisi atau pengalaman masa kecil Anda, sampai dengan Anda berusia 18 tahun.",
+      "questions": [
+        {
+          "id": 1,
+          "text": "Apakah orangtua/wali Anda memahami masalah yang tengah Anda rasakan?",
+          "category": "Emotional Neglect",
+          "scoring": {
+            "Selalu": 0,
+            "Sering": 0,
+            "Kadang-kadang": 0,
+            "Jarang": 1,
+            "Tidak pernah": 1
+          }
+        },
+        {
+          "id": 2,
+          "text": "Apakah orangtua/wali Anda mengetahui kegiatan yang Anda lakukan di luar sekolah atau tempat kerja Anda?",
+          "category": "Emotional Neglect",
+          "scoring": {
+            "Selalu": 0,
+            "Sering": 0,
+            "Kadang-kadang": 0,
+            "Jarang": 1,
+            "Tidak pernah": 1
+          }
+        },
+        {
+          "id": 3,
+          "text": "Seberapa sering orangtua/wali Anda tidak memberikan makanan yang cukup meskipun mereka dapat melakukan hal tersebut dengan mudah?",
+          "category": "Physical Neglect",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 0,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 4,
+          "text": "Apakah orangtua/wali Anda mabuk atau berada di bawah pengaruh obat-obatan terlarang sehingga tidak dapat mengurus Anda?",
+          "category": "Physical Neglect",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 0,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 5,
+          "text": "Seberapa sering orangtua/wali Anda tidak menyekolahkan Anda meskipun hal tersebut bisa dilakukan?",
+          "category": "Physical Neglect",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 0,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        }
+      ]
+    },
+    {
+      "title": "Abuse & Household Threats",
+      "instructions": "Pertanyaan-pertanyaan berikut ini mengenai hal-hal yang MUNGKIN Anda alami saat Anda tumbuh besar. Sampai dengan Anda berusia 18 tahun.",
+      "questions": [
+        {
+          "id": 6,
+          "text": "Apakah orangtua, wali, atau anggota keluarga inti mencela, menyuruh Anda diam, mempermalukan atau menghina Anda?",
+          "category": "Emotional Abuse",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 7,
+          "text": "Apakah orangtua, wali, atau anggota keluarga inti pernah mengabaikan, menelantarkan, atau mengusir Anda dari rumah?",
+          "category": "Emotional Abuse",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 8,
+          "text": "Apakah orangtua, wali, atau anggota keluarga lain memukul pantat, menampar, menendang, meninju, atau memukuli Anda?",
+          "category": "Physical Abuse",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 9,
+          "text": "Apakah orangtua, wali, atau anggota keluarga lain memukul Anda menggunakan benda seperti tongkat, botol, gada, pisau, cambuk, dll.?",
+          "category": "Physical Abuse",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 10,
+          "text": "Apakah seseorang pernah menyentuh atau membelai Anda secara seksual meskipun Anda tidak menginginkannya?",
+          "category": "Contact Sexual Abuse",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 1,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 11,
+          "text": "Apakah seseorang pernah membuat Anda menyentuh bagian tubuhnya secara seksual meskipun Anda tidak menginginkannya?",
+          "category": "Contact Sexual Abuse",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 1,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 12,
+          "text": "Apakah seseorang pernah melakukan percobaan hubungan seksual secara oral, anal, atau vaginal dengan Anda meskipun Anda tidak menginginkannya?",
+          "category": "Contact Sexual Abuse",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 1,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 13,
+          "text": "Apakah seseorang pernah melakukan hubungan seksual secara oral, anal, atau vaginal dengan Anda meskipun Anda tidak menginginkannya?",
+          "category": "Contact Sexual Abuse",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 1,
+            "Tidak pernah": 0
+          }
+        }
+      ]
+    },
+    {
+      "title": "Household Environment",
+      "instructions": "Pertanyaan-pertanyaan berikut adalah mengenai lingkungan keluarga Anda, sampai dengan Anda berusia 18 tahun.",
+      "questions": [
+        {
+          "id": 14,
+          "text": "Apakah Anda tinggal bersama anggota keluarga yang bermasalah dengan penyalahgunaan alkohol atau obat-obatan?",
+          "category": "Alcohol and/or drug abuser in the household",
+          "scoring": {
+            "Ya": 1,
+            "Tidak": 0
+          }
+        },
+        {
+          "id": 15,
+          "text": "Apakah Anda tinggal bersama anggota keluarga yang mengalami depresi, gangguan mental atau memiliki kecenderungan bunuh diri?",
+          "category": "Someone chronically depressed, mentally ill, institutionalized, or suicidal",
+          "scoring": {
+            "Ya": 1,
+            "Tidak": 0
+          }
+        },
+        {
+          "id": 16,
+          "text": "Apakah Anda tinggal bersama anggota keluarga yang pernah dipenjara?",
+          "category": "Incarcerated household member",
+          "scoring": {
+            "Ya": 1,
+            "Tidak": 0
+          }
+        },
+        {
+          "id": 17,
+          "text": "Apakah orangtua Anda bercerai?",
+          "category": "One or no parents, parental separation, or divorce",
+          "scoring": {
+            "Ya": 1,
+            "Tidak": 0
+          }
+        },
+        {
+          "id": 18,
+          "text": "Apakah ibu, ayah, atau wali Anda meninggal dunia?",
+          "category": "One or no parents, parental separation, or divorce",
+          "scoring": {
+            "Ya": 1,
+            "Tidak": 0
+          }
+        }
+      ]
+    },
+    {
+      "title": "Violence in the Home",
+      "instructions": "Pertanyaan-pertanyaan berikut ini mengenai hal-hal yang pernah Anda dengar atau saksikan DI RUMAH ANDA. Hal-hal berikut ini dapat merupakan hal-hal yang dilakukan terhadap anggota keluarga lain, tidak hanya terhadap Anda saja, sampai dengan Anda berusia 18 tahun.",
+      "questions": [
+        {
+          "id": 19,
+          "text": "Apakah Anda melihat atau mendengar orangtua atau anggota keluarga di rumah Anda diteriaki, dihina, disumpahi dengan kata-kata kasar, dihina, atau dipermalukan?",
+          "category": "Household member treated violently",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 20,
+          "text": "Apakah Anda melihat atau mendengar orangtua atau anggota keluarga di rumah Anda ditampar, ditendang, ditinju, atau dipukuli?",
+          "category": "Household member treated violently",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 21,
+          "text": "Apakah Anda melihat atau mendengar orangtua atau anggota keluarga di rumah Anda dipukul atau dilukai dengan benda, seperti tongkat, botol, gada, pisau, cambuk, dsb?",
+          "category": "Household member treated violently",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        }
+      ]
+    },
+    {
+      "title": "Bullying",
+      "instructions": "Pertanyaan-pertanyaan berikut ini mengenai PERUNDUNGAN/BULLYING yang Anda alami saat Anda tumbuh besar. Perundungan terjadi ketika anak muda atau kelompok berisi anak-anak muda mengatakan atau melakukan hal-hal buruk atau tidak menyenangkan kepada anak muda lainnya...",
+      "questions": [
+        {
+          "id": 22,
+          "text": "Seberapa sering Anda menjadi sasaran perundungan/bullying?",
+          "category": "Bullying",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 0,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        }
+      ]
+    },
+    {
+      "title": "Community Violence",
+      "instructions": "Pertanyaan-pertanyaan berikut ini mengenai seberapa sering Anda, saat masa kanak-kanak, mungkin pernah melihat atau mendengar hal-hal di DAERAH SEKITAR ATAU MASYARAKAT SETEMPAT (bukan di dalam rumah Anda atau televisi, film, atau radio).",
+      "questions": [
+        {
+          "id": 23,
+          "text": "Apakah Anda melihat atau mendengar seseorang dipukuli dalam kehidupan nyata?",
+          "category": "Community Violence",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 0,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 24,
+          "text": "Apakah Anda melihat atau mendengar seseorang ditusuk atau ditembak dalam kehidupan nyata?",
+          "category": "Community Violence",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 0,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 25,
+          "text": "Apakah Anda melihat atau mendengar seseorang diancam dengan pisau atau ditodong pistol dalam kehidupan nyata?",
+          "category": "Community Violence",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 0,
+            "Satu kali": 0,
+            "Tidak pernah": 0
+          }
+        }
+      ]
+    },
+    {
+      "title": "Collective Violence",
+      "instructions": "Pertanyaan-pertanyaan berikut ini mengenai apakah ANDA mengalami atau tidak mengalami kejadian-kejadian berikut pada masa kecil. Kejadian-kejadian berikut berhubungan dengan kekerasan kolektif...",
+      "questions": [
+        {
+          "id": 26,
+          "text": "Apakah Anda pernah terpaksa pergi dan tinggal di tempat lain karena salah satu (atau lebih) kejadian tersebut?",
+          "category": "Collective Violence",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 1,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 27,
+          "text": "Apakah Anda pernah mengalami kerusakan di rumah Anda karena salah satu (atau lebih) kejadian tersebut?",
+          "category": "Collective Violence",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 1,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 28,
+          "text": "Apakah Anda pernah dipukuli oleh tentara, polisi, militer, atau geng?",
+          "category": "Collective Violence",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 1,
+            "Tidak pernah": 0
+          }
+        },
+        {
+          "id": 29,
+          "text": "Apakah ada pernah anggota keluarga atau teman Anda dibunuh atau dipukuli oleh tentara, polisi, militer, atau geng?",
+          "category": "Collective Violence",
+          "scoring": {
+            "Seringkali": 1,
+            "Beberapa kali": 1,
+            "Satu kali": 1,
+            "Tidak pernah": 0
+          }
+        }
+      ]
+    }
+  ]
+}
