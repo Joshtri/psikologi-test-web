@@ -4,30 +4,29 @@ import "./App.css";
 import Layout from "./components/Layout";
 import AboutPage from "./pages/about/about";
 import HomePage from "./pages/home/home";
-import { ToastProvider } from "./provider/ToastProvider"; // pastikan path benar
-// import QuestionPage from "./pages/test/question";
+import { ToastProvider } from "./provider/ToastProvider";
 import TestIndexPage from "./pages/test/index";
 import PersonalityTypesPage from "./pages/personality-types/personality-types";
 import ScrollToTop from "./utils/ScrollToTop";
 import NotFoundPage from "./pages/404";
 import RespondentFormPage from "./pages/home/respondent-form";
 import LoginPage from "./pages/login";
+import DashboardPage from "./pages/sys/dashboard/page";
+import RespondentPage from "./pages/sys/respondent/page";
+import RespondentShowPage from "./pages/sys/respondent/show";
 
 function App() {
   return (
     <ToastProvider>
-      <ThemeConfig dark={true} />
       <BrowserRouter>
+        <ThemeConfig dark={true} />
         <ScrollToTop />
-        <Layout>
-          <Routes>
+
+        {/* ✅ Public Layout */}
+        <Routes>
+          <Route element={<Layout />}>
             <Route index element={<HomePage />} />
-            {/* <Route path="/about" element={<AboutPage />} /> */}
-
             <Route path="/test" element={<TestIndexPage />} />
-            {/* <Route path="/test/start" element={<TestStartPage />} />
-            <Route path="/test/result" element={<TestResultPage />} /> */}
-
             <Route
               path="/respondent-fill-form"
               element={<RespondentFormPage />}
@@ -36,12 +35,19 @@ function App() {
               path="/personality-types"
               element={<PersonalityTypesPage />}
             />
+          </Route>
 
-            <Route path="/sys/g/login" element={<LoginPage />} />
+          <Route path="/g/login" element={<LoginPage />} />
+          {/* ✅ Admin-only layout */}
+          <Route path="/sys" element={<Layout isRole="Admin" />}>
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="respondents" element={<RespondentPage />} />
+            <Route path="respondents/:id" element={<RespondentShowPage />} />
+            <Route path="master" element={<div>Data Master</div>} />
+          </Route>
 
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </Layout>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
       </BrowserRouter>
     </ToastProvider>
   );
