@@ -16,6 +16,8 @@ import {
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { submitRespondentForm } from "@/services/respondent.service";
+import { useToast } from "@/provider/ToastProvider";
 
 export default function RespondentForm() {
   const {
@@ -28,6 +30,7 @@ export default function RespondentForm() {
 
   const navigate = useNavigate();
   const dateOfBirth = watch("dateOfBirth");
+  const { showToast } = useToast();
 
   useEffect(() => {
     if (dateOfBirth) {
@@ -42,11 +45,24 @@ export default function RespondentForm() {
     }
   }, [dateOfBirth, setValue]);
 
-  const onSubmit = (data) => {
-    console.log("Submitted data:", data);
-    navigate("/test");
-  };
+  const onSubmit = async (data) => {
+    try {
+      await submitRespondentForm(data); // pastikan ini berhasil
+      showToast({
+        type: "success",
+        message: "Data responden berhasil dikirim!",
+      });
+      console.log("Redirecting to /test...");
 
+      navigate("/test"); // redirect ke halaman tes
+    } catch (error) {
+      showToast({
+        type: "error",
+        message: "Gagal mengirim data. Coba lagi.",
+      });
+      console.error("Submit error:", error);
+    }
+  };
   const getFieldIcon = (fieldName) => {
     const iconMap = {
       name: User,
