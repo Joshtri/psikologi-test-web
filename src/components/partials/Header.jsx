@@ -5,18 +5,20 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function Header() {
+export default function Header({ isRole }) {
   const location = useLocation();
   const pathname = location.pathname;
   const [isOpen, setIsOpen] = useState(false);
-  const [showConsent, setShowConsent] = useState(false);
-  const handleStartTest = () => setShowConsent(true);
 
-  if (showConsent) return <ConsentPage onBack={() => setShowConsent(false)} />;
+  const isAdmin = isRole === "Admin";
 
-  const navItems = [
-    { to: "/", label: "Beranda" },
-    // { to: "/test", label: "Mulai Tes", onClick: handleStartTest },
+  const navItems = [{ to: "/", label: "Beranda" }];
+
+  const adminItems = [
+    { to: "/sys/g/dashboard", label: "Dashboard Admin" },
+    { to: "/sys/respondents", label: "Data Responden" },
+    { to: "/sys/master", label: "Data Master" },
+    { to: "/sys/setting", label: "Pengaturan" },
   ];
 
   return (
@@ -41,25 +43,15 @@ export default function Header() {
           </div>
         </Link>
 
-        <div className="flex items-center space-x-2">
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden p-2 rounded-lg bg-purple-100 hover:bg-purple-200 text-purple-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-purple-300"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-1">
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center space-x-4">
+          {/* General Nav */}
           {navItems.map((item) => {
             const isActive = pathname === item.to;
             return (
               <Link
                 key={item.to}
                 to={item.to}
-                onClick={item.onClick}
                 className={`relative px-4 py-2 rounded-lg transition-all duration-300 group ${
                   isActive
                     ? "bg-purple-200 text-purple-900 font-semibold shadow-md"
@@ -67,21 +59,46 @@ export default function Header() {
                 }`}
               >
                 {item.label}
-                {isActive && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute inset-0 rounded-lg bg-purple-300/30"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                  />
-                )}
               </Link>
             );
           })}
+
+          {/* Admin Nav Group */}
+          {isAdmin && (
+            <div className="pl-4 ml-4 border-l border-purple-300 space-x-2 flex items-center">
+              <span className="text-xs uppercase tracking-widest text-purple-600 font-semibold">
+                Admin Panel
+              </span>
+              {adminItems.map((item) => {
+                const isActive = pathname === item.to;
+                return (
+                  <Link
+                    key={item.to}
+                    to={item.to}
+                    className={`relative px-3 py-2 rounded-md transition-all duration-300 group ${
+                      isActive
+                        ? "bg-amber-200 text-amber-900 font-semibold shadow-sm"
+                        : "text-amber-700 hover:bg-amber-100"
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </nav>
+
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden p-2 rounded-lg bg-purple-100 hover:bg-purple-200 text-purple-700 transition-colors"
+        >
+          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+        </button>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Nav */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -89,32 +106,45 @@ export default function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="md:hidden border-t border-purple-200 bg-white/80 backdrop-blur-sm"
+            className="md:hidden border-t border-purple-200 bg-white/80 backdrop-blur-sm px-4 py-4"
           >
-            <div className="px-4 py-4 space-y-2">
-              {navItems.map((item, index) => {
-                const isActive = pathname === item.to;
-                return (
-                  <motion.div
-                    key={item.to}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
+            <div className="space-y-3">
+              {navItems.map((item) => (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  onClick={() => setIsOpen(false)}
+                  className={`block px-4 py-2 rounded-lg ${
+                    pathname === item.to
+                      ? "bg-purple-200 text-purple-900 font-semibold"
+                      : "text-purple-700 hover:bg-purple-100"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              ))}
+
+              {isAdmin && (
+                <div className="pt-4 border-t border-purple-300">
+                  <p className="text-xs font-bold text-purple-600 mb-1 uppercase">
+                    Admin Panel
+                  </p>
+                  {adminItems.map((item) => (
                     <Link
+                      key={item.to}
                       to={item.to}
                       onClick={() => setIsOpen(false)}
-                      className={`block px-4 py-3 rounded-lg transition-all duration-200 ${
-                        isActive
-                          ? "bg-purple-200 text-purple-900 font-semibold"
-                          : "text-purple-700 hover:bg-purple-100"
+                      className={`block px-4 py-2 rounded-lg ${
+                        pathname === item.to
+                          ? "bg-amber-200 text-amber-900 font-semibold"
+                          : "text-amber-700 hover:bg-amber-100"
                       }`}
                     >
                       {item.label}
                     </Link>
-                  </motion.div>
-                );
-              })}
+                  ))}
+                </div>
+              )}
             </div>
           </motion.div>
         )}
