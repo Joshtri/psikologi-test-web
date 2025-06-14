@@ -1,14 +1,30 @@
-import { Breadcrumb , BreadcrumbItem} from "flowbite-react";
+import { Breadcrumb, BreadcrumbItem } from "flowbite-react";
+import { Link } from "react-router-dom";
 
-export default function PageBreadcrumb({ items = [] }) {
+
+function PageBreadcrumb({ items = [] }) {
   return (
     <Breadcrumb className="mb-4">
-      <BreadcrumbItem href="/">Beranda</BreadcrumbItem>
+      <BreadcrumbItem>
+        <Link
+          to="/"
+          className="hover:text-blue-600 text-gray-700 transition-colors"
+        >
+          Beranda
+        </Link>
+      </BreadcrumbItem>
       {items.map((item, index) => (
-        <BreadcrumbItem key={index} href={item.href}>
-          {item.label}
+        <BreadcrumbItem key={index}>
+          <Link
+            to={item.href}
+            className="hover:text-blue-600 text-gray-700 transition-colors"
+          >
+            {item.label}
+          </Link>
         </BreadcrumbItem>
       ))}
     </Breadcrumb>
   );
 }
+
+export default PageBreadcrumb;

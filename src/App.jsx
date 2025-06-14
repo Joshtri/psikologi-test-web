@@ -14,6 +14,7 @@ import LoginPage from "./pages/login";
 import DashboardPage from "./pages/sys/dashboard/page";
 import RespondentPage from "./pages/sys/respondent/page";
 import RespondentShowPage from "./pages/sys/respondent/show";
+import MasterPage from "./pages/sys/master/page";
 
 function App() {
   return (
@@ -43,7 +44,7 @@ function App() {
             <Route path="dashboard" element={<DashboardPage />} />
             <Route path="respondents" element={<RespondentPage />} />
             <Route path="respondents/:id" element={<RespondentShowPage />} />
-            <Route path="master" element={<div>Data Master</div>} />
+            <Route path="master" element={<MasterPage />} />
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />

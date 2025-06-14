@@ -2,7 +2,10 @@ import { useEffect, useState } from "react";
 import ActionButtons from "@/components/ui/ActionButtons";
 import PageBreadcrumb from "@/components/ui/PageBreadcrumb";
 import Table from "@/components/ui/Table";
-import { getRespondents } from "@/services/respondent.service"; // pastikan path sesuai
+import {
+  getRespondents,
+  deleteRespondent,
+} from "@/services/respondent.service"; // pastikan path sesuai
 import { useNavigate } from "react-router-dom";
 
 export default function RespondentPage() {
@@ -10,6 +13,17 @@ export default function RespondentPage() {
   const [loading, setLoading] = useState(true);
 
   const navigate = useNavigate();
+
+  const fetchRespondents = async () => {
+    try {
+      const data = await getRespondents();
+      setRespondents(data);
+    } catch (error) {
+      console.error("Gagal memuat data responden:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const columns = [
     { label: "No", key: "index", render: (_row, i) => i + 1 },
@@ -24,25 +38,22 @@ export default function RespondentPage() {
       render: (row) => (
         <ActionButtons
           onDetail={() => navigate(`/sys/respondents/${row.id}`)}
-          onEdit={() => console.log("Edit:", row)}
-          onDelete={() => console.log("Hapus:", row)}
+          // onEdit={() => console.log("Edit:", row)}
+          onDelete={async () => {
+                try {
+                  await deleteRespondent(row.id);
+                  fetchRespondents();
+                  console.log("Responden dihapus:", row.id);
+                } catch (error) {
+                  console.error("Gagal menghapus responden:", error);
+                }
+              }}
         />
       ),
     },
   ];
 
   useEffect(() => {
-    const fetchRespondents = async () => {
-      try {
-        const data = await getRespondents();
-        setRespondents(data);
-      } catch (error) {
-        console.error("Gagal memuat data responden:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchRespondents();
   }, []);
 
