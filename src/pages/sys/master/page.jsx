@@ -15,6 +15,7 @@ import hfsData from "../../../../data/questions/hfsQuestion.json"
 import pdq4Data from "../../../../data/questions/pdqQuestion.json"
 import pwbData from "../../../../data/questions/pwbQuestion.json"
 import aceData from "../../../../data/questions/aceQuestion.json"
+import PageBreadcrumb from "@/components/ui/PageBreadcrumb"
 
 const assessments = {
   hfs: hfsData,
@@ -74,6 +75,8 @@ export default function MasterPage() {
 
     return (
       <div className="space-y-6">
+
+        <PageBreadcrumb items={[{ label: "Data Master" }]} />
         <div className="bg-purple-50 p-4 rounded-lg">
           <h3 className="font-semibold text-purple-800 mb-2">Instruksi</h3>
           <p className="text-purple-700">{data.instructions}</p>

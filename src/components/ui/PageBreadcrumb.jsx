@@ -7,7 +7,7 @@ function PageBreadcrumb({ items = [] }) {
     <Breadcrumb className="mb-4">
       <BreadcrumbItem>
         <Link
-          to="/"
+          to="/sys/dashboard"
           className="hover:text-blue-600 text-gray-700 transition-colors"
         >
           Beranda

@@ -12,9 +12,10 @@ import NotFoundPage from "./pages/404";
 import RespondentFormPage from "./pages/home/respondent-form";
 import LoginPage from "./pages/login";
 import DashboardPage from "./pages/sys/dashboard/page";
-import RespondentPage from "./pages/sys/respondent/page";
-import RespondentShowPage from "./pages/sys/respondent/show";
+import RespondentPage from "./pages/sys/respondents/page";
+import RespondentShowPage from "./pages/sys/respondents/show";
 import MasterPage from "./pages/sys/master/page";
+import RespondentResultsPage from "./pages/sys/respondents-results/page";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             <Route path="respondents" element={<RespondentPage />} />
             <Route path="respondents/:id" element={<RespondentShowPage />} />
             <Route path="master" element={<MasterPage />} />
+            <Route path="respondents-results" element={<RespondentResultsPage />} />
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />
