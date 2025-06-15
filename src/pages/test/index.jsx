@@ -15,8 +15,15 @@ import pwbData from "../../../data/questions/pwbQuestion.json";
 import aceData from "../../../data/questions/aceQuestion.json";
 import AceScale from "@/components/QuestionScale/AceScale";
 import LeavePagePrompt from "@/components/common/LeavePagePrompt"; // pastikan path sesuai
+import {
+  calculateHfsTotalScore,
+  interpretHfsScore,
+} from "@/utils/rules/hfsScoring";
 
-const testSequence = ["ace", "pwb", "pdq_4", "hfs"];
+import { submitRespondentForm } from "@/services/respondent.service";
+
+// const testSequence = ["ace", "pwb", "pdq_4", "hfs"];
+const testSequence = ["hfs"];
 const steps = ["Bagian 1", "Bagian 2", "Bagian 3", "Bagian 4", "Selesai"];
 const dataMap = {
   ace: {
@@ -52,15 +59,25 @@ export default function TestIndexPage() {
     return () => clearInterval(timer);
   }, []);
 
+  // const canProceed = () => {
+  //   return currentQuestions.every((q) => {
+  //     const key =
+  //       currentTestId === "pdq_4"
+  //         ? `pdq_4-${q.id}`
+  //         : currentTestId === "ace"
+  //         ? `ace-${q.id}`
+  //         : q.id;
+  //     return answers[key];
+  //   });
+  // };
+
   const canProceed = () => {
     return currentQuestions.every((q) => {
-      const key =
-        currentTestId === "pdq_4"
-          ? `pdq_4-${q.id}`
-          : currentTestId === "ace"
-          ? `ace-${q.id}`
-          : q.id;
-      return answers[key];
+      let key = q.id;
+      if (currentTestId === "pdq_4") key = `pdq_4-${q.id}`;
+      else if (currentTestId === "ace") key = `ace-${q.id}`;
+      else if (currentTestId === "hfs") key = `hfs-${q.id}`; // ✅ tambahkan ini
+      return answers[key] !== undefined;
     });
   };
 
@@ -100,7 +117,76 @@ export default function TestIndexPage() {
       setCurrentPage(0);
     }
   };
-  
+
+  const handleFinishTest = async () => {
+    try {
+      // Ambil draft data responden dari localStorage
+      const respondentDataRaw = localStorage.getItem("respondentDraft");
+      if (!respondentDataRaw) {
+        alert("Data responden tidak ditemukan.");
+        return;
+      }
+
+      const respondentData = JSON.parse(respondentDataRaw);
+
+      // Hitung skor HFS
+      const hfsScore = interpretHfsScore(
+        calculateHfsTotalScore(dataMap.hfs.questions, answers)
+      );
+
+      // Gabungkan semua data untuk dikirim
+      const finalData = {
+        ...respondentData,
+        answers,
+        summary: {
+          hfs: hfsScore,
+          // Tambahkan skor lain nanti seperti pdq, ace, pwb...
+        },
+      };
+
+      // Kirim ke backend
+      await submitRespondentForm(finalData);
+
+      // Bersihkan localStorage (opsional)
+      localStorage.removeItem("respondentDraft");
+      localStorage.removeItem("testResults");
+
+      // Redirect ke halaman hasil
+      // navigate("/test-results");
+    } catch (error) {
+      console.error("Gagal menyimpan data tes:", error);
+      alert("Terjadi kesalahan saat menyimpan data. Silakan coba lagi.");
+    }
+  };
+
+  // const handleFinishTest = () => {
+  //   const results = {};
+
+  //   // Hitung skor tiap skala jika sudah selesai
+  //   const hfsScore = interpretHfsScore(
+  //     calculateHfsTotalScore(dataMap.hfs.questions, answers)
+  //   );
+
+  //   // Tambahkan interpretasi lain jika ada
+  //   // const pdqScore = interpretPdqScore(...);
+  //   // const aceScore = interpretAceScore(...);
+  //   // const pwbScore = interpretPwbScore(...);
+
+  //   results.hfs = hfsScore;
+  //   results.answers = answers;
+  //   // results.pdq = pdqScore;
+  //   // ...
+
+  //   const respondentData = localStorage.getItem("respondentDraft");
+
+  //   console.log(respondentData);
+
+  //   // Simpan ke localStorage atau state management
+  //   localStorage.setItem("testResults", JSON.stringify(results));
+
+  //   // navigate("/test-results");
+  // };
+
   return (
     <>
       <LeavePagePrompt when={Object.keys(answers).length > 0} />
@@ -174,21 +260,13 @@ export default function TestIndexPage() {
               currentPage={currentPage}
               totalPages={totalPages}
               canProceed={canProceed}
-              allQuestions={allQuestions} // ✅ Pastikan ini ada
               handleNext={handleNext}
               handlePrevious={handlePrevious}
-            />
-
-            <QuestionPagination
-              currentPage={currentPage}
-              totalPages={totalPages}
-              currentQuestions={currentQuestions}
-              allQuestions={allQuestions}
-              answers={answers}
-              canProceed={canProceed}
-              handleNext={handleNext}
-              handlePrevious={handlePrevious}
-              handlePageClick={(pageIndex) => setCurrentPage(pageIndex)}
+              handleFinishTest={handleFinishTest} // ✅ kirim fungsi kirim
+              isLastPage={
+                currentTestIndex === testSequence.length - 1 &&
+                currentPage === totalPages - 1
+              }
             />
           </div>
         </div>

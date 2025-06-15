@@ -16,6 +16,7 @@ import RespondentPage from "./pages/sys/respondents/page";
 import RespondentShowPage from "./pages/sys/respondents/show";
 import MasterPage from "./pages/sys/master/page";
 import RespondentResultsPage from "./pages/sys/respondents-results/page";
+import ResultsPage from "./pages/test/results";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
               path="/respondent-fill-form"
               element={<RespondentFormPage />}
             />
+            <Route path="/test-results" element={<ResultsPage />} />
             <Route
               path="/personality-types"
               element={<PersonalityTypesPage />}

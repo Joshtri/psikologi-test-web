@@ -47,7 +47,9 @@ export default function RespondentForm() {
 
   const onSubmit = async (data) => {
     try {
-      await submitRespondentForm(data); // pastikan ini berhasil
+      // await submitRespondentForm(data); // pastikan ini berhasil
+      localStorage.setItem("respondentDraft", JSON.stringify(data));
+
       showToast({
         type: "success",
         message: "Data responden berhasil dikirim!",

@@ -39,7 +39,7 @@ export default function RespondentShowPage() {
         <div className="mx-auto max-w-4xl p-6">
             <PageBreadcrumb
                 items={[
-                    { label: "Data Responden", href: "/sys/g/respondent" },
+                    { label: "Data Responden", href: "/sys/respondents" },
                     { label: "Detail Responden" },
                 ]}
             />

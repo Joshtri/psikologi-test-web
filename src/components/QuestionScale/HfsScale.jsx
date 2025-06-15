@@ -17,8 +17,10 @@ export default function HfsScale({
     7: "Sangat sesuai",
   };
 
+
   const handleChange = (id, value) => {
-    setAnswers((prev) => ({ ...prev, [id]: value }));
+    const key = `hfs-${id}`; // 👈 penting!
+    setAnswers((prev) => ({ ...prev, [key]: value }));
   };
 
   return (
@@ -47,7 +49,7 @@ export default function HfsScale({
                   type="radio"
                   name={`question-${q.id}`}
                   value={val}
-                  checked={answers[q.id] === val}
+                  checked={answers[`hfs-${q.id}`] === val}
                   onChange={() => handleChange(q.id, val)}
                 />
                 <span className="mt-1">{scaleLabels[val] || ""}</span>
