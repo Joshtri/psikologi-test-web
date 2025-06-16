@@ -3,13 +3,7 @@
 import { consentItems } from "@/constants/consentItems";
 import { Button } from "flowbite-react";
 import { motion } from "framer-motion";
-import {
-  ArrowLeft,
-  ArrowRight,
-  CheckCircle,
-  FileText,
-  Info,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle, FileText, Info } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "../../provider/ToastProvider";
@@ -84,9 +78,7 @@ export default function ConsentPage({ onBack }) {
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold">Informed Consent</h1>
-                  <p className="text-white/90">
-                    Persetujuan Partisipasi Penelitian RaiReflect
-                  </p>
+                  <p className="text-white/90">Persetujuan Partisipasi Penelitian Psikologi 2025</p>
                 </div>
               </div>
             </div>
@@ -106,28 +98,13 @@ export default function ConsentPage({ onBack }) {
                   <div className="flex items-start">
                     <Info className="w-6 h-6 mr-3 mt-1 text-amber-600" />
                     <div>
-                      <h3 className="font-semibold mb-2 text-amber-800">
-                        Selamat Datang di Penelitian RaiReflect
-                      </h3>
                       <p className="text-amber-700">
-                        Mohon untuk mengisi formulir di bawah ini setelah
-                        membaca lembar penjelasan dari peneliti mengenai
-                        penelitian yang akan dilaksanakan.
+                        Terima kasih telah mempertimbangkan untuk berpartisipasi. Mohon untuk menandai semua
+                        kotak di bawah ini sebagai tanda persetujuan atas pernyataan tertulis.
                       </p>
                     </div>
                   </div>
                 </div>
-
-                <p>
-                  Terima kasih telah mempertimbangkan untuk berpartisipasi.
-                  Mohon untuk menandai semua kotak di bawah ini sebagai tanda
-                  persetujuan atas pernyataan tertulis.
-                </p>
-
-                <p>
-                  Bila Anda bersedia untuk berpartisipasi, tekan tombol
-                  'Selanjutnya'. Bila tidak, klik 'Kembali'.
-                </p>
               </div>
 
               {/* Consent Items */}
@@ -139,9 +116,7 @@ export default function ConsentPage({ onBack }) {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.3 + index * 0.1 }}
                     className={`p-6 rounded-xl border hover:shadow-md transition-all duration-300 ${
-                      agreements[item.key]
-                        ? "bg-purple-50 border-purple-200"
-                        : "bg-gray-50 border-gray-200"
+                      agreements[item.key] ? "bg-purple-50 border-purple-200" : "bg-gray-50 border-gray-200"
                     }`}
                   >
                     <div className="flex items-start space-x-4">
@@ -155,19 +130,9 @@ export default function ConsentPage({ onBack }) {
                       <div>
                         <div className="flex items-center mb-2">
                           <item.icon
-                            className={`w-5 h-5 mr-2 ${
-                              agreements[item.key]
-                                ? "text-purple-600"
-                                : "text-gray-500"
-                            }`}
+                            className={`w-5 h-5 mr-2 ${agreements[item.key] ? "text-purple-600" : "text-gray-500"}`}
                           />
-                          <h4
-                            className={`font-semibold ${
-                              agreements[item.key]
-                                ? "text-purple-800"
-                                : "text-gray-700"
-                            }`}
-                          >
+                          <h4 className={`font-semibold ${agreements[item.key] ? "text-purple-800" : "text-gray-700"}`}>
                             {item.title}
                           </h4>
                         </div>
@@ -207,16 +172,13 @@ export default function ConsentPage({ onBack }) {
                           className="w-6 h-6 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 focus:ring-2 mt-1"
                         />
                         <div>
-                          <h4 className="font-bold mb-2 text-purple-800">
-                            Persetujuan Final
-                          </h4>
+                          <h4 className="font-bold mb-2 text-purple-800">Persetujuan Final</h4>
                           <label
                             htmlFor="finalConsent"
                             className="cursor-pointer text-lg leading-relaxed text-gray-700"
                           >
-                            Saya telah membaca dan memahami informasi pada
-                            Lembar Penjelasan Penelitian dan menyetujui untuk
-                            berpartisipasi dalam penelitian RaiReflect.
+                            Saya telah membaca dan memahami informasi pada Lembar Penjelasan Penelitian dan menyetujui
+                            untuk berpartisipasi dalam penelitian Psikologi 2025.
                           </label>
                         </div>
                       </div>
@@ -233,12 +195,9 @@ export default function ConsentPage({ onBack }) {
                 className="mt-8"
               >
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm text-gray-600">
-                    Progress Persetujuan
-                  </span>
+                  <span className="text-sm text-gray-600">Progress Persetujuan</span>
                   <span className="text-sm font-semibold text-gray-700">
-                    {Object.values(agreements).filter(Boolean).length} /{" "}
-                    {Object.keys(agreements).length}
+                    {Object.values(agreements).filter(Boolean).length} / {Object.keys(agreements).length}
                   </span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
@@ -246,9 +205,7 @@ export default function ConsentPage({ onBack }) {
                     className="bg-gradient-to-r from-purple-500 to-amber-500 h-2 rounded-full transition-all duration-500"
                     style={{
                       width: `${
-                        (Object.values(agreements).filter(Boolean).length /
-                          Object.keys(agreements).length) *
-                        100
+                        (Object.values(agreements).filter(Boolean).length / Object.keys(agreements).length) * 100
                       }%`,
                     }}
                   />
