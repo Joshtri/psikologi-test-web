@@ -1,11 +1,6 @@
 import { Clock } from "lucide-react";
 
-export default function TestHeader({
-  title,
-  description,
-  progress,
-  timeElapsed,
-}) {
+export default function TestHeader({ title, description, progress, timeElapsed }) {
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
@@ -20,10 +15,6 @@ export default function TestHeader({
           <div>
             <h1 className="text-2xl font-bold text-gray-900">{title}</h1>
             {description && <p className="text-gray-600 mt-1">{description}</p>}
-          </div>
-          <div className="flex items-center px-3 py-2 rounded-lg bg-purple-100 text-purple-700 text-sm w-fit">
-            <Clock className="w-4 h-4 mr-2" />
-            {formatTime(timeElapsed)}
           </div>
         </div>
       </div>
