@@ -2,12 +2,7 @@ import React from "react";
 import hfsData from "../../../data/questions/hfsQuestion.json";
 import TestHeader from "@/components/Test/TestHeader";
 
-export default function HfsScale({
-  questions,
-  answers,
-  setAnswers,
-  totalQuestions,
-}) {
+export default function HfsScale({ questions, answers, setAnswers, totalQuestions }) {
   const scaleValues = [1, 2, 3, 4, 5, 6, 7];
   const scaleLabels = {
     1: "Sangat tidak sesuai",
@@ -23,15 +18,16 @@ export default function HfsScale({
   return (
     <div className="space-y-6">
       <TestHeader
-        title={hfsData.name}
+        title="Bagian 1"
         description={hfsData.instructions}
-        progress={Math.round(
-          (Object.keys(answers).length / totalQuestions) * 100
-        )}
+        progress={Math.round((Object.keys(answers).length / totalQuestions) * 100)}
       />
 
       {questions.map((q) => (
-        <div key={q.id} className="bg-white p-4 rounded-xl shadow border">
+        <div
+          key={q.id}
+          className="bg-white p-4 rounded-xl shadow border"
+        >
           <p className="mb-2 font-medium">
             {q.id}. {q.text}
           </p>
