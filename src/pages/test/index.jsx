@@ -14,18 +14,17 @@ import PwbScale from "@/components/QuestionScale/PwbScale";
 import pwbData from "../../../data/questions/pwbQuestion.json";
 import aceData from "../../../data/questions/aceQuestion.json";
 import AceScale from "@/components/QuestionScale/AceScale";
-import LeavePagePrompt from "@/components/common/LeavePagePrompt"; // pastikan path sesuai
+import LeavePagePrompt from "@/components/common/LeavePagePrompt";
+import { TEST_SEQUENCE, TEST_STEPS, QUESTIONS_PER_PAGE, TEST_TYPES } from "@/constants/testConfig";
 
-const testSequence = ["ace", "pwb", "pdq_4", "hfs"];
-const steps = ["Bagian 1", "Bagian 2", "Bagian 3", "Bagian 4", "Selesai"];
 const dataMap = {
-  ace: {
+  [TEST_TYPES.ACE]: {
     questions: aceData.sections.flatMap((s) => s.questions),
     full: aceData,
   },
-  pwb: pwbData,
-  pdq_4: pdqData,
-  hfs: hfsData,
+  [TEST_TYPES.PWB]: pwbData,
+  [TEST_TYPES.PDQ_4]: pdqData,
+  [TEST_TYPES.HFS]: hfsData,
 };
 
 export default function TestIndexPage() {
@@ -35,20 +34,20 @@ export default function TestIndexPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [answers, setAnswers] = useState({});
   const [maxStepReached, setMaxStepReached] = useState(0);
-  const [visitedSteps, setVisitedSteps] = useState([0]); // awalnya cuma step 0
+  const [visitedSteps, setVisitedSteps] = useState([0]);
 
-  const questionsPerPage = 10;
-  const currentTestId = testSequence[currentTestIndex];
+  const currentTestId = TEST_SEQUENCE[currentTestIndex];
   const currentTest = dataMap[currentTestId];
   const allQuestions = currentTest.questions;
-  const totalPages = Math.ceil(allQuestions.length / questionsPerPage);
-  const start = currentPage * questionsPerPage;
-  const end = start + questionsPerPage;
+  const totalPages = Math.ceil(allQuestions.length / QUESTIONS_PER_PAGE);
+  const start = currentPage * QUESTIONS_PER_PAGE;
+  const end = start + QUESTIONS_PER_PAGE;
   const currentQuestions = allQuestions.slice(start, end);
 
   const canProceed = () => {
     return currentQuestions.every((q) => {
-      const key = currentTestId === "pdq_4" ? `pdq_4-${q.id}` : currentTestId === "ace" ? `ace-${q.id}` : q.id;
+      const key =
+        currentTestId === TEST_TYPES.PDQ_4 ? `pdq_4-${q.id}` : currentTestId === TEST_TYPES.ACE ? `ace-${q.id}` : q.id;
       return answers[key];
     });
   };
@@ -66,12 +65,11 @@ export default function TestIndexPage() {
 
     if (currentPage < totalPages - 1) {
       setCurrentPage((prev) => prev + 1);
-    } else if (currentTestIndex < testSequence.length - 1) {
+    } else if (currentTestIndex < TEST_SEQUENCE.length - 1) {
       const nextStep = currentTestIndex + 1;
       setCurrentTestIndex(nextStep);
       setCurrentPage(0);
 
-      // ⬇ tambahkan nextStep ke daftar step yang pernah dikunjungi
       setVisitedSteps((prev) => (prev.includes(nextStep) ? prev : [...prev, nextStep]));
     }
   };
@@ -81,6 +79,7 @@ export default function TestIndexPage() {
       setCurrentPage((prev) => prev - 1);
     }
   };
+
   const handleStepClick = (targetStep) => {
     if (visitedSteps.includes(targetStep)) {
       setCurrentTestIndex(targetStep);
@@ -96,7 +95,7 @@ export default function TestIndexPage() {
         <div className="relative z-10 py-8">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <VerticalStepper
-              steps={steps}
+              steps={TEST_STEPS}
               currentStep={currentTestIndex}
               onStepClick={handleStepClick}
               visitedSteps={visitedSteps}
@@ -111,7 +110,7 @@ export default function TestIndexPage() {
                 transition={{ duration: 0.3 }}
               >
                 <Card className="mb-8 shadow-xl border-2 bg-white border-purple-200 p-6">
-                  {currentTestId === "ace" ? (
+                  {currentTestId === TEST_TYPES.ACE ? (
                     <AceScale
                       questions={currentQuestions}
                       answers={answers}
@@ -120,27 +119,27 @@ export default function TestIndexPage() {
                         s.questions.some((q) => q.id === currentQuestions[0]?.id)
                       )}
                     />
-                  ) : currentTestId === "pdq_4" ? (
+                  ) : currentTestId === TEST_TYPES.PDQ_4 ? (
                     <PdqScale
                       questions={currentQuestions}
                       answers={answers}
                       setAnswers={setAnswers}
                       totalQuestions={allQuestions.length}
                     />
-                  ) : currentTestId === "hfs" ? (
+                  ) : currentTestId === TEST_TYPES.HFS ? (
                     <HfsScale
                       questions={currentQuestions}
                       answers={answers}
                       setAnswers={setAnswers}
                       totalQuestions={allQuestions.length}
                     />
-                  ) : currentTestId === "pwb" ? (
+                  ) : currentTestId === TEST_TYPES.PWB ? (
                     <PwbScale
                       questions={currentQuestions}
                       answers={answers}
                       setAnswers={setAnswers}
                       currentPage={currentPage}
-                      questionsPerPage={questionsPerPage}
+                      questionsPerPage={QUESTIONS_PER_PAGE}
                     />
                   ) : (
                     <div className="text-center text-gray-500 italic">Skala untuk tes ini belum tersedia.</div>
@@ -153,7 +152,7 @@ export default function TestIndexPage() {
               currentPage={currentPage}
               totalPages={totalPages}
               canProceed={canProceed}
-              allQuestions={allQuestions} // ✅ Pastikan ini ada
+              allQuestions={allQuestions}
               handleNext={handleNext}
               handlePrevious={handlePrevious}
             />
