@@ -2,12 +2,7 @@ import React from "react";
 import pwbData from "../../../data/questions/pwbQuestion.json"; // sesuaikan path jika beda
 import TestHeader from "@/components/Test/TestHeader";
 
-export default function PwbScale({
-  answers,
-  setAnswers,
-  currentPage,
-  questionsPerPage = 10,
-}) {
+export default function PwbScale({ answers, setAnswers, currentPage, questionsPerPage = 10 }) {
   const scaleLabels = pwbData.scale.labels;
   const startIndex = currentPage * questionsPerPage;
   const endIndex = startIndex + questionsPerPage;
@@ -20,11 +15,9 @@ export default function PwbScale({
   return (
     <div className="space-y-6">
       <TestHeader
-        title={pwbData.name}
+        title="Bagian 2"
         description={pwbData.instructions}
-        progress={Math.round(
-          (Object.keys(answers).length / pwbData.questions.length) * 100
-        )}
+        progress={Math.round((Object.keys(answers).length / pwbData.questions.length) * 100)}
       />
 
       {currentQuestions.map((q) => (

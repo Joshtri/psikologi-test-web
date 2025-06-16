@@ -72,6 +72,8 @@ export default function TestIndexPage() {
 
       setVisitedSteps((prev) => (prev.includes(nextStep) ? prev : [...prev, nextStep]));
     }
+
+    console.log(answers); //debug block
   };
 
   const handlePrevious = () => {
@@ -155,6 +157,7 @@ export default function TestIndexPage() {
               allQuestions={allQuestions}
               handleNext={handleNext}
               handlePrevious={handlePrevious}
+              answers={answers}
             />
 
             <QuestionPagination
