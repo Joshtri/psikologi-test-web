@@ -7,7 +7,6 @@ export default function PwbScale({
   setAnswers,
   currentPage,
   questionsPerPage = 10,
-  timeElapsed,
 }) {
   const scaleLabels = pwbData.scale.labels;
   const startIndex = currentPage * questionsPerPage;
@@ -23,7 +22,6 @@ export default function PwbScale({
       <TestHeader
         title={pwbData.name}
         description={pwbData.instructions}
-        timeElapsed={timeElapsed}
         progress={Math.round(
           (Object.keys(answers).length / pwbData.questions.length) * 100
         )}

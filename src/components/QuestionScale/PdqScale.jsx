@@ -7,7 +7,6 @@ export default function PdqScale({
   questions,
   answers,
   setAnswers,
-  timeElapsed,
   totalQuestions,
 }) {
   const { scale, name, instructions } = pdqData;
@@ -54,7 +53,6 @@ export default function PdqScale({
         title={name}
         description={instructions}
         progress={progress}
-        timeElapsed={timeElapsed}
       />
 
       {questions.map((q, index) => {

@@ -6,7 +6,6 @@ export default function HfsScale({
   questions,
   answers,
   setAnswers,
-  timeElapsed,
   totalQuestions,
 }) {
   const scaleValues = [1, 2, 3, 4, 5, 6, 7];
@@ -26,7 +25,6 @@ export default function HfsScale({
       <TestHeader
         title={hfsData.name}
         description={hfsData.instructions}
-        timeElapsed={timeElapsed}
         progress={Math.round(
           (Object.keys(answers).length / totalQuestions) * 100
         )}

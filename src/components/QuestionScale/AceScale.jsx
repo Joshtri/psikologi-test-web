@@ -6,7 +6,6 @@ export default function AceScale({
   questions,
   answers,
   setAnswers,
-  timeElapsed,
 }) {
   const { name, sections } = aceData;
 
@@ -41,7 +40,6 @@ export default function AceScale({
         title={name}
         description="Jawaban berdasarkan pengalaman hingga usia 18 tahun."
         progress={progress}
-        timeElapsed={timeElapsed}
       />
 
       {groupedSections.map((section, idx) => (

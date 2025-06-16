@@ -1,12 +1,4 @@
-import { Clock } from "lucide-react";
-
-export default function TestHeader({ title, description, progress, timeElapsed }) {
-  const formatTime = (seconds) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
-  };
-
+export default function TestHeader({ title, description, progress }) {
   return (
     <>
       {/* Judul dan waktu - tidak sticky */}

@@ -1,6 +1,6 @@
 import { Card } from "flowbite-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import hfsData from "../../../data/questions/hfsQuestion.json";
 import pdqData from "../../../data/questions/pdqQuestion.json";
@@ -34,7 +34,6 @@ export default function TestIndexPage() {
   const [currentTestIndex, setCurrentTestIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [timeElapsed, setTimeElapsed] = useState(0);
   const [maxStepReached, setMaxStepReached] = useState(0);
   const [visitedSteps, setVisitedSteps] = useState([0]); // awalnya cuma step 0
 
@@ -47,19 +46,9 @@ export default function TestIndexPage() {
   const end = start + questionsPerPage;
   const currentQuestions = allQuestions.slice(start, end);
 
-  useEffect(() => {
-    const timer = setInterval(() => setTimeElapsed((prev) => prev + 1), 1000);
-    return () => clearInterval(timer);
-  }, []);
-
   const canProceed = () => {
     return currentQuestions.every((q) => {
-      const key =
-        currentTestId === "pdq_4"
-          ? `pdq_4-${q.id}`
-          : currentTestId === "ace"
-          ? `ace-${q.id}`
-          : q.id;
+      const key = currentTestId === "pdq_4" ? `pdq_4-${q.id}` : currentTestId === "ace" ? `ace-${q.id}` : q.id;
       return answers[key];
     });
   };
@@ -83,9 +72,7 @@ export default function TestIndexPage() {
       setCurrentPage(0);
 
       // ⬇ tambahkan nextStep ke daftar step yang pernah dikunjungi
-      setVisitedSteps((prev) =>
-        prev.includes(nextStep) ? prev : [...prev, nextStep]
-      );
+      setVisitedSteps((prev) => (prev.includes(nextStep) ? prev : [...prev, nextStep]));
     }
   };
 
@@ -100,7 +87,7 @@ export default function TestIndexPage() {
       setCurrentPage(0);
     }
   };
-  
+
   return (
     <>
       <LeavePagePrompt when={Object.keys(answers).length > 0} />
@@ -129,11 +116,8 @@ export default function TestIndexPage() {
                       questions={currentQuestions}
                       answers={answers}
                       setAnswers={setAnswers}
-                      timeElapsed={timeElapsed}
                       sectionInfo={currentTest.full.sections.find((s) =>
-                        s.questions.some(
-                          (q) => q.id === currentQuestions[0]?.id
-                        )
+                        s.questions.some((q) => q.id === currentQuestions[0]?.id)
                       )}
                     />
                   ) : currentTestId === "pdq_4" ? (
@@ -141,7 +125,6 @@ export default function TestIndexPage() {
                       questions={currentQuestions}
                       answers={answers}
                       setAnswers={setAnswers}
-                      timeElapsed={timeElapsed}
                       totalQuestions={allQuestions.length}
                     />
                   ) : currentTestId === "hfs" ? (
@@ -149,7 +132,6 @@ export default function TestIndexPage() {
                       questions={currentQuestions}
                       answers={answers}
                       setAnswers={setAnswers}
-                      timeElapsed={timeElapsed}
                       totalQuestions={allQuestions.length}
                     />
                   ) : currentTestId === "pwb" ? (
@@ -157,14 +139,11 @@ export default function TestIndexPage() {
                       questions={currentQuestions}
                       answers={answers}
                       setAnswers={setAnswers}
-                      timeElapsed={timeElapsed}
                       currentPage={currentPage}
                       questionsPerPage={questionsPerPage}
                     />
                   ) : (
-                    <div className="text-center text-gray-500 italic">
-                      Skala untuk tes ini belum tersedia.
-                    </div>
+                    <div className="text-center text-gray-500 italic">Skala untuk tes ini belum tersedia.</div>
                   )}
                 </Card>
               </motion.div>
