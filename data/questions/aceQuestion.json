@@ -221,7 +221,7 @@
           "category": "Household member treated violently",
           "scoring": {
             "Seringkali": 1,
-            "Beberapa kali": 1,
+            "Beberapa kali": 0,
             "Satu kali": 0,
             "Tidak pernah": 0
           }

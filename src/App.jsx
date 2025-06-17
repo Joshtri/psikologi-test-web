@@ -7,11 +7,11 @@ import HomePage from "./pages/home/home";
 import { ToastProvider } from "./provider/ToastProvider"; // pastikan path benar
 // import QuestionPage from "./pages/test/question";
 import TestIndexPage from "./pages/test/index";
-import PersonalityTypesPage from "./pages/personality-types/personality-types";
 import ScrollToTop from "./utils/ScrollToTop";
 import NotFoundPage from "./pages/404";
 import RespondentFormPage from "./pages/home/respondent-form";
 import LoginPage from "./pages/login";
+import ResultsPage from "./pages/results/resultsPage";
 
 function App() {
   return (
@@ -21,25 +21,35 @@ function App() {
         <ScrollToTop />
         <Layout>
           <Routes>
-            <Route index element={<HomePage />} />
-            {/* <Route path="/about" element={<AboutPage />} /> */}
+            <Route
+              index
+              element={<HomePage />}
+            />
 
-            <Route path="/test" element={<TestIndexPage />} />
-            {/* <Route path="/test/start" element={<TestStartPage />} />
-            <Route path="/test/result" element={<TestResultPage />} /> */}
+            <Route
+              path="/test"
+              element={<TestIndexPage />}
+            />
 
             <Route
               path="/respondent-fill-form"
               element={<RespondentFormPage />}
             />
+
             <Route
-              path="/personality-types"
-              element={<PersonalityTypesPage />}
+              path="results"
+              element={<ResultsPage />}
             />
 
-            <Route path="/sys/g/login" element={<LoginPage />} />
+            <Route
+              path="/sys/g/login"
+              element={<LoginPage />}
+            />
 
-            <Route path="*" element={<NotFoundPage />} />
+            <Route
+              path="*"
+              element={<NotFoundPage />}
+            />
           </Routes>
         </Layout>
       </BrowserRouter>
