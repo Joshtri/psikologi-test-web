@@ -11,7 +11,7 @@ import ScrollToTop from "./utils/ScrollToTop";
 import NotFoundPage from "./pages/404";
 import RespondentFormPage from "./pages/home/respondent-form";
 import LoginPage from "./pages/login";
-import ResultsPage from "./pages/result/resultsPage";
+import ResultsPage from "./pages/results/resultsPage";
 
 function App() {
   return (
