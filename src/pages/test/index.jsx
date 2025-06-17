@@ -35,7 +35,7 @@ export default function TestIndexPage() {
   const [answers, setAnswers] = useState({});
   const [maxStepReached, setMaxStepReached] = useState(0);
   const [visitedSteps, setVisitedSteps] = useState([0]);
-  
+
   // Persistent state for PDQ-4 sub-questions (34-39)
   const [pdqSubQuestions, setPdqSubQuestions] = useState({});
 
@@ -92,6 +92,12 @@ export default function TestIndexPage() {
       setCurrentPage(0);
 
       setVisitedSteps((prev) => (prev.includes(nextStep) ? prev : [...prev, nextStep]));
+    } else {
+      // All tests completed - redirect to results page with answers
+      console.log("Final answers (excluding sub-questions):", answers);
+      console.log("PDQ Sub-questions (persistent, not saved):", pdqSubQuestions);
+      navigate("/results", { state: { answers, pdqSubQuestions } });
+      return;
     }
 
     console.log("Final answers (excluding sub-questions):", answers);

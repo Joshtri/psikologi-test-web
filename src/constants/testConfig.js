@@ -1,4 +1,4 @@
-export const TEST_SEQUENCE = ["pdq_4", "pwb", "hfs", "ace"];
+export const TEST_SEQUENCE = ["hfs", "pwb", "pdq_4", "ace"];
 
 export const TEST_STEPS = ["Bagian 1", "Bagian 2", "Bagian 3", "Bagian 4", "Selesai"];
 
