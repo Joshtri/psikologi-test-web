@@ -9,6 +9,7 @@ export default function ResultsPage() {
   const [results, setResults] = useState(null);
   const [respondent, setRespondent] = useState(null);
   const [isExporting, setIsExporting] = useState(false);
+  
 
   useEffect(() => {
     const resultsData = localStorage.getItem("testResults");

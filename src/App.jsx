@@ -33,7 +33,7 @@ function App() {
             <Route path="/test" element={<TestIndexPage />} />
             <Route path="/respondent-fill-form" element={<RespondentFormPage />} />
             <Route path="/test-results" element={<ResultsPage />} />
-            {/* <Route path="results" element={<ResultsPage />} /> */}
+            <Route path="results" element={<ResultsPage />} />
           </Route>
 
           <Route path="/g/login" element={<LoginPage />} />
