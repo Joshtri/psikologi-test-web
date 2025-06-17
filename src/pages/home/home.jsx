@@ -1,23 +1,16 @@
-import { features, stats } from "@/constants/common";
+import { features } from "@/constants/common";
 import { Button } from "flowbite-react";
 import { motion } from "framer-motion";
-import {
-  Brain,
-  Globe,
-  Heart,
-  Play,
-  Sparkles
-} from "lucide-react";
+import { Brain, Globe, Heart, Play, Sparkles } from "lucide-react";
 import { useState } from "react";
 import ConsentPage from "./consent";
 
 export default function HomePage() {
-   const [showConsent, setShowConsent] = useState(false);
+  const [showConsent, setShowConsent] = useState(false);
 
   const handleStartTest = () => setShowConsent(true);
 
   if (showConsent) return <ConsentPage onBack={() => setShowConsent(false)} />;
-
 
   return (
     <div className="min-h-screen bg-white text-gray-800">
@@ -58,18 +51,10 @@ export default function HomePage() {
             >
               Selamat Datang di{" "}
               <span className="bg-gradient-to-r from-purple-600 to-amber-600 bg-clip-text text-transparent">
-                RaiReflect
+                <br />
+                Penelitian Psikologi 2025
               </span>
             </motion.h1>
-
-            <motion.p
-              className="text-xl md:text-2xl mb-6 max-w-3xl mx-auto text-gray-600"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              Refleksi diri yang berakar dari tanah tempatmu berpijak
-            </motion.p>
 
             <motion.p
               className="text-lg mb-12 max-w-4xl mx-auto text-gray-600"
@@ -77,9 +62,7 @@ export default function HomePage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 }}
             >
-              Platform tes kepribadian yang menggabungkan ilmu psikologi modern
-              dengan kearifan lokal NTT. Temukan pemahaman diri yang lebih dalam
-              melalui asesmen yang peka budaya dan bermakna.
+              Platform tes kepribadian yang mengukur kepribadian Anda melalui 4 skala kepribadian.
             </motion.p>
 
             <motion.div
@@ -103,20 +86,7 @@ export default function HomePage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.8 }}
-            >
-              <div className="flex items-center">
-                <Globe className="w-4 h-4 mr-2" />
-                <span>Peka Budaya</span>
-              </div>
-              <div className="flex items-center text-purple-700">
-                <Brain className="w-4 h-4 mr-2" />
-                <span>Berbasis Riset</span>
-              </div>
-              <div className="flex items-center">
-                <Heart className="w-4 h-4 mr-2" />
-                <span>Kearifan Lokal</span>
-              </div>
-            </motion.div>
+            ></motion.div>
           </motion.div>
         </div>
 
@@ -132,13 +102,7 @@ export default function HomePage() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.9 }}
           >
-            <h2 className="text-4xl font-bold mb-6 text-gray-900">
-              4 Aspek Kepribadian yang Diukur
-            </h2>
-            <p className="text-xl max-w-3xl mx-auto text-gray-600">
-              RaiReflect menganalisis kepribadian Anda melalui empat dimensi
-              utama yang mencerminkan kearifan psikologi modern dan budaya lokal
-            </p>
+            <h2 className="text-4xl font-bold mb-6 text-gray-900">4 Aspek Kepribadian yang Diukur</h2>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -151,60 +115,12 @@ export default function HomePage() {
                 transition={{ delay: 1.0 + i * 0.1 }}
               >
                 <div className="w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto bg-white shadow-md">
-                  <feature.icon
-                    className={`w-8 h-8 ${
-                      i % 2 === 0 ? "text-purple-600" : "text-amber-600"
-                    }`}
-                  />
+                  <feature.icon className={`w-8 h-8 ${i % 2 === 0 ? "text-purple-600" : "text-amber-600"}`} />
                 </div>
-                <h3 className="text-xl font-semibold mb-3 text-center text-gray-900">
-                  {feature.title}
-                </h3>
-                <p className="text-center text-gray-600">
-                  {feature.description}
-                </p>
+                <h3 className="text-xl font-semibold mb-3 text-center text-gray-900">{feature.title}</h3>
               </motion.div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-16 md:py-24 bg-amber-50">
-        <div className="max-w-7xl mx-auto px-6">
-          <motion.div
-            className="rounded-3xl shadow-xl p-8 md:p-12 bg-gradient-to-r from-purple-600 to-amber-600"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1.4 }}
-          >
-            <div className="text-center mb-8">
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Platform Tes Terpercaya
-              </h2>
-              <p className="text-lg text-white/90 max-w-2xl mx-auto">
-                Dikembangkan dengan standar psikologi internasional dan
-                disesuaikan dengan konteks budaya Indonesia
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 text-center text-white">
-              {stats.map((stat, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.5 + i * 0.1 }}
-                  className="bg-white/10 backdrop-blur-sm rounded-xl p-6"
-                >
-                  <div className="text-4xl md:text-5xl font-bold mb-2">
-                    {stat.value}
-                  </div>
-                  <div className="text-white/80">{stat.label}</div>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
         </div>
       </section>
     </div>

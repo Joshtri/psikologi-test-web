@@ -1,6 +1,6 @@
 import { Card } from "flowbite-react";
 import { AnimatePresence, motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import hfsData from "../../../data/questions/hfsQuestion.json";
 import pdqData from "../../../data/questions/pdqQuestion.json";
@@ -14,18 +14,17 @@ import PwbScale from "@/components/QuestionScale/PwbScale";
 import pwbData from "../../../data/questions/pwbQuestion.json";
 import aceData from "../../../data/questions/aceQuestion.json";
 import AceScale from "@/components/QuestionScale/AceScale";
-import LeavePagePrompt from "@/components/common/LeavePagePrompt"; // pastikan path sesuai
+import LeavePagePrompt from "@/components/common/LeavePagePrompt";
+import { TEST_SEQUENCE, TEST_STEPS, QUESTIONS_PER_PAGE, TEST_TYPES } from "@/constants/testConfig";
 
-const testSequence = ["ace", "pwb", "pdq_4", "hfs"];
-const steps = ["Bagian 1", "Bagian 2", "Bagian 3", "Bagian 4", "Selesai"];
 const dataMap = {
-  ace: {
+  [TEST_TYPES.ACE]: {
     questions: aceData.sections.flatMap((s) => s.questions),
     full: aceData,
   },
-  pwb: pwbData,
-  pdq_4: pdqData,
-  hfs: hfsData,
+  [TEST_TYPES.PWB]: pwbData,
+  [TEST_TYPES.PDQ_4]: pdqData,
+  [TEST_TYPES.HFS]: hfsData,
 };
 
 export default function TestIndexPage() {
@@ -34,31 +33,41 @@ export default function TestIndexPage() {
   const [currentTestIndex, setCurrentTestIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [answers, setAnswers] = useState({});
-  const [timeElapsed, setTimeElapsed] = useState(0);
   const [maxStepReached, setMaxStepReached] = useState(0);
-  const [visitedSteps, setVisitedSteps] = useState([0]); // awalnya cuma step 0
+  const [visitedSteps, setVisitedSteps] = useState([0]);
+  
+  // Persistent state for PDQ-4 sub-questions (34-39)
+  const [pdqSubQuestions, setPdqSubQuestions] = useState({});
 
-  const questionsPerPage = 10;
-  const currentTestId = testSequence[currentTestIndex];
+  const currentTestId = TEST_SEQUENCE[currentTestIndex];
   const currentTest = dataMap[currentTestId];
   const allQuestions = currentTest.questions;
-  const totalPages = Math.ceil(allQuestions.length / questionsPerPage);
-  const start = currentPage * questionsPerPage;
-  const end = start + questionsPerPage;
+  const totalPages = Math.ceil(allQuestions.length / QUESTIONS_PER_PAGE);
+  const start = currentPage * QUESTIONS_PER_PAGE;
+  const end = start + QUESTIONS_PER_PAGE;
   const currentQuestions = allQuestions.slice(start, end);
-
-  useEffect(() => {
-    const timer = setInterval(() => setTimeElapsed((prev) => prev + 1), 1000);
-    return () => clearInterval(timer);
-  }, []);
 
   const canProceed = () => {
     return currentQuestions.every((q) => {
+      // Handle PDQ-4 sub-questions (34-39) - check persistent state
+      if (currentTestId === TEST_TYPES.PDQ_4 && [34, 35, 36, 37, 38, 39].includes(q.id)) {
+        return pdqSubQuestions[q.id] !== undefined;
+      }
+
+      // Skip validation for PDQ-4 instruction questions
+      if (currentTestId === TEST_TYPES.PDQ_4 && q.isInstruction) {
+        return true; // Always allow proceeding for instruction questions
+      }
+
       const key =
-        currentTestId === "pdq_4"
+        currentTestId === TEST_TYPES.PDQ_4
           ? `pdq_4-${q.id}`
-          : currentTestId === "ace"
+          : currentTestId === TEST_TYPES.ACE
           ? `ace-${q.id}`
+          : currentTestId === TEST_TYPES.HFS
+          ? `hfs-${q.id}`
+          : currentTestId === TEST_TYPES.PWB
+          ? `pwb-${q.id}`
           : q.id;
       return answers[key];
     });
@@ -77,16 +86,16 @@ export default function TestIndexPage() {
 
     if (currentPage < totalPages - 1) {
       setCurrentPage((prev) => prev + 1);
-    } else if (currentTestIndex < testSequence.length - 1) {
+    } else if (currentTestIndex < TEST_SEQUENCE.length - 1) {
       const nextStep = currentTestIndex + 1;
       setCurrentTestIndex(nextStep);
       setCurrentPage(0);
 
-      // ⬇ tambahkan nextStep ke daftar step yang pernah dikunjungi
-      setVisitedSteps((prev) =>
-        prev.includes(nextStep) ? prev : [...prev, nextStep]
-      );
+      setVisitedSteps((prev) => (prev.includes(nextStep) ? prev : [...prev, nextStep]));
     }
+
+    console.log("Final answers (excluding sub-questions):", answers);
+    console.log("PDQ Sub-questions (persistent, not saved):", pdqSubQuestions);
   };
 
   const handlePrevious = () => {
@@ -94,13 +103,22 @@ export default function TestIndexPage() {
       setCurrentPage((prev) => prev - 1);
     }
   };
+
   const handleStepClick = (targetStep) => {
     if (visitedSteps.includes(targetStep)) {
       setCurrentTestIndex(targetStep);
       setCurrentPage(0);
     }
   };
-  
+
+  // Handler for PDQ sub-questions changes - now directly updates persistent state
+  const handlePdqSubQuestionsChange = (questionId, value) => {
+    setPdqSubQuestions((prev) => ({
+      ...prev,
+      [questionId]: value,
+    }));
+  };
+
   return (
     <>
       <LeavePagePrompt when={Object.keys(answers).length > 0} />
@@ -109,7 +127,7 @@ export default function TestIndexPage() {
         <div className="relative z-10 py-8">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <VerticalStepper
-              steps={steps}
+              steps={TEST_STEPS}
               currentStep={currentTestIndex}
               onStepClick={handleStepClick}
               visitedSteps={visitedSteps}
@@ -124,47 +142,41 @@ export default function TestIndexPage() {
                 transition={{ duration: 0.3 }}
               >
                 <Card className="mb-8 shadow-xl border-2 bg-white border-purple-200 p-6">
-                  {currentTestId === "ace" ? (
+                  {currentTestId === TEST_TYPES.ACE ? (
                     <AceScale
                       questions={currentQuestions}
                       answers={answers}
                       setAnswers={setAnswers}
-                      timeElapsed={timeElapsed}
                       sectionInfo={currentTest.full.sections.find((s) =>
-                        s.questions.some(
-                          (q) => q.id === currentQuestions[0]?.id
-                        )
+                        s.questions.some((q) => q.id === currentQuestions[0]?.id)
                       )}
                     />
-                  ) : currentTestId === "pdq_4" ? (
+                  ) : currentTestId === TEST_TYPES.PDQ_4 ? (
                     <PdqScale
                       questions={currentQuestions}
                       answers={answers}
                       setAnswers={setAnswers}
-                      timeElapsed={timeElapsed}
                       totalQuestions={allQuestions.length}
+                      pdqSubQuestions={pdqSubQuestions}
+                      onSubQuestionChange={handlePdqSubQuestionsChange}
                     />
-                  ) : currentTestId === "hfs" ? (
+                  ) : currentTestId === TEST_TYPES.HFS ? (
                     <HfsScale
                       questions={currentQuestions}
                       answers={answers}
                       setAnswers={setAnswers}
-                      timeElapsed={timeElapsed}
                       totalQuestions={allQuestions.length}
                     />
-                  ) : currentTestId === "pwb" ? (
+                  ) : currentTestId === TEST_TYPES.PWB ? (
                     <PwbScale
                       questions={currentQuestions}
                       answers={answers}
                       setAnswers={setAnswers}
-                      timeElapsed={timeElapsed}
                       currentPage={currentPage}
-                      questionsPerPage={questionsPerPage}
+                      questionsPerPage={QUESTIONS_PER_PAGE}
                     />
                   ) : (
-                    <div className="text-center text-gray-500 italic">
-                      Skala untuk tes ini belum tersedia.
-                    </div>
+                    <div className="text-center text-gray-500 italic">Skala untuk tes ini belum tersedia.</div>
                   )}
                 </Card>
               </motion.div>
@@ -174,9 +186,10 @@ export default function TestIndexPage() {
               currentPage={currentPage}
               totalPages={totalPages}
               canProceed={canProceed}
-              allQuestions={allQuestions} // ✅ Pastikan ini ada
+              allQuestions={allQuestions}
               handleNext={handleNext}
               handlePrevious={handlePrevious}
+              answers={answers}
             />
 
             <QuestionPagination

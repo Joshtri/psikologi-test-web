@@ -2,30 +2,23 @@ import React from "react";
 import pwbData from "../../../data/questions/pwbQuestion.json"; // sesuaikan path jika beda
 import TestHeader from "@/components/Test/TestHeader";
 
-export default function PwbScale({
-  answers,
-  setAnswers,
-  currentPage,
-  questionsPerPage = 10,
-  timeElapsed,
-}) {
+export default function PwbScale({ answers, setAnswers, currentPage, questionsPerPage = 10 }) {
   const scaleLabels = pwbData.scale.labels;
   const startIndex = currentPage * questionsPerPage;
   const endIndex = startIndex + questionsPerPage;
   const currentQuestions = pwbData.questions.slice(startIndex, endIndex);
 
   const handleChange = (id, value) => {
-    setAnswers((prev) => ({ ...prev, [id]: value }));
+    setAnswers((prev) => ({ ...prev, [`pwb-${id}`]: value }));
   };
 
   return (
     <div className="space-y-6">
       <TestHeader
-        title={pwbData.name}
+        title="Bagian 2"
         description={pwbData.instructions}
-        timeElapsed={timeElapsed}
         progress={Math.round(
-          (Object.keys(answers).length / pwbData.questions.length) * 100
+          (Object.keys(answers).filter((key) => key.startsWith("pwb-")).length / pwbData.questions.length) * 100
         )}
       />
 
@@ -45,9 +38,9 @@ export default function PwbScale({
               >
                 <input
                   type="radio"
-                  name={`question-${q.id}`}
+                  name={`pwb-${q.id}`}
                   value={val}
-                  checked={answers[q.id] === val}
+                  checked={answers[`pwb-${q.id}`] === val}
                   onChange={() => handleChange(q.id, val)}
                 />
                 <span className="mt-1">{scaleLabels[val]}</span>

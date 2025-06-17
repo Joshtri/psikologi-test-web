@@ -27,7 +27,7 @@ export const consentItems = [
     icon: Heart,
     title: "Insentif Penelitian",
     label:
-      "Saya memahami bahwa saya akan mendapatkan insentif berupa finansial sebesar Rp 25,000,- (dua puluh ribu rupiah) untuk 10 orang peserta random dari ovo. - tambah 1 poin tentang kesediaan diwawancara lebih lanjut",
+      "Saya memahami bahwa saya akan mendapatkan insentif berupa finansial sebesar Rp 25,000,- (dua puluh lima ribu rupiah) untuk 10 orang peserta random dari ovo. tambah 1 poin tentang kesediaan diwawancara lebih lanjut",
   },
   {
     key: "confidentiality",
@@ -40,7 +40,13 @@ export const consentItems = [
     key: "voluntary",
     icon: Heart,
     title: "Persetujuan Sukarela",
+    label: "Saya secara sukarela dan tanpa paksaan setuju untuk berpartisipasi dalam penelitian ini.",
+  },
+  {
+    key: "contact",
+    icon: Info,
+    title: "Ketersediaan Wawancara",
     label:
-      "Saya secara sukarela dan tanpa paksaan setuju untuk berpartisipasi dalam penelitian ini.",
+      "Saya bersedia untuk dihubungi melalui nomor telepon yang akan saya isi untuk diwawancari lebih lanjut oleh tim peneliti berdasarkan hasil penelitian ini.",
   },
 ];

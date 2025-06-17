@@ -2,13 +2,7 @@ import React from "react";
 import hfsData from "../../../data/questions/hfsQuestion.json";
 import TestHeader from "@/components/Test/TestHeader";
 
-export default function HfsScale({
-  questions,
-  answers,
-  setAnswers,
-  timeElapsed,
-  totalQuestions,
-}) {
+export default function HfsScale({ questions, answers, setAnswers, totalQuestions }) {
   const scaleValues = [1, 2, 3, 4, 5, 6, 7];
   const scaleLabels = {
     1: "Sangat tidak sesuai",
@@ -18,22 +12,24 @@ export default function HfsScale({
   };
 
   const handleChange = (id, value) => {
-    setAnswers((prev) => ({ ...prev, [id]: value }));
+    setAnswers((prev) => ({ ...prev, [`hfs-${id}`]: value }));
   };
 
   return (
     <div className="space-y-6">
       <TestHeader
-        title={hfsData.name}
+        title="Bagian 1"
         description={hfsData.instructions}
-        timeElapsed={timeElapsed}
         progress={Math.round(
-          (Object.keys(answers).length / totalQuestions) * 100
+          (Object.keys(answers).filter((key) => key.startsWith("hfs-")).length / totalQuestions) * 100
         )}
       />
 
       {questions.map((q) => (
-        <div key={q.id} className="bg-white p-4 rounded-xl shadow border">
+        <div
+          key={q.id}
+          className="bg-white p-4 rounded-xl shadow border"
+        >
           <p className="mb-2 font-medium">
             {q.id}. {q.text}
           </p>
@@ -45,9 +41,9 @@ export default function HfsScale({
               >
                 <input
                   type="radio"
-                  name={`question-${q.id}`}
+                  name={`hfs-${q.id}`}
                   value={val}
-                  checked={answers[q.id] === val}
+                  checked={answers[`hfs-${q.id}`] === val}
                   onChange={() => handleChange(q.id, val)}
                 />
                 <span className="mt-1">{scaleLabels[val] || ""}</span>
