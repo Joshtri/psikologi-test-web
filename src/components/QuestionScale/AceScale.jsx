@@ -2,12 +2,7 @@ import React from "react";
 import aceData from "../../../data/questions/aceQuestion.json";
 import TestHeader from "@/components/Test/TestHeader";
 
-export default function AceScale({
-  questions,
-  answers,
-  setAnswers,
-  timeElapsed,
-}) {
+export default function AceScale({ questions, answers, setAnswers }) {
   const { name, sections } = aceData;
 
   const progress = Math.round(
@@ -19,12 +14,8 @@ export default function AceScale({
   // Group questions by section
   const groupedSections = sections
     .map((section) => {
-      const matchedQuestions = section.questions.filter((q) =>
-        questions.some((currentQ) => currentQ.id === q.id)
-      );
-      return matchedQuestions.length > 0
-        ? { ...section, questions: matchedQuestions }
-        : null;
+      const matchedQuestions = section.questions.filter((q) => questions.some((currentQ) => currentQ.id === q.id));
+      return matchedQuestions.length > 0 ? { ...section, questions: matchedQuestions } : null;
     })
     .filter(Boolean); // remove null sections
 
@@ -38,16 +29,17 @@ export default function AceScale({
   return (
     <div className="space-y-6">
       <TestHeader
-        title={name}
+        title="Bagian 4"
         description="Jawaban berdasarkan pengalaman hingga usia 18 tahun."
         progress={progress}
-        timeElapsed={timeElapsed}
       />
 
       {groupedSections.map((section, idx) => (
-        <div key={idx} className="space-y-4">
+        <div
+          key={idx}
+          className="space-y-4"
+        >
           <div className="p-4 rounded bg-blue-50 border-l-4 border-blue-400 shadow-sm">
-            <h2 className="font-semibold text-blue-900">{section.title}</h2>
             <p className="text-sm text-blue-800">{section.instructions}</p>
           </div>
 
@@ -62,7 +54,10 @@ export default function AceScale({
 
               <div className="flex flex-wrap gap-4">
                 {Object.keys(q.scoring).map((option) => (
-                  <label key={option} className="flex items-center gap-2">
+                  <label
+                    key={option}
+                    className="flex items-center gap-2"
+                  >
                     <input
                       type="radio"
                       name={`ace-${q.id}`}

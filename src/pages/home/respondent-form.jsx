@@ -1,4 +1,5 @@
 import FormField from "@/components/ui/FormField";
+import { respondentFormFields } from "@/constants/formFields";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -10,6 +11,7 @@ import {
   Home,
   MapPin,
   Phone,
+  School, // Add this import
   User,
   Users,
 } from "lucide-react";
@@ -29,6 +31,7 @@ export default function RespondentForm() {
   } = useForm();
 
   const navigate = useNavigate();
+
   const dateOfBirth = watch("dateOfBirth");
   const { showToast } = useToast();
 
@@ -73,6 +76,7 @@ export default function RespondentForm() {
       gender: Users,
       phoneNumber: Phone,
       educationLevel: GraduationCap,
+      schoolName: School, // Add this line
       livingWith: Home,
       address: MapPin,
       parentOccupation: Briefcase,
@@ -81,37 +85,6 @@ export default function RespondentForm() {
     };
     return iconMap[fieldName] || User;
   };
-
-  const fields = [
-    { name: "name", label: "Nama Lengkap", type: "text", required: true },
-    {
-      name: "dateOfBirth",
-      label: "Tanggal Lahir",
-      type: "date",
-      required: true,
-    },
-    { name: "age", label: "Usia (otomatis)", type: "number", disabled: true },
-    {
-      name: "gender",
-      label: "Jenis Kelamin",
-      type: "select",
-      required: true,
-      options: ["Laki-laki", "Perempuan"],
-    },
-    { name: "phoneNumber", label: "Nomor HP", type: "tel", required: true },
-    {
-      name: "educationLevel",
-      label: "Pendidikan Terakhir",
-      type: "select",
-      required: true,
-      options: ["SD", "SMP", "SMA", "S1"],
-    },
-    { name: "livingWith", label: "Tinggal Dengan", type: "text" },
-    { name: "address", label: "Alamat", type: "text" },
-    { name: "parentOccupation", label: "Pekerjaan Orang Tua", type: "text" },
-    { name: "birthOrder", label: "Anak Ke-", type: "text" },
-    { name: "ethnicity", label: "Suku / Etnis", type: "text" },
-  ];
 
   return (
     <div className="min-h-screen bg-white text-gray-800">
@@ -140,9 +113,7 @@ export default function RespondentForm() {
                 </div>
                 <div>
                   <h1 className="text-3xl font-bold">Informasi Responden</h1>
-                  <p className="text-white/90">
-                    Mohon lengkapi data diri Anda dengan benar
-                  </p>
+                  <p className="text-white/90">Mohon lengkapi data diri Anda dengan benar</p>
                 </div>
               </div>
             </div>
@@ -155,8 +126,11 @@ export default function RespondentForm() {
             className="bg-white shadow-xl rounded-b-2xl overflow-hidden"
           >
             <div className="p-8">
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-                {fields.map((field, idx) => (
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="space-y-6"
+              >
+                {respondentFormFields.map((field, idx) => (
                   <FormField
                     key={field.name}
                     field={field}
