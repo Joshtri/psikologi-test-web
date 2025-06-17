@@ -9,7 +9,7 @@ export default function PwbScale({ answers, setAnswers, currentPage, questionsPe
   const currentQuestions = pwbData.questions.slice(startIndex, endIndex);
 
   const handleChange = (id, value) => {
-    setAnswers((prev) => ({ ...prev, [id]: value }));
+    setAnswers((prev) => ({ ...prev, [`pwb-${id}`]: value }));
   };
 
   return (
@@ -17,7 +17,9 @@ export default function PwbScale({ answers, setAnswers, currentPage, questionsPe
       <TestHeader
         title="Bagian 2"
         description={pwbData.instructions}
-        progress={Math.round((Object.keys(answers).length / pwbData.questions.length) * 100)}
+        progress={Math.round(
+          (Object.keys(answers).filter((key) => key.startsWith("pwb-")).length / pwbData.questions.length) * 100
+        )}
       />
 
       {currentQuestions.map((q) => (
@@ -36,9 +38,9 @@ export default function PwbScale({ answers, setAnswers, currentPage, questionsPe
               >
                 <input
                   type="radio"
-                  name={`question-${q.id}`}
+                  name={`pwb-${q.id}`}
                   value={val}
-                  checked={answers[q.id] === val}
+                  checked={answers[`pwb-${q.id}`] === val}
                   onChange={() => handleChange(q.id, val)}
                 />
                 <span className="mt-1">{scaleLabels[val]}</span>

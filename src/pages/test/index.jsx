@@ -35,6 +35,9 @@ export default function TestIndexPage() {
   const [answers, setAnswers] = useState({});
   const [maxStepReached, setMaxStepReached] = useState(0);
   const [visitedSteps, setVisitedSteps] = useState([0]);
+  
+  // Persistent state for PDQ-4 sub-questions (34-39)
+  const [pdqSubQuestions, setPdqSubQuestions] = useState({});
 
   const currentTestId = TEST_SEQUENCE[currentTestIndex];
   const currentTest = dataMap[currentTestId];
@@ -46,8 +49,26 @@ export default function TestIndexPage() {
 
   const canProceed = () => {
     return currentQuestions.every((q) => {
+      // Handle PDQ-4 sub-questions (34-39) - check persistent state
+      if (currentTestId === TEST_TYPES.PDQ_4 && [34, 35, 36, 37, 38, 39].includes(q.id)) {
+        return pdqSubQuestions[q.id] !== undefined;
+      }
+
+      // Skip validation for PDQ-4 instruction questions
+      if (currentTestId === TEST_TYPES.PDQ_4 && q.isInstruction) {
+        return true; // Always allow proceeding for instruction questions
+      }
+
       const key =
-        currentTestId === TEST_TYPES.PDQ_4 ? `pdq_4-${q.id}` : currentTestId === TEST_TYPES.ACE ? `ace-${q.id}` : q.id;
+        currentTestId === TEST_TYPES.PDQ_4
+          ? `pdq_4-${q.id}`
+          : currentTestId === TEST_TYPES.ACE
+          ? `ace-${q.id}`
+          : currentTestId === TEST_TYPES.HFS
+          ? `hfs-${q.id}`
+          : currentTestId === TEST_TYPES.PWB
+          ? `pwb-${q.id}`
+          : q.id;
       return answers[key];
     });
   };
@@ -73,7 +94,8 @@ export default function TestIndexPage() {
       setVisitedSteps((prev) => (prev.includes(nextStep) ? prev : [...prev, nextStep]));
     }
 
-    console.log(answers); //debug block
+    console.log("Final answers (excluding sub-questions):", answers);
+    console.log("PDQ Sub-questions (persistent, not saved):", pdqSubQuestions);
   };
 
   const handlePrevious = () => {
@@ -87,6 +109,14 @@ export default function TestIndexPage() {
       setCurrentTestIndex(targetStep);
       setCurrentPage(0);
     }
+  };
+
+  // Handler for PDQ sub-questions changes - now directly updates persistent state
+  const handlePdqSubQuestionsChange = (questionId, value) => {
+    setPdqSubQuestions((prev) => ({
+      ...prev,
+      [questionId]: value,
+    }));
   };
 
   return (
@@ -127,6 +157,8 @@ export default function TestIndexPage() {
                       answers={answers}
                       setAnswers={setAnswers}
                       totalQuestions={allQuestions.length}
+                      pdqSubQuestions={pdqSubQuestions}
+                      onSubQuestionChange={handlePdqSubQuestionsChange}
                     />
                   ) : currentTestId === TEST_TYPES.HFS ? (
                     <HfsScale

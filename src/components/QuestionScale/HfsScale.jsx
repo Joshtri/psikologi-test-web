@@ -12,7 +12,7 @@ export default function HfsScale({ questions, answers, setAnswers, totalQuestion
   };
 
   const handleChange = (id, value) => {
-    setAnswers((prev) => ({ ...prev, [id]: value }));
+    setAnswers((prev) => ({ ...prev, [`hfs-${id}`]: value }));
   };
 
   return (
@@ -20,7 +20,9 @@ export default function HfsScale({ questions, answers, setAnswers, totalQuestion
       <TestHeader
         title="Bagian 1"
         description={hfsData.instructions}
-        progress={Math.round((Object.keys(answers).length / totalQuestions) * 100)}
+        progress={Math.round(
+          (Object.keys(answers).filter((key) => key.startsWith("hfs-")).length / totalQuestions) * 100
+        )}
       />
 
       {questions.map((q) => (
@@ -39,9 +41,9 @@ export default function HfsScale({ questions, answers, setAnswers, totalQuestion
               >
                 <input
                   type="radio"
-                  name={`question-${q.id}`}
+                  name={`hfs-${q.id}`}
                   value={val}
-                  checked={answers[q.id] === val}
+                  checked={answers[`hfs-${q.id}`] === val}
                   onChange={() => handleChange(q.id, val)}
                 />
                 <span className="mt-1">{scaleLabels[val] || ""}</span>

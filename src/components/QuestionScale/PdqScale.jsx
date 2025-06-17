@@ -1,23 +1,63 @@
-import React from "react";
+import React, { useEffect } from "react";
 import pdqData from "../../../data/questions/pdqQuestion.json";
 import TestHeader from "@/components/Test/TestHeader";
 import { Flame, Star, HeartPulse, ShieldAlert, HelpCircle } from "lucide-react";
 
-export default function PdqScale({ questions, answers, setAnswers, totalQuestions }) {
+export default function PdqScale({
+  questions,
+  answers,
+  setAnswers,
+  totalQuestions,
+  pdqSubQuestions, // Persistent sub-questions from parent
+  onSubQuestionChange, // Callback to update individual sub-question
+}) {
   const { scale, name, instructions } = pdqData;
 
   const handleChange = (questionId, value) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [`pdq_4-${questionId}`]: value,
-    }));
+    const subQuestions = [34, 35, 36, 37, 38, 39];
+
+    if (subQuestions.includes(questionId)) {
+      // Store sub-question answers in parent's persistent state
+      onSubQuestionChange(questionId, value);
+    } else {
+      // Store regular answers in main state
+      setAnswers((prev) => ({
+        ...prev,
+        [`pdq_4-${questionId}`]: value,
+      }));
+    }
   };
 
-  const progress = Math.round(
-    (Object.keys(answers).filter((key) => key.startsWith("pdq_4-")).length / totalQuestions) * 100
-  );
+  // Auto-answer question 33 based on questions 34-39
+  useEffect(() => {
+    const subQuestions = [34, 35, 36, 37, 38, 39];
+    const trueAnswers = subQuestions.filter((qId) => pdqSubQuestions[qId] === "true");
 
-  // used for the styling of aech disorder type
+    // Check if all sub-questions (34-39) have been answered
+    const allSubQuestionsAnswered = subQuestions.every((qId) => pdqSubQuestions[qId] !== undefined);
+
+    // Only auto-answer if all sub-questions are answered
+    if (allSubQuestionsAnswered) {
+      const shouldBeTrue = trueAnswers.length >= 2;
+      const currentAnswer = answers[`pdq_4-33`];
+      const targetAnswer = shouldBeTrue ? "true" : "false";
+
+      // Only update if the answer needs to change
+      if (currentAnswer !== targetAnswer) {
+        setAnswers((prev) => ({
+          ...prev,
+          [`pdq_4-33`]: targetAnswer,
+        }));
+      }
+    }
+  }, [pdqSubQuestions, answers, setAnswers]);
+
+  // Calculate progress including sub-questions
+  const mainAnswersCount = Object.keys(answers).filter((key) => key.startsWith("pdq_4-")).length;
+  const subAnswersCount = Object.keys(pdqSubQuestions).length;
+  const progress = Math.round(((mainAnswersCount + subAnswersCount) / totalQuestions) * 100);
+
+  // used for the styling of each disorder type
   const labelMeta = {
     Histrionik: {
       color: "bg-pink-100 text-pink-700",
@@ -41,6 +81,17 @@ export default function PdqScale({ questions, answers, setAnswers, totalQuestion
     },
   };
 
+  // Helper function to get the checked value for radio inputs
+  const getCheckedValue = (questionId, value) => {
+    const subQuestions = [34, 35, 36, 37, 38, 39];
+
+    if (subQuestions.includes(questionId)) {
+      return pdqSubQuestions[questionId] === value;
+    } else {
+      return answers[`pdq_4-${questionId}`] === value;
+    }
+  };
+
   return (
     <div className="space-y-6">
       <TestHeader
@@ -60,7 +111,7 @@ export default function PdqScale({ questions, answers, setAnswers, totalQuestion
               className="p-4 rounded bg-yellow-50 border-l-4 border-yellow-400 shadow"
             >
               <p className="font-semibold text-gray-700">
-                {index + 1}. {q.text}
+                {q.id}. {q.text}
               </p>
             </div>
           );
@@ -73,29 +124,31 @@ export default function PdqScale({ questions, answers, setAnswers, totalQuestion
               isSub ? "ml-6 border-dashed border-gray-300" : ""
             }`}
           >
-            <p className="mb-2 text-sm text-gray-800">
-              {index + 1}. {q.text}
+            <p className="mb-4 text-sm text-gray-800">
+              {q.id}. {q.text}
             </p>
-            <div className="flex gap-2">
-              <label>
+            <div className="flex justify-center gap-8">
+              <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="radio"
                   name={`pdq_4-${q.id}`}
                   value="true"
-                  checked={answers[`pdq_4-${q.id}`] === "true"}
+                  checked={getCheckedValue(q.id, "true")}
                   onChange={() => handleChange(q.id, "true")}
-                />{" "}
-                {scale.labels.true}
+                  className="w-4 h-4"
+                />
+                <span className="text-sm">{scale.labels.true}</span>
               </label>
-              <label>
+              <label className="flex items-center gap-2 cursor-pointer">
                 <input
                   type="radio"
                   name={`pdq_4-${q.id}`}
                   value="false"
-                  checked={answers[`pdq_4-${q.id}`] === "false"}
+                  checked={getCheckedValue(q.id, "false")}
                   onChange={() => handleChange(q.id, "false")}
-                />{" "}
-                {scale.labels.false}
+                  className="w-4 h-4"
+                />
+                <span className="text-sm">{scale.labels.false}</span>
               </label>
             </div>
           </div>
