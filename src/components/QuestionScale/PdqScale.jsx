@@ -3,12 +3,7 @@ import pdqData from "../../../data/questions/pdqQuestion.json";
 import TestHeader from "@/components/Test/TestHeader";
 import { Flame, Star, HeartPulse, ShieldAlert, HelpCircle } from "lucide-react";
 
-export default function PdqScale({
-  questions,
-  answers,
-  setAnswers,
-  totalQuestions,
-}) {
+export default function PdqScale({ questions, answers, setAnswers, totalQuestions }) {
   const { scale, name, instructions } = pdqData;
 
   const handleChange = (questionId, value) => {
@@ -19,11 +14,10 @@ export default function PdqScale({
   };
 
   const progress = Math.round(
-    (Object.keys(answers).filter((key) => key.startsWith("pdq_4-")).length /
-      totalQuestions) *
-      100
+    (Object.keys(answers).filter((key) => key.startsWith("pdq_4-")).length / totalQuestions) * 100
   );
 
+  // used for the styling of aech disorder type
   const labelMeta = {
     Histrionik: {
       color: "bg-pink-100 text-pink-700",
@@ -50,7 +44,7 @@ export default function PdqScale({
   return (
     <div className="space-y-6">
       <TestHeader
-        title={name}
+        title="Bagian 3"
         description={instructions}
         progress={progress}
       />
@@ -82,7 +76,7 @@ export default function PdqScale({
             <p className="mb-2 text-sm text-gray-800">
               {index + 1}. {q.text}
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-2">
               <label>
                 <input
                   type="radio"
