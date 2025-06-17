@@ -7,6 +7,8 @@ export default function TestNavigationButtons({
   canProceed,
   handleNext,
   handlePrevious,
+  handleFinishTest, // ✅ Tambahan
+  isLastPage, // ✅ Tambahan
 }) {
   return (
     <div className="flex justify-between items-center mt-6">
@@ -23,27 +25,33 @@ export default function TestNavigationButtons({
         Sebelumnya
       </button>
 
-      <button
-        onClick={handleNext}
-        disabled={!canProceed()}
-        className={`flex items-center gap-2 px-4 py-2 rounded font-semibold transition ${
-          !canProceed()
-            ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-            : "bg-amber-500 text-white hover:bg-amber-600"
-        }`}
-      >
-        {currentPage < totalPages - 1 ? (
-          <>
-            Selanjutnya
-            <ArrowRight className="w-4 h-4" />
-          </>
-        ) : (
-          <>
-            Selesai
-            <CheckCircle className="w-4 h-4" />
-          </>
-        )}
-      </button>
+      {isLastPage ? (
+        <button
+          onClick={handleFinishTest}
+          disabled={!canProceed()}
+          className={`flex items-center gap-2 px-4 py-2 rounded font-semibold transition ${
+            !canProceed()
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-emerald-600 text-white hover:bg-emerald-700"
+          }`}
+        >
+          Selesai & Kirim
+          <CheckCircle className="w-4 h-4" />
+        </button>
+      ) : (
+        <button
+          onClick={handleNext}
+          disabled={!canProceed()}
+          className={`flex items-center gap-2 px-4 py-2 rounded font-semibold transition ${
+            !canProceed()
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-amber-500 text-white hover:bg-amber-600"
+          }`}
+        >
+          Selanjutnya
+          <ArrowRight className="w-4 h-4" />
+        </button>
+      )}
     </div>
   );
 }

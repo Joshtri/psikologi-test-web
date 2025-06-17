@@ -11,6 +11,7 @@ export default function HfsScale({ questions, answers, setAnswers, totalQuestion
     7: "Sangat sesuai",
   };
 
+
   const handleChange = (id, value) => {
     setAnswers((prev) => ({ ...prev, [`hfs-${id}`]: value }));
   };
