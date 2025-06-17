@@ -92,6 +92,12 @@ export default function TestIndexPage() {
       setCurrentPage(0);
 
       setVisitedSteps((prev) => (prev.includes(nextStep) ? prev : [...prev, nextStep]));
+    } else {
+      // All tests completed - redirect to results page
+      console.log("Final answers (excluding sub-questions):", answers);
+      console.log("PDQ Sub-questions (persistent, not saved):", pdqSubQuestions);
+      navigate("/results");
+      return;
     }
 
     console.log("Final answers (excluding sub-questions):", answers);
