@@ -15,11 +15,15 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
+import { useNavigate } from "react-router-dom";
+
 export default function Header({ isRole }) {
   const location = useLocation();
   const pathname = location.pathname;
   const [isOpen, setIsOpen] = useState(false);
   const [adminDropdownOpen, setAdminDropdownOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const adminDropdownRef = useRef(null);
 
@@ -40,6 +44,12 @@ export default function Header({ isRole }) {
     };
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/g/login");
+  };
+
   const isAdmin = isRole === "Admin";
 
   const navItems = [{ to: "/", label: "Beranda", icon: Home }];
@@ -48,7 +58,11 @@ export default function Header({ isRole }) {
     { to: "/sys/dashboard", label: "Dashboard Admin", icon: BarChart3 },
     { to: "/sys/respondents", label: "Data Responden", icon: Users },
     { to: "/sys/master", label: "Data Master", icon: Database },
-    { to: "/sys/respondents-results", label: "Hasil Responden", icon: Database },
+    {
+      to: "/sys/respondents-results",
+      label: "Hasil Responden",
+      icon: Database,
+    },
   ];
 
   // Admin Header Design
@@ -129,6 +143,15 @@ export default function Header({ isRole }) {
                       </Link>
                     );
                   })}
+                  <hr className="my-2 border-slate-600" />
+
+                  <button
+                    onClick={handleLogout}
+                    className="w-full text-left flex items-center space-x-3 px-4 py-3 text-red-400 hover:text-white hover:bg-red-500/40 transition-all duration-200"
+                  >
+                    <X className="w-4 h-4" />
+                    <span className="text-sm">Keluar</span>
+                  </button>
                 </div>
               )}
             </div>
