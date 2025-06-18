@@ -1,5 +1,6 @@
 // components/test/TestNavigationButtons.jsx
 import { ArrowLeft, ArrowRight, CheckCircle } from "lucide-react";
+import { PDQ_SCORING } from "../../constants/inference/pdqInference";
 
 export default function TestNavigationButtons({
   currentPage,
@@ -10,20 +11,46 @@ export default function TestNavigationButtons({
   handleFinishTest,
   isLastPage,
   answers, // Add this prop to access answers
+  pdqSubQuestions, // Add this prop to access PDQ sub-questions
 }) {
+  // Function to convert PDQ sub-questions to scores
+  const convertPdqSubQuestions = (subQuestions) => {
+    const convertedScores = {};
+    const subQuestionIds = [34, 35, 36, 37, 38, 39];
+
+    subQuestionIds.forEach((questionId) => {
+      if (subQuestions[questionId] !== undefined) {
+        const score = PDQ_SCORING.SCALE_MAPPING[subQuestions[questionId]] || 0;
+        convertedScores[`pdq_4-${questionId}`] = score;
+      }
+    });
+
+    return convertedScores;
+  };
+
   const handleNextClick = () => {
     // Save answers to localStorage when on last page before proceeding
     if (isLastPage) {
-      localStorage.setItem("resultsData", JSON.stringify(answers));
-      console.log("Answers saved to localStorage on last page:", answers);
+      // Convert PDQ sub-questions to scores and merge with main answers
+      const convertedPdqScores = convertPdqSubQuestions(pdqSubQuestions || {});
+      const completeAnswers = { ...answers, ...convertedPdqScores };
+
+      localStorage.setItem("resultsData", JSON.stringify(completeAnswers));
+      console.log("Complete answers saved to localStorage on last page:", completeAnswers);
+      console.log("PDQ sub-questions converted scores:", convertedPdqScores);
     }
     handleNext();
   };
 
   const handleFinishClick = () => {
     // Ensure answers are saved before finishing
-    localStorage.setItem("resultsData", JSON.stringify(answers));
-    console.log("Answers saved to localStorage on finish:", answers);
+    // Convert PDQ sub-questions to scores and merge with main answers
+    const convertedPdqScores = convertPdqSubQuestions(pdqSubQuestions || {});
+    const completeAnswers = { ...answers, ...convertedPdqScores };
+
+    localStorage.setItem("resultsData", JSON.stringify(completeAnswers));
+    console.log("Complete answers saved to localStorage on finish:", completeAnswers);
+    console.log("PDQ sub-questions converted scores:", convertedPdqScores);
     handleFinishTest();
   };
 

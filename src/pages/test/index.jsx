@@ -93,7 +93,7 @@ export default function TestIndexPage() {
 
     // Check if this is the last page of the last test
     const isLastPage = currentPage === totalPages - 1 && currentTestIndex === TEST_SEQUENCE.length - 1;
-    
+
     // Save answers to localStorage before proceeding on last page
     if (isLastPage) {
       localStorage.setItem("resultsData", JSON.stringify(answers));
@@ -240,6 +240,7 @@ export default function TestIndexPage() {
 
     return {
       disorders: disordersFound,
+      labelScores: labelScores, // Add total scores for each disorder
       inference:
         disordersFound.length > 0
           ? `Anda memiliki kecenderungan kepribadian: ${disordersFound.join(", ")}`
@@ -275,6 +276,7 @@ export default function TestIndexPage() {
 
     return {
       experiences: experiencedCategories,
+      categoryScores: categoryScores, // Add total scores for each category
       inference:
         experiencedCategories.length > 0
           ? `Anda pernah melewati pengalaman: ${experiencedCategories.join(", ")}`
@@ -431,6 +433,7 @@ export default function TestIndexPage() {
               handleNext={handleNext}
               handlePrevious={handlePrevious}
               answers={answers}
+              pdqSubQuestions={pdqSubQuestions} // Add this line
               isLastPage={currentPage === totalPages - 1 && currentTestIndex === TEST_SEQUENCE.length - 1}
             />
 
