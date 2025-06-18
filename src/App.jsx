@@ -30,33 +30,66 @@ function App() {
         <Routes>
           {/* ✅ Public Layout */}
           <Route element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path="/test" element={<TestIndexPage />} />
+            <Route
+              index
+              element={<HomePage />}
+            />
+            <Route
+              path="/test"
+              element={<TestIndexPage />}
+            />
             <Route
               path="/respondent-fill-form"
               element={<RespondentFormPage />}
             />
-            <Route path="/test-results" element={<ResultsPage />} />
-            <Route path="results" element={<ResultsPage />} />
+            <Route
+              path="/test-results"
+              element={<ResultsPage />}
+            />
+            <Route
+              path="results"
+              element={<ResultsPage />}
+            />
           </Route>
 
-          <Route path="/g/login" element={<LoginPage />} />
+          <Route
+            path="/g/login"
+            element={<LoginPage />}
+          />
 
           {/* ✅ Admin-only layout */}
-          {/* <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} />}> */}
-            <Route path="/sys" element={<Layout isRole="Admin" />}>
-              <Route path="dashboard" element={<DashboardPage />} />
-              <Route path="respondents" element={<RespondentPage />} />
-              <Route path="respondents/:id" element={<RespondentShowPage />} />
-              <Route path="master" element={<MasterPage />} />
+          <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} />}>
+            <Route
+              path="/sys"
+              element={<Layout isRole="Admin" />}
+            >
+              <Route
+                path="dashboard"
+                element={<DashboardPage />}
+              />
+              <Route
+                path="respondents"
+                element={<RespondentPage />}
+              />
+              <Route
+                path="respondents/:id"
+                element={<RespondentShowPage />}
+              />
+              <Route
+                path="master"
+                element={<MasterPage />}
+              />
               <Route
                 path="respondents-results"
                 element={<RespondentResultsPage />}
               />
             </Route>
-          {/* </Route> */}
+          </Route>
 
-          <Route path="*" element={<NotFoundPage />} />
+          <Route
+            path="*"
+            element={<NotFoundPage />}
+          />
         </Routes>
       </BrowserRouter>
     </ToastProvider>
