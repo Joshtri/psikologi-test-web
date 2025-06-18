@@ -317,18 +317,20 @@ export default function TestIndexPage() {
       const aceSummary = calculateAceSummary(testAnswers);
 
       const payload = {
-        name: respondent.name,
-        dateOfBirth: respondent.dateOfBirth,
-        age: respondent.age,
-        gender: respondent.gender,
-        phoneNumber: respondent.phoneNumber,
-        educationLevel: respondent.educationLevel,
-        schoolName: respondent.schoolName,
-        livingWith: respondent.livingWith,
-        address: respondent.address,
-        parentOccupation: respondent.parentOccupation,
-        birthOrder: respondent.birthOrder,
-        ethnicity: respondent.ethnicity,
+        
+        // name: respondent.name,
+        // dateOfBirth: respondent.dateOfBirth,
+        // age: respondent.age,
+        // gender: respondent.gender,
+        // phoneNumber: respondent.phoneNumber,
+        // educationLevel: respondent.educationLevel,
+        // schoolName: respondent.schoolName,
+        // livingWith: respondent.livingWith,
+        // address: respondent.address,
+        // parentOccupation: respondent.parentOccupation,
+        // birthOrder: respondent.birthOrder,
+        // ethnicity: respondent.ethnicity,
+        respondent: respondent,
         answers: testAnswers,
         summary: {
           hfs: hfsSummary,
