@@ -26,11 +26,14 @@ export default function ResultsPage() {
     if (resultsData) {
       setResults(JSON.parse(resultsData));
     }
-
+    
     if (respondentData) {
       setRespondent(JSON.parse(respondentData));
     }
   }, []);
+  console.log("🔍 Hasil tes yang ditemukan:", results);
+
+  
 
   const exportToPDF = async () => {
     setIsExporting(true);

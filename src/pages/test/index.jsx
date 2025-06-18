@@ -15,7 +15,13 @@ import pwbData from "../../../data/questions/pwbQuestion.json";
 import aceData from "../../../data/questions/aceQuestion.json";
 import AceScale from "@/components/QuestionScale/AceScale";
 import LeavePagePrompt from "@/components/common/LeavePagePrompt";
-import { TEST_SEQUENCE, TEST_STEPS, QUESTIONS_PER_PAGE, TEST_TYPES } from "@/constants/testConfig";
+import {
+  TEST_SEQUENCE,
+  TEST_STEPS,
+  QUESTIONS_PER_PAGE,
+  TEST_TYPES,
+} from "@/constants/testConfig";
+import { submitRespondentForm } from "@/services/respondent.service";
 
 const dataMap = {
   [TEST_TYPES.ACE]: {
@@ -49,8 +55,11 @@ export default function TestIndexPage() {
 
   const canProceed = () => {
     return currentQuestions.every((q) => {
-      // Handle PDQ-4 sub-questions (34-39) - check persistent state
-      if (currentTestId === TEST_TYPES.PDQ_4 && [34, 35, 36, 37, 38, 39].includes(q.id)) {
+      // Handle PDQ-4 sub- questions (34-39) - check persistent state
+      if (
+        currentTestId === TEST_TYPES.PDQ_4 &&
+        [34, 35, 36, 37, 38, 39].includes(q.id)
+      ) {
         return pdqSubQuestions[q.id] !== undefined;
       }
 
@@ -91,11 +100,16 @@ export default function TestIndexPage() {
       setCurrentTestIndex(nextStep);
       setCurrentPage(0);
 
-      setVisitedSteps((prev) => (prev.includes(nextStep) ? prev : [...prev, nextStep]));
+      setVisitedSteps((prev) =>
+        prev.includes(nextStep) ? prev : [...prev, nextStep]
+      );
     } else {
       // All tests completed - redirect to results page with answers
       console.log("Final answers (excluding sub-questions):", answers);
-      console.log("PDQ Sub-questions (persistent, not saved):", pdqSubQuestions);
+      console.log(
+        "PDQ Sub-questions (persistent, not saved):",
+        pdqSubQuestions
+      );
       navigate("/results", { state: { answers, pdqSubQuestions } });
       return;
     }
@@ -123,6 +137,50 @@ export default function TestIndexPage() {
       ...prev,
       [questionId]: value,
     }));
+  };
+
+  const handleFinishTest = async () => {
+    try {
+      const respondentData = localStorage.getItem("respondentDraft");
+      if (!respondentData) {
+        showToast({
+          type: "error",
+          message: "Data responden tidak ditemukan.",
+          align: "top-right",
+        });
+        return;
+      }
+
+      const respondent = JSON.parse(respondentData);
+      localStorage.setItem("resultsData", JSON.stringify(answers)); // optional simpan lokal
+
+      const payload = {
+        respondent,
+        answers,
+        pdqSubQuestions,
+      };
+
+      console.log("🔍 Payload yang dikirim ke backend:", payload);
+
+      await submitRespondentForm(payload);
+
+      showToast({
+        type: "success",
+        message: "Hasil tes berhasil disimpan!",
+        align: "top-right",
+      });
+
+      navigate("/results", {
+        state: { answers, pdqSubQuestions, respondent },
+      });
+    } catch (error) {
+      console.error(error);
+      showToast({
+        type: "error",
+        message: "Terjadi kesalahan saat menyimpan hasil.",
+        align: "top-right",
+      });
+    }
   };
 
   return (
@@ -154,7 +212,9 @@ export default function TestIndexPage() {
                       answers={answers}
                       setAnswers={setAnswers}
                       sectionInfo={currentTest.full.sections.find((s) =>
-                        s.questions.some((q) => q.id === currentQuestions[0]?.id)
+                        s.questions.some(
+                          (q) => q.id === currentQuestions[0]?.id
+                        )
                       )}
                     />
                   ) : currentTestId === TEST_TYPES.PDQ_4 ? (
@@ -182,7 +242,9 @@ export default function TestIndexPage() {
                       questionsPerPage={QUESTIONS_PER_PAGE}
                     />
                   ) : (
-                    <div className="text-center text-gray-500 italic">Skala untuk tes ini belum tersedia.</div>
+                    <div className="text-center text-gray-500 italic">
+                      Skala untuk tes ini belum tersedia.
+                    </div>
                   )}
                 </Card>
               </motion.div>
@@ -193,9 +255,14 @@ export default function TestIndexPage() {
               totalPages={totalPages}
               canProceed={canProceed}
               allQuestions={allQuestions}
+              handleFinishTest={handleFinishTest}
               handleNext={handleNext}
               handlePrevious={handlePrevious}
               answers={answers}
+              isLastPage={
+                currentPage === totalPages - 1 &&
+                currentTestIndex === TEST_SEQUENCE.length - 1
+              }
             />
 
             <QuestionPagination

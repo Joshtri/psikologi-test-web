@@ -103,5 +103,5 @@ export default function AceInference({ answers }) {
         </div>
       </div>
     </Card>
-  );
+  );  
 }
