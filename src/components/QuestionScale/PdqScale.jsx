@@ -92,6 +92,23 @@ export default function PdqScale({
     }
   };
 
+  // Helper function to get radio button labels
+  const getRadioLabels = (questionId) => {
+    const subQuestions = [34, 35, 36, 37, 38, 39];
+
+    if (subQuestions.includes(questionId)) {
+      return {
+        true: "pernah",
+        false: "tidak pernah",
+      };
+    } else {
+      return {
+        true: scale.labels.true,
+        false: scale.labels.false,
+      };
+    }
+  };
+
   return (
     <div className="space-y-6">
       <TestHeader
@@ -103,6 +120,7 @@ export default function PdqScale({
       {questions.map((q, index) => {
         const isSub = q.parentId !== undefined;
         const labelInfo = labelMeta[q.label] || labelMeta[""];
+        const radioLabels = getRadioLabels(q.id);
 
         if (q.isInstruction) {
           return (
@@ -137,7 +155,7 @@ export default function PdqScale({
                   onChange={() => handleChange(q.id, "true")}
                   className="w-4 h-4"
                 />
-                <span className="text-sm">{scale.labels.true}</span>
+                <span className="text-sm">{radioLabels.true}</span>
               </label>
               <label className="flex items-center gap-2 cursor-pointer">
                 <input
@@ -148,7 +166,7 @@ export default function PdqScale({
                   onChange={() => handleChange(q.id, "false")}
                   className="w-4 h-4"
                 />
-                <span className="text-sm">{scale.labels.false}</span>
+                <span className="text-sm">{radioLabels.false}</span>
               </label>
             </div>
           </div>

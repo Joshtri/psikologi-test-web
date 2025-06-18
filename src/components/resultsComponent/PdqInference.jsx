@@ -73,7 +73,7 @@ export default function PdqInference({ answers }) {
                 className="rounded-lg p-6 shadow-sm"
                 style={getDisorderBg(disorder)}
               >
-                <h4 className="text-xl font-semibold text-black">Anda terindikasi disorder {disorder}</h4>
+                <h4 className="text-xl font-semibold text-black">Anda memiliki kecenderungan kepribadian {disorder}</h4>
               </div>
             ))
           ) : (

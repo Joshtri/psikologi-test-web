@@ -45,8 +45,8 @@ export const consentItems = [
   {
     key: "contact",
     icon: Info,
-    title: "Ketersediaan Wawancara",
+    title: "Kesediaan Wawancara",
     label:
-      "Saya bersedia untuk dihubungi melalui nomor telepon yang akan saya isi untuk diwawancari lebih lanjut oleh tim peneliti berdasarkan hasil penelitian ini.",
+      "Saya bersedia untuk dihubungi melalui nomor telepon yang akan saya isi untuk diwawancarai lebih lanjut oleh tim peneliti berdasarkan hasil penelitian ini.",
   },
 ];

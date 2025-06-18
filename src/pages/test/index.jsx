@@ -39,11 +39,9 @@ export default function TestIndexPage() {
   const [currentTestIndex, setCurrentTestIndex] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [answers, setAnswers] = useState({});
+  const [pdqSubQuestions, setPdqSubQuestions] = useState({});
   const [maxStepReached, setMaxStepReached] = useState(0);
   const [visitedSteps, setVisitedSteps] = useState([0]);
-
-  // Persistent state for PDQ-4 sub-questions (34-39)
-  const [pdqSubQuestions, setPdqSubQuestions] = useState({});
 
   const currentTestId = TEST_SEQUENCE[currentTestIndex];
   const currentTest = dataMap[currentTestId];
