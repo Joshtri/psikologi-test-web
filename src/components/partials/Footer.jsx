@@ -1,26 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Sparkles,
-  Heart,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Twitter,
-} from "lucide-react";
+import { Sparkles, Heart, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
 
 export default function FooterCustom() {
-  const currentYear = new Date().getFullYear();
-
-  const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Linkedin, href: "#", label: "LinkedIn" },
-  ];
-
   return (
     <footer className="bg-gradient-to-tr from-purple-50 via-white to-amber-50 text-gray-700 border-t border-purple-100">
       <motion.div
@@ -41,38 +25,8 @@ export default function FooterCustom() {
               <Sparkles className="w-5 h-5 text-purple-700" />
             </div>
             <div className="text-sm">
-              <p className="font-semibold text-purple-800">RaiReflect</p>
-              <p className="text-gray-600">
-                © {currentYear} Dibuat dengan{" "}
-                <Heart className="inline w-4 h-4 text-red-500" /> di Indonesia
-              </p>
+              <p className="font-semibold text-purple-800">Penelitian Psikologi 2025</p>
             </div>
-          </motion.div>
-
-          {/* Social Media */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center space-x-4"
-          >
-            {socialLinks.map((social, index) => (
-              <motion.a
-                key={social.label}
-                href={social.href}
-                aria-label={social.label}
-                className="w-9 h-9 bg-purple-100 hover:bg-purple-200 rounded-full flex items-center justify-center transition-colors"
-                whileHover={{ scale: 1.1 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 15,
-                  delay: index * 0.05,
-                }}
-              >
-                <social.icon className="w-5 h-5 text-purple-600" />
-              </motion.a>
-            ))}
           </motion.div>
         </div>
       </motion.div>

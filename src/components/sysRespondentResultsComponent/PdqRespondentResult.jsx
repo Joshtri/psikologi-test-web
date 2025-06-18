@@ -18,9 +18,9 @@ export default function PdqRespondentResult({ respondent }) {
           <tbody>
             {questions.map((q) => (
               <tr key={q.id}>
-                <td className="px-3 py-1 border">{q.id}</td>
+                <td className="px-3 py-1 border w-16">{q.id}</td>
                 <td className="px-3 py-1 border">{q.text}</td>
-                <td className="px-3 py-1 border">{answers[`pdq_4-${q.id}`]}</td>
+                <td className="px-3 py-1 border w-24">{answers[`pdq_4-${q.id}`]}</td>
               </tr>
             ))}
           </tbody>

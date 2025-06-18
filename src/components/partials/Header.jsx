@@ -2,17 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import {
-  Menu,
-  X,
-  Sparkles,
-  Settings,
-  Users,
-  BarChart3,
-  Database,
-  Home,
-  ChevronDown,
-} from "lucide-react";
+import { Menu, X, Sparkles, Settings, Users, BarChart3, Database, Home, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { useNavigate } from "react-router-dom";
@@ -30,10 +20,7 @@ export default function Header({ isRole }) {
   // Handle clicks outside of dropdown
   useEffect(() => {
     function handleClickOutside(event) {
-      if (
-        adminDropdownRef.current &&
-        !adminDropdownRef.current.contains(event.target)
-      ) {
+      if (adminDropdownRef.current && !adminDropdownRef.current.contains(event.target)) {
         setAdminDropdownOpen(false);
       }
     }
@@ -87,7 +74,7 @@ export default function Header({ isRole }) {
               <Settings className="w-6 h-6 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold text-white">RaiReflect Admin</h1>
+              <h1 className="text-xl font-bold text-white">Penelitian Psikologi 2025 Admin</h1>
               <p className="text-xs text-purple-200">Panel Administrasi</p>
             </div>
           </Link>
@@ -108,18 +95,17 @@ export default function Header({ isRole }) {
             <div className="w-px h-6 bg-purple-600 mx-2"></div>
 
             {/* Admin Dropdown */}
-            <div className="relative" ref={adminDropdownRef}>
+            <div
+              className="relative"
+              ref={adminDropdownRef}
+            >
               <button
                 onClick={() => setAdminDropdownOpen(!adminDropdownOpen)}
                 className="flex items-center space-x-2 px-4 py-2 rounded-lg text-purple-100 hover:bg-purple-800/50 hover:text-white transition-all duration-300"
               >
                 <Database className="w-4 h-4" />
                 <span className="text-sm">Panel Admin</span>
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform ${
-                    adminDropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
+                <ChevronDown className={`w-4 h-4 transition-transform ${adminDropdownOpen ? "rotate-180" : ""}`} />
               </button>
 
               {adminDropdownOpen && (
@@ -190,9 +176,7 @@ export default function Header({ isRole }) {
                 <div className="border-t border-purple-700 my-2"></div>
 
                 <div className="mb-3">
-                  <p className="text-xs font-bold text-purple-300 mb-2 uppercase tracking-wider px-4">
-                    Panel Admin
-                  </p>
+                  <p className="text-xs font-bold text-purple-300 mb-2 uppercase tracking-wider px-4">Panel Admin</p>
                   {adminItems.map((item) => {
                     const Icon = item.icon;
                     return (
@@ -233,13 +217,15 @@ export default function Header({ isRole }) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center relative z-10">
         {/* Public Logo */}
-        <Link to="/" className="flex items-center space-x-3 group">
+        <Link
+          to="/"
+          className="flex items-center space-x-3 group"
+        >
           <div className="w-10 h-10 rounded-lg flex items-center justify-center bg-purple-200/40 group-hover:bg-purple-300 transition-all duration-300">
             <Sparkles className="w-6 h-6 text-purple-700" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-purple-900">RaiReflect</h1>
-            <p className="text-xs text-purple-600">Refleksi Diri Bermakna</p>
+            <h1 className="text-xl font-bold text-purple-900">Penelitian Psikologi 2025</h1>
           </div>
         </Link>
 

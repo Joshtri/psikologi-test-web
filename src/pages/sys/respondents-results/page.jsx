@@ -52,9 +52,7 @@ export default function RespondentResultsPage() {
                 <th className="px-4 py-2 font-medium text-gray-700">Usia</th>
                 <th className="px-4 py-2 font-medium text-gray-700">Jenis Kelamin</th>
                 <th className="px-4 py-2 font-medium text-gray-700">Pendidikan</th>
-                <th className="px-4 py-2 font-medium text-gray-700">Total Skor HFS</th>
-                <th className="px-4 py-2 font-medium text-gray-700">Interpretasi</th>
-                <th className="px-4 py-2 font-medium text-gray-700">Tanggal</th>
+                <th className="px-4 py-2 font-medium text-gray-700">Tanggal Pengisian</th>
                 <th className="px-4 py-2 font-medium text-gray-700 text-center">Detail</th>
               </tr>
             </thead>
@@ -70,11 +68,6 @@ export default function RespondentResultsPage() {
                     <td className="px-4 py-2">{res.age}</td>
                     <td className="px-4 py-2">{res.gender}</td>
                     <td className="px-4 py-2">{res.educationLevel}</td>
-                    <td className="px-4 py-2">{res.summary?.hfs?.total?.value ?? "-"}</td>
-                    <td className="px-4 py-2">
-                      {res.summary?.hfs?.total?.inference?.slice(0, 60) ?? "-"}
-                      ...
-                    </td>
                     <td className="px-4 py-2">{new Date(res.createdAt).toLocaleDateString("id-ID")}</td>
                     <td className="px-4 py-2 text-center">
                       <button

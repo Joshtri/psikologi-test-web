@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
-import { Button } from "flowbite-react"
-import { Heart, Brain, User, Sparkles, Sun, Moon, ArrowRight, Globe, Leaf, BookOpen } from "lucide-react"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Button } from "flowbite-react";
+import { Heart, Brain, User, Sparkles, Sun, Moon, ArrowRight, Globe, Leaf, BookOpen } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-import "./about.css" // Import custom styles if needed
+import "./about.css"; // Import custom styles if needed
 
 export default function AboutPage() {
-  const navigate = useNavigate()
-  const [darkMode, setDarkMode] = useState(false)
+  const navigate = useNavigate();
+  const [darkMode, setDarkMode] = useState(false);
 
   // Check system preference for dark mode on load
   useEffect(() => {
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      setDarkMode(true)
+      setDarkMode(true);
     }
-  }, [])
+  }, []);
 
   // Toggle dark mode
   const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
+    setDarkMode(!darkMode);
+  };
 
   // Animation variants
   const fadeIn = {
@@ -32,7 +32,7 @@ export default function AboutPage() {
       y: 0,
       transition: { duration: 0.6 },
     },
-  }
+  };
 
   const staggerContainer = {
     hidden: { opacity: 0 },
@@ -42,7 +42,7 @@ export default function AboutPage() {
         staggerChildren: 0.2,
       },
     },
-  }
+  };
 
   // Team members data
   const teamMembers = [
@@ -70,7 +70,7 @@ export default function AboutPage() {
       image: "/placeholder.svg?height=300&width=300",
       bio: "Pengembang platform digital dengan fokus pada pengalaman pengguna yang inklusif.",
     },
-  ]
+  ];
 
   // Mission pillars data
   const missionPillars = [
@@ -94,11 +94,13 @@ export default function AboutPage() {
       icon: Leaf,
       description: "Merefleksikan nilai-nilai dan tujuan hidup yang bermakna.",
     },
-  ]
+  ];
 
   return (
     <div
-      className={`min-h-screen ${darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"} transition-colors duration-300`}
+      className={`min-h-screen ${
+        darkMode ? "bg-gray-900 text-gray-100" : "bg-white text-gray-800"
+      } transition-colors duration-300`}
     >
       {/* Dark Mode Toggle */}
       <div className="fixed top-4 right-4 z-50">
@@ -113,7 +115,9 @@ export default function AboutPage() {
 
       {/* Hero Section */}
       <section
-        className={`relative overflow-hidden ${darkMode ? "bg-gray-800" : "bg-gradient-to-br from-purple-50 via-white to-amber-50"}`}
+        className={`relative overflow-hidden ${
+          darkMode ? "bg-gray-800" : "bg-gradient-to-br from-purple-50 via-white to-amber-50"
+        }`}
       >
         <div className="absolute inset-0 z-0 opacity-20">
           <div
@@ -126,15 +130,20 @@ export default function AboutPage() {
           />
         </div>
 
-<div className="max-w-screen-xl mx-auto px-6 sm:px-10 lg:px-12 py-24 md:py-32">
-          <motion.div className="text-center" initial="hidden" animate="visible" variants={fadeIn}>
+        <div className="max-w-screen-xl mx-auto px-6 sm:px-10 lg:px-12 py-24 md:py-32">
+          <motion.div
+            className="text-center"
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+          >
             <motion.h1
               className={`text-4xl md:text-6xl font-bold mb-6 ${darkMode ? "text-white" : "text-gray-900"}`}
               variants={fadeIn}
             >
               Tentang{" "}
               <span className="bg-gradient-to-r from-purple-600 to-amber-600 bg-clip-text text-transparent">
-                RaiReflect
+                Penelitian Psikologi 2025
               </span>
             </motion.h1>
 
@@ -145,7 +154,10 @@ export default function AboutPage() {
               Refleksi diri yang berakar dari tanah tempatmu berpijak
             </motion.p>
 
-            <motion.div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-amber-500 mx-auto" variants={fadeIn} />
+            <motion.div
+              className="w-24 h-1 bg-gradient-to-r from-purple-500 to-amber-500 mx-auto"
+              variants={fadeIn}
+            />
           </motion.div>
         </div>
 
@@ -166,9 +178,9 @@ export default function AboutPage() {
               Visi dan Misi
             </h2>
             <p className={`text-lg max-w-3xl mx-auto ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
-              RaiReflect membantu individu merefleksikan pemaafan, kesejahteraan, kepribadian, dan nilai-nilai hidup
-              melalui asesmen psikologis yang peka budaya. Kami menggabungkan ilmu psikologi modern dengan kearifan
-              lokal untuk menciptakan pengalaman refleksi diri yang bermakna dan relevan.
+              Penelitian Psikologi 2025 membantu individu merefleksikan pemaafan, kesejahteraan, kepribadian, dan
+              nilai-nilai hidup melalui asesmen psikologis yang peka budaya. Kami menggabungkan ilmu psikologi modern
+              dengan kearifan lokal untuk menciptakan pengalaman refleksi diri yang bermakna dan relevan.
             </p>
           </motion.div>
 
@@ -182,11 +194,15 @@ export default function AboutPage() {
             {missionPillars.map((pillar, index) => (
               <motion.div
                 key={index}
-                className={`p-6 rounded-xl ${darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-purple-50 hover:bg-amber-50"} transition-colors duration-300`}
+                className={`p-6 rounded-xl ${
+                  darkMode ? "bg-gray-800 hover:bg-gray-700" : "bg-purple-50 hover:bg-amber-50"
+                } transition-colors duration-300`}
                 variants={fadeIn}
               >
                 <div
-                  className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto ${darkMode ? "bg-purple-900" : "bg-purple-100"}`}
+                  className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto ${
+                    darkMode ? "bg-purple-900" : "bg-purple-100"
+                  }`}
                 >
                   <pillar.icon className={`w-8 h-8 ${darkMode ? "text-purple-300" : "text-purple-600"}`} />
                 </div>
@@ -200,18 +216,23 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Why RaiReflect Section */}
+      {/* Why Penelitian Psikologi 2025 Section */}
       <section className={`py-16 md:py-24 ${darkMode ? "bg-gray-800" : "bg-amber-50"}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeIn}
+            >
               <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${darkMode ? "text-white" : "text-gray-900"}`}>
-                Mengapa RaiReflect?
+                Mengapa Penelitian Psikologi 2025?
               </h2>
               <p className={`text-lg mb-6 ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
-                RaiReflect lahir dari kesadaran bahwa alat ukur psikologi perlu mempertimbangkan konteks budaya lokal.
-                Kami menggabungkan metodologi psikologi modern dengan kearifan lokal NTT untuk menciptakan pengalaman
-                refleksi diri yang lebih bermakna dan relevan.
+                Penelitian Psikologi 2025 lahir dari kesadaran bahwa alat ukur psikologi perlu mempertimbangkan konteks
+                budaya lokal. Kami menggabungkan metodologi psikologi modern dengan kearifan lokal NTT untuk menciptakan
+                pengalaman refleksi diri yang lebih bermakna dan relevan.
               </p>
               <p className={`text-lg mb-6 ${darkMode ? "text-gray-300" : "text-gray-600"}`}>
                 Nama "Rai" diambil dari bahasa Tetun yang berarti "tanah" atau "bumi", melambangkan hubungan kita dengan
@@ -287,7 +308,9 @@ export default function AboutPage() {
             {teamMembers.map((member, index) => (
               <motion.div
                 key={index}
-                className={`rounded-xl overflow-hidden ${darkMode ? "bg-gray-800" : "bg-white"} shadow-lg transition-transform duration-300 hover:-translate-y-2`}
+                className={`rounded-xl overflow-hidden ${
+                  darkMode ? "bg-gray-800" : "bg-white"
+                } shadow-lg transition-transform duration-300 hover:-translate-y-2`}
                 variants={fadeIn}
               >
                 <div className="aspect-square overflow-hidden">
@@ -314,10 +337,17 @@ export default function AboutPage() {
 
       {/* Call to Action */}
       <section
-        className={`py-16 md:py-24 ${darkMode ? "bg-gradient-to-br from-purple-900 to-amber-900" : "bg-gradient-to-br from-purple-100 to-amber-100"}`}
+        className={`py-16 md:py-24 ${
+          darkMode ? "bg-gradient-to-br from-purple-900 to-amber-900" : "bg-gradient-to-br from-purple-100 to-amber-100"
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeIn}>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
             <h2 className={`text-3xl md:text-4xl font-bold mb-6 ${darkMode ? "text-white" : "text-gray-900"}`}>
               Siap mengenal diri lebih dalam?
             </h2>
@@ -340,5 +370,5 @@ export default function AboutPage() {
         </div>
       </section>
     </div>
-  )
+  );
 }

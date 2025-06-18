@@ -6,15 +6,13 @@ export default function HfsRespondentResult({ respondent }) {
 
     return (
       <div className="mt-3">
-        <h5 className="font-semibold text-gray-800 capitalize mb-1">
-          Skala: {subscale}
-        </h5>
+        <h5 className="font-semibold text-gray-800 capitalize mb-1">Skala: {subscale}</h5>
         <table className="w-full border text-sm bg-white rounded shadow">
           <thead className="bg-gray-100">
             <tr>
-              <th className="px-3 py-1 border">No</th>
+              <th className="px-3 py-1 border w-16">No</th>
               <th className="px-3 py-1 border">Pernyataan</th>
-              <th className="px-3 py-1 border">Jawaban</th>
+              <th className="px-3 py-1 border w-24">Jawaban</th>
             </tr>
           </thead>
           <tbody>
@@ -22,9 +20,7 @@ export default function HfsRespondentResult({ respondent }) {
               <tr key={q.id}>
                 <td className="px-3 py-1 border">{q.id}</td>
                 <td className="px-3 py-1 border">{q.text}</td>
-                <td className="px-3 py-1 border">
-                  {answers[`hfs-${q.id}`] ?? "-"}
-                </td>
+                <td className="px-3 py-1 border">{answers[`hfs-${q.id}`] ?? "-"}</td>
               </tr>
             ))}
           </tbody>

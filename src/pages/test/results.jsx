@@ -9,7 +9,6 @@ export default function ResultsPage() {
   const [results, setResults] = useState(null);
   const [respondent, setRespondent] = useState(null);
   const [isExporting, setIsExporting] = useState(false);
-  
 
   useEffect(() => {
     const resultsData = localStorage.getItem("testResults");
@@ -43,12 +42,7 @@ export default function ResultsPage() {
       yPosition += 10;
       doc.setFontSize(12);
       doc.setFont("helvetica", "normal");
-      doc.text(
-        "RaiReflect - Refleksi Diri Bermakna",
-        pageWidth / 2,
-        yPosition,
-        { align: "center" }
-      );
+      doc.text("Penelitian Psikologi 2025", pageWidth / 2, yPosition, { align: "center" });
 
       yPosition += 20;
 
@@ -82,11 +76,7 @@ export default function ResultsPage() {
       // HFS Results Section
       doc.setFontSize(16);
       doc.setFont("helvetica", "bold");
-      doc.text(
-        "Hasil Skala HFS (Heartland Forgiveness Scale)",
-        margin,
-        yPosition
-      );
+      doc.text("Hasil Skala HFS (Heartland Forgiveness Scale)", margin, yPosition);
       yPosition += 10;
 
       // HFS Total Score
@@ -96,31 +86,14 @@ export default function ResultsPage() {
       yPosition += 5;
       doc.setFont("helvetica", "normal");
       const maxWidth = pageWidth - margin * 2;
-      doc.text(
-        `Interpretasi: ${results.hfs.total.inference}`,
-        margin,
-        yPosition,
-        { maxWidth, align: "left" }
-      );
+      doc.text(`Interpretasi: ${results.hfs.total.inference}`, margin, yPosition, { maxWidth, align: "left" });
       yPosition += 15;
 
       // HFS Subscales Table
       const hfsData = [
-        [
-          "Diri Sendiri (Self)",
-          results.hfs.self.value,
-          results.hfs.self.inference,
-        ],
-        [
-          "Orang Lain (Others)",
-          results.hfs.others.value,
-          results.hfs.others.inference,
-        ],
-        [
-          "Keadaan (Situation)",
-          results.hfs.situation.value,
-          results.hfs.situation.inference,
-        ],
+        ["Diri Sendiri (Self)", results.hfs.self.value, results.hfs.self.inference],
+        ["Orang Lain (Others)", results.hfs.others.value, results.hfs.others.inference],
+        ["Keadaan (Situation)", results.hfs.situation.value, results.hfs.situation.inference],
       ];
 
       autoTable(doc, {
@@ -138,9 +111,7 @@ export default function ResultsPage() {
         },
       });
 
-      yPosition = doc.lastAutoTable?.finalY
-        ? doc.lastAutoTable.finalY + 20
-        : yPosition + 20;
+      yPosition = doc.lastAutoTable?.finalY ? doc.lastAutoTable.finalY + 20 : yPosition + 20;
 
       // Footer
       if (yPosition > doc.internal.pageSize.height - 40) {
@@ -150,42 +121,26 @@ export default function ResultsPage() {
 
       doc.setFontSize(10);
       doc.setFont("helvetica", "italic");
-      doc.text(
-        "Dokumen ini dibuat secara otomatis oleh sistem RaiReflect",
-        pageWidth / 2,
-        yPosition,
-        {
-          align: "center",
-        }
-      );
+      doc.text("Dokumen ini dibuat secara otomatis oleh sistem Penelitian Psikologi 2025", pageWidth / 2, yPosition, {
+        align: "center",
+      });
       yPosition += 5;
-      doc.text(
-        `Tanggal cetak: ${new Date().toLocaleString("id-ID")}`,
-        pageWidth / 2,
-        yPosition,
-        { align: "center" }
-      );
+      doc.text(`Tanggal cetak: ${new Date().toLocaleString("id-ID")}`, pageWidth / 2, yPosition, { align: "center" });
 
       // Page numbers
       const pageCount = doc.internal.getNumberOfPages();
       for (let i = 1; i <= pageCount; i++) {
         doc.setPage(i);
         doc.setFontSize(8);
-        doc.text(
-          `Halaman ${i} dari ${pageCount}`,
-          pageWidth - margin,
-          doc.internal.pageSize.height - 10,
-          {
-            align: "right",
-          }
-        );
+        doc.text(`Halaman ${i} dari ${pageCount}`, pageWidth - margin, doc.internal.pageSize.height - 10, {
+          align: "right",
+        });
       }
 
       // Save the PDF
-      const fileName = `Hasil_Evaluasi_${respondent.name.replace(
-        /\s+/g,
-        "_"
-      )}_${new Date().toISOString().split("T")[0]}.pdf`;
+      const fileName = `Hasil_Evaluasi_${respondent.name.replace(/\s+/g, "_")}_${
+        new Date().toISOString().split("T")[0]
+      }.pdf`;
       doc.save(fileName);
     } catch (error) {
       console.error("Error generating PDF:", error);
@@ -210,9 +165,7 @@ export default function ResultsPage() {
     <div className="max-w-3xl mx-auto p-6 space-y-6">
       {/* Header with Export Button */}
       <div className="flex justify-between items-center">
-        <h1 className="text-2xl font-bold text-gray-800">
-          Hasil Evaluasi Responden
-        </h1>
+        <h1 className="text-2xl font-bold text-gray-800">Hasil Evaluasi Responden</h1>
         <button
           onClick={exportToPDF}
           disabled={isExporting}
@@ -236,9 +189,7 @@ export default function ResultsPage() {
       <section className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
         <div className="flex items-center space-x-2 mb-4">
           <User className="w-5 h-5 text-purple-600" />
-          <h2 className="font-semibold text-lg text-gray-800">
-            Data Responden
-          </h2>
+          <h2 className="font-semibold text-lg text-gray-800">Data Responden</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
@@ -266,9 +217,7 @@ export default function ResultsPage() {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-600">Tanggal Tes:</span>
-              <span className="font-medium">
-                {new Date().toLocaleDateString("id-ID")}
-              </span>
+              <span className="font-medium">{new Date().toLocaleDateString("id-ID")}</span>
             </div>
           </div>
         </div>
@@ -278,20 +227,14 @@ export default function ResultsPage() {
       <section className="bg-white p-6 rounded-lg shadow-md border border-gray-200">
         <div className="flex items-center space-x-2 mb-4">
           <FileText className="w-5 h-5 text-purple-600" />
-          <h2 className="font-semibold text-lg text-gray-800">
-            Skala HFS (Heartland Forgiveness Scale)
-          </h2>
+          <h2 className="font-semibold text-lg text-gray-800">Skala HFS (Heartland Forgiveness Scale)</h2>
         </div>
 
         {/* Total Score */}
         <div className="bg-purple-50 p-4 rounded-lg mb-4">
           <div className="flex justify-between items-center">
-            <span className="text-lg font-semibold text-purple-800">
-              Skor Total:
-            </span>
-            <span className="text-2xl font-bold text-purple-600">
-              {results.hfs.total.value}
-            </span>
+            <span className="text-lg font-semibold text-purple-800">Skor Total:</span>
+            <span className="text-2xl font-bold text-purple-600">{results.hfs.total.value}</span>
           </div>
           <p className="text-purple-700 mt-2">
             <strong>Interpretasi:</strong> {results.hfs.total.inference}
@@ -300,51 +243,31 @@ export default function ResultsPage() {
 
         {/* Subscales */}
         <div className="space-y-3">
-          <h3 className="font-medium text-gray-800 mb-3">
-            Detail per Dimensi:
-          </h3>
+          <h3 className="font-medium text-gray-800 mb-3">Detail per Dimensi:</h3>
 
           <div className="grid gap-3">
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
               <div>
-                <span className="font-medium text-gray-800">
-                  Diri Sendiri (Self)
-                </span>
-                <p className="text-sm text-gray-600">
-                  {results.hfs.self.inference}
-                </p>
+                <span className="font-medium text-gray-800">Diri Sendiri (Self)</span>
+                <p className="text-sm text-gray-600">{results.hfs.self.inference}</p>
               </div>
-              <span className="text-xl font-bold text-purple-600">
-                {results.hfs.self.value}
-              </span>
+              <span className="text-xl font-bold text-purple-600">{results.hfs.self.value}</span>
             </div>
 
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
               <div>
-                <span className="font-medium text-gray-800">
-                  Orang Lain (Others)
-                </span>
-                <p className="text-sm text-gray-600">
-                  {results.hfs.others.inference}
-                </p>
+                <span className="font-medium text-gray-800">Orang Lain (Others)</span>
+                <p className="text-sm text-gray-600">{results.hfs.others.inference}</p>
               </div>
-              <span className="text-xl font-bold text-purple-600">
-                {results.hfs.others.value}
-              </span>
+              <span className="text-xl font-bold text-purple-600">{results.hfs.others.value}</span>
             </div>
 
             <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
               <div>
-                <span className="font-medium text-gray-800">
-                  Keadaan (Situation)
-                </span>
-                <p className="text-sm text-gray-600">
-                  {results.hfs.situation.inference}
-                </p>
+                <span className="font-medium text-gray-800">Keadaan (Situation)</span>
+                <p className="text-sm text-gray-600">{results.hfs.situation.inference}</p>
               </div>
-              <span className="text-xl font-bold text-purple-600">
-                {results.hfs.situation.value}
-              </span>
+              <span className="text-xl font-bold text-purple-600">{results.hfs.situation.value}</span>
             </div>
           </div>
         </div>
@@ -357,9 +280,8 @@ export default function ResultsPage() {
           <div>
             <h3 className="font-medium text-blue-800">Informasi</h3>
             <p className="text-sm text-blue-700 mt-1">
-              Hasil evaluasi ini dapat diekspor ke format PDF untuk disimpan
-              atau dicetak. Klik tombol "Export PDF" di atas untuk mengunduh
-              dokumen lengkap.
+              Hasil evaluasi ini dapat diekspor ke format PDF untuk disimpan atau dicetak. Klik tombol "Export PDF" di
+              atas untuk mengunduh dokumen lengkap.
             </p>
           </div>
         </div>
