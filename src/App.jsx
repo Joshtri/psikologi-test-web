@@ -43,7 +43,7 @@ function App() {
           <Route path="/g/login" element={<LoginPage />} />
 
           {/* ✅ Admin-only layout */}
-          <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} />}>
+          {/* <Route element={<ProtectedRoute allowedRoles={["ADMIN"]} />}> */}
             <Route path="/sys" element={<Layout isRole="Admin" />}>
               <Route path="dashboard" element={<DashboardPage />} />
               <Route path="respondents" element={<RespondentPage />} />
@@ -54,7 +54,7 @@ function App() {
                 element={<RespondentResultsPage />}
               />
             </Route>
-          </Route>
+          {/* </Route> */}
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
