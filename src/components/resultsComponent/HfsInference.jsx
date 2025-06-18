@@ -5,7 +5,7 @@ import { HFS_SCORING, getSubscaleInterpretation, getTotalInterpretation } from "
 
 export default function HfsInference({ answers }) {
   const hfsScores = useMemo(() => {
-    // Extract HFS answers from the answers object
+    // Extract HFS answers from the answers object (now they're already scores)
     const hfsAnswers = Object.entries(answers)
       .filter(([key]) => key.startsWith("hfs-"))
       .reduce((acc, [key, value]) => {
@@ -23,19 +23,9 @@ export default function HfsInference({ answers }) {
 
     // Calculate scores for each subscale
     hfsData.questions.forEach((question) => {
-      const answer = hfsAnswers[question.id];
-      if (answer !== undefined) {
-        let score;
-
-        if (question.label === "favorable") {
-          // For favorable items: score = answer value
-          score = answer;
-        } else if (question.label === "unfavorable") {
-          // For unfavorable items: reverse scoring (1->7, 2->6, 3->5, 4->4, 5->3, 6->2, 7->1)
-          score = 8 - answer;
-        }
-
-        // Add to appropriate subscale
+      const score = hfsAnswers[question.id];
+      if (score !== undefined) {
+        // Score is already calculated, just add to appropriate subscale
         scores[question.subscale] += score;
       }
     });

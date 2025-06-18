@@ -5,7 +5,7 @@ import { ACE_SCORING, ACE_INTERPRETATIONS, getAceInterpretation } from "../../co
 
 export default function AceInference({ answers }) {
   const aceResults = useMemo(() => {
-    // Extract ACE answers from the answers object
+    // Extract ACE answers from the answers object (now they're already scores)
     const aceAnswers = Object.entries(answers)
       .filter(([key]) => key.startsWith("ace-"))
       .reduce((acc, [key, value]) => {
@@ -22,21 +22,9 @@ export default function AceInference({ answers }) {
 
     // Calculate scores for each category
     allQuestions.forEach((question) => {
-      const answer = aceAnswers[question.id];
-      if (answer !== undefined && question.category) {
-        let score = 0;
-
-        // Special handling for question 19 (Household member treated violently)
-        if (question.id === 19 && question.category === "Household member treated violently") {
-          score = ACE_SCORING.QUESTION_19_SCORING[answer] || 0;
-        } else {
-          // Use the category's scoring system
-          const categoryScoring = ACE_SCORING.CATEGORY_SCORING[question.category];
-          if (categoryScoring) {
-            score = categoryScoring[answer] || 0;
-          }
-        }
-
+      const score = aceAnswers[question.id];
+      if (score !== undefined && question.category) {
+        // Score is already calculated, just add to category
         if (!categoryScores[question.category]) {
           categoryScores[question.category] = 0;
         }
@@ -103,5 +91,5 @@ export default function AceInference({ answers }) {
         </div>
       </div>
     </Card>
-  );  
+  );
 }

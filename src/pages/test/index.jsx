@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import hfsData from "../../../data/questions/hfsQuestion.json";
 import pdqData from "../../../data/questions/pdqQuestion.json";
+import pwbData from "../../../data/questions/pwbQuestion.json";
+import aceData from "../../../data/questions/aceQuestion.json";
 import { useToast } from "../../provider/ToastProvider";
 import VerticalStepper from "@/components/ui/VerticalStepper";
 import PdqScale from "@/components/QuestionScale/PdqScale";
@@ -11,17 +13,16 @@ import HfsScale from "@/components/QuestionScale/HfsScale";
 import TestNavigationButtons from "@/components/Test/TestNavigationButtons";
 import QuestionPagination from "@/components/Test/TestPaginationIndicator";
 import PwbScale from "@/components/QuestionScale/PwbScale";
-import pwbData from "../../../data/questions/pwbQuestion.json";
-import aceData from "../../../data/questions/aceQuestion.json";
 import AceScale from "@/components/QuestionScale/AceScale";
 import LeavePagePrompt from "@/components/common/LeavePagePrompt";
-import {
-  TEST_SEQUENCE,
-  TEST_STEPS,
-  QUESTIONS_PER_PAGE,
-  TEST_TYPES,
-} from "@/constants/testConfig";
+import { TEST_SEQUENCE, TEST_STEPS, QUESTIONS_PER_PAGE, TEST_TYPES } from "@/constants/testConfig";
 import { submitRespondentForm } from "@/services/respondent.service";
+
+// Import inference constants
+import { HFS_SCORING, getSubscaleInterpretation, getTotalInterpretation } from "@/constants/inference/hfsInference";
+import { PWB_SCORING, getPwbInterpretation } from "@/constants/inference/pwbInference";
+import { PDQ_SCORING, PDQ_INTERPRETATIONS, getPdqInterpretation } from "@/constants/inference/pdqInference";
+import { ACE_SCORING, ACE_INTERPRETATIONS, getAceInterpretation } from "@/constants/inference/aceInference";
 
 const dataMap = {
   [TEST_TYPES.ACE]: {
@@ -53,11 +54,8 @@ export default function TestIndexPage() {
 
   const canProceed = () => {
     return currentQuestions.every((q) => {
-      // Handle PDQ-4 sub- questions (34-39) - check persistent state
-      if (
-        currentTestId === TEST_TYPES.PDQ_4 &&
-        [34, 35, 36, 37, 38, 39].includes(q.id)
-      ) {
+      // Handle PDQ-4 sub-questions (34-39) - check persistent state
+      if (currentTestId === TEST_TYPES.PDQ_4 && [34, 35, 36, 37, 38, 39].includes(q.id)) {
         return pdqSubQuestions[q.id] !== undefined;
       }
 
@@ -70,13 +68,15 @@ export default function TestIndexPage() {
         currentTestId === TEST_TYPES.PDQ_4
           ? `pdq_4-${q.id}`
           : currentTestId === TEST_TYPES.ACE
-          ? `ace-${q.id}`
+          ? `ace-${q.id}` // Check score value for ACE (no more raw)
           : currentTestId === TEST_TYPES.HFS
           ? `hfs-${q.id}`
           : currentTestId === TEST_TYPES.PWB
           ? `pwb-${q.id}`
           : q.id;
-      return answers[key];
+
+      // Check if the answer exists (not undefined), regardless of its value (including 0)
+      return answers[key] !== undefined;
     });
   };
 
@@ -91,6 +91,15 @@ export default function TestIndexPage() {
       return;
     }
 
+    // Check if this is the last page of the last test
+    const isLastPage = currentPage === totalPages - 1 && currentTestIndex === TEST_SEQUENCE.length - 1;
+    
+    // Save answers to localStorage before proceeding on last page
+    if (isLastPage) {
+      localStorage.setItem("resultsData", JSON.stringify(answers));
+      console.log("Answers saved to localStorage:", answers);
+    }
+
     if (currentPage < totalPages - 1) {
       setCurrentPage((prev) => prev + 1);
     } else if (currentTestIndex < TEST_SEQUENCE.length - 1) {
@@ -98,16 +107,11 @@ export default function TestIndexPage() {
       setCurrentTestIndex(nextStep);
       setCurrentPage(0);
 
-      setVisitedSteps((prev) =>
-        prev.includes(nextStep) ? prev : [...prev, nextStep]
-      );
+      setVisitedSteps((prev) => (prev.includes(nextStep) ? prev : [...prev, nextStep]));
     } else {
       // All tests completed - redirect to results page with answers
       console.log("Final answers (excluding sub-questions):", answers);
-      console.log(
-        "PDQ Sub-questions (persistent, not saved):",
-        pdqSubQuestions
-      );
+      console.log("PDQ Sub-questions (persistent, not saved):", pdqSubQuestions);
       navigate("/results", { state: { answers, pdqSubQuestions } });
       return;
     }
@@ -137,9 +141,152 @@ export default function TestIndexPage() {
     }));
   };
 
+  // Function to calculate HFS summary
+  const calculateHfsSummary = (answers) => {
+    const hfsAnswers = Object.entries(answers)
+      .filter(([key]) => key.startsWith("hfs-"))
+      .reduce((acc, [key, value]) => {
+        const questionId = parseInt(key.replace("hfs-", ""));
+        acc[questionId] = value;
+        return acc;
+      }, {});
+
+    const scores = { self: 0, others: 0, situation: 0 };
+
+    hfsData.questions.forEach((question) => {
+      const score = hfsAnswers[question.id];
+      if (score !== undefined) {
+        // Score is already calculated, just add to subscale
+        scores[question.subscale] += score;
+      }
+    });
+
+    const totalScore = scores.self + scores.others + scores.situation;
+
+    return {
+      total: {
+        value: totalScore,
+        inference: getTotalInterpretation(totalScore).interpretation,
+      },
+      self: {
+        value: scores.self,
+        inference: getSubscaleInterpretation(scores.self, "self").interpretation,
+      },
+      others: {
+        value: scores.others,
+        inference: getSubscaleInterpretation(scores.others, "others").interpretation,
+      },
+      situation: {
+        value: scores.situation,
+        inference: getSubscaleInterpretation(scores.situation, "situation").interpretation,
+      },
+    };
+  };
+
+  // Function to calculate PWB summary
+  const calculatePwbSummary = (answers) => {
+    const pwbAnswers = Object.entries(answers)
+      .filter(([key]) => key.startsWith("pwb-"))
+      .reduce((acc, [key, value]) => {
+        const questionId = parseInt(key.replace("pwb-", ""));
+        acc[questionId] = value;
+        return acc;
+      }, {});
+
+    let totalScore = 0;
+
+    pwbData.questions.forEach((question) => {
+      const score = pwbAnswers[question.id];
+      if (score !== undefined) {
+        // Score is already calculated, just sum them up
+        totalScore += score;
+      }
+    });
+
+    return {
+      total: {
+        value: totalScore,
+        inference: getPwbInterpretation(totalScore).interpretation,
+      },
+    };
+  };
+
+  // Function to calculate PDQ summary
+  const calculatePdqSummary = (answers) => {
+    const pdqAnswers = Object.entries(answers)
+      .filter(([key]) => key.startsWith("pdq_4-"))
+      .reduce((acc, [key, value]) => {
+        const questionId = parseInt(key.replace("pdq_4-", ""));
+        acc[questionId] = value;
+        return acc;
+      }, {});
+
+    const labelScores = {};
+
+    pdqData.questions.forEach((question) => {
+      if (question.parentId) return;
+
+      const score = pdqAnswers[question.id];
+      if (score !== undefined && question.label) {
+        // Score is already calculated, just add to label
+        if (!labelScores[question.label]) {
+          labelScores[question.label] = 0;
+        }
+        labelScores[question.label] += score;
+      }
+    });
+
+    const disordersFound = getPdqInterpretation(labelScores);
+
+    return {
+      disorders: disordersFound,
+      inference:
+        disordersFound.length > 0
+          ? `Anda memiliki kecenderungan kepribadian: ${disordersFound.join(", ")}`
+          : PDQ_INTERPRETATIONS.NO_DISORDER.interpretation,
+    };
+  };
+
+  // Function to calculate ACE summary
+  const calculateAceSummary = (answers) => {
+    const aceAnswers = Object.entries(answers)
+      .filter(([key]) => key.startsWith("ace-"))
+      .reduce((acc, [key, value]) => {
+        const questionId = parseInt(key.replace("ace-", ""));
+        acc[questionId] = value;
+        return acc;
+      }, {});
+
+    const categoryScores = {};
+    const allQuestions = aceData.sections.flatMap((section) => section.questions);
+
+    allQuestions.forEach((question) => {
+      const score = aceAnswers[question.id];
+      if (score !== undefined && question.category) {
+        // Score is already calculated, just add to category
+        if (!categoryScores[question.category]) {
+          categoryScores[question.category] = 0;
+        }
+        categoryScores[question.category] += score;
+      }
+    });
+
+    const experiencedCategories = getAceInterpretation(categoryScores);
+
+    return {
+      experiences: experiencedCategories,
+      inference:
+        experiencedCategories.length > 0
+          ? `Anda pernah melewati pengalaman: ${experiencedCategories.join(", ")}`
+          : ACE_INTERPRETATIONS.NO_EXPERIENCES.interpretation,
+    };
+  };
+
   const handleFinishTest = async () => {
     try {
       const respondentData = localStorage.getItem("respondentDraft");
+      const resultsData = localStorage.getItem("resultsData");
+
       if (!respondentData) {
         showToast({
           type: "error",
@@ -149,13 +296,44 @@ export default function TestIndexPage() {
         return;
       }
 
+      if (!resultsData) {
+        showToast({
+          type: "error",
+          message: "Data hasil tes tidak ditemukan.",
+          align: "top-right",
+        });
+        return;
+      }
+
       const respondent = JSON.parse(respondentData);
-      localStorage.setItem("resultsData", JSON.stringify(answers)); // optional simpan lokal
+      const testAnswers = JSON.parse(resultsData);
+
+      // Calculate summaries for each test
+      const hfsSummary = calculateHfsSummary(testAnswers);
+      const pwbSummary = calculatePwbSummary(testAnswers);
+      const pdqSummary = calculatePdqSummary(testAnswers);
+      const aceSummary = calculateAceSummary(testAnswers);
 
       const payload = {
-        respondent,
-        answers,
-        pdqSubQuestions,
+        name: respondent.name,
+        dateOfBirth: respondent.dateOfBirth,
+        age: respondent.age,
+        gender: respondent.gender,
+        phoneNumber: respondent.phoneNumber,
+        educationLevel: respondent.educationLevel,
+        schoolName: respondent.schoolName,
+        livingWith: respondent.livingWith,
+        address: respondent.address,
+        parentOccupation: respondent.parentOccupation,
+        birthOrder: respondent.birthOrder,
+        ethnicity: respondent.ethnicity,
+        answers: testAnswers,
+        summary: {
+          hfs: hfsSummary,
+          pwb: pwbSummary,
+          pdq: pdqSummary,
+          ace: aceSummary,
+        },
       };
 
       console.log("🔍 Payload yang dikirim ke backend:", payload);
@@ -169,7 +347,7 @@ export default function TestIndexPage() {
       });
 
       navigate("/results", {
-        state: { answers, pdqSubQuestions, respondent },
+        state: { answers: testAnswers, pdqSubQuestions, respondent },
       });
     } catch (error) {
       console.error(error);
@@ -210,9 +388,7 @@ export default function TestIndexPage() {
                       answers={answers}
                       setAnswers={setAnswers}
                       sectionInfo={currentTest.full.sections.find((s) =>
-                        s.questions.some(
-                          (q) => q.id === currentQuestions[0]?.id
-                        )
+                        s.questions.some((q) => q.id === currentQuestions[0]?.id)
                       )}
                     />
                   ) : currentTestId === TEST_TYPES.PDQ_4 ? (
@@ -240,9 +416,7 @@ export default function TestIndexPage() {
                       questionsPerPage={QUESTIONS_PER_PAGE}
                     />
                   ) : (
-                    <div className="text-center text-gray-500 italic">
-                      Skala untuk tes ini belum tersedia.
-                    </div>
+                    <div className="text-center text-gray-500 italic">Skala untuk tes ini belum tersedia.</div>
                   )}
                 </Card>
               </motion.div>
@@ -257,10 +431,7 @@ export default function TestIndexPage() {
               handleNext={handleNext}
               handlePrevious={handlePrevious}
               answers={answers}
-              isLastPage={
-                currentPage === totalPages - 1 &&
-                currentTestIndex === TEST_SEQUENCE.length - 1
-              }
+              isLastPage={currentPage === totalPages - 1 && currentTestIndex === TEST_SEQUENCE.length - 1}
             />
 
             <QuestionPagination

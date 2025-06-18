@@ -7,9 +7,26 @@ export default function TestNavigationButtons({
   canProceed,
   handleNext,
   handlePrevious,
-  handleFinishTest, // ✅ Tambahan
-  isLastPage, // ✅ Tambahan
+  handleFinishTest,
+  isLastPage,
+  answers, // Add this prop to access answers
 }) {
+  const handleNextClick = () => {
+    // Save answers to localStorage when on last page before proceeding
+    if (isLastPage) {
+      localStorage.setItem("resultsData", JSON.stringify(answers));
+      console.log("Answers saved to localStorage on last page:", answers);
+    }
+    handleNext();
+  };
+
+  const handleFinishClick = () => {
+    // Ensure answers are saved before finishing
+    localStorage.setItem("resultsData", JSON.stringify(answers));
+    console.log("Answers saved to localStorage on finish:", answers);
+    handleFinishTest();
+  };
+
   return (
     <div className="flex justify-between items-center mt-6">
       <button
@@ -27,7 +44,7 @@ export default function TestNavigationButtons({
 
       {isLastPage ? (
         <button
-          onClick={handleFinishTest}
+          onClick={handleFinishClick}
           disabled={!canProceed()}
           className={`flex items-center gap-2 px-4 py-2 rounded font-semibold transition ${
             !canProceed()
@@ -40,7 +57,7 @@ export default function TestNavigationButtons({
         </button>
       ) : (
         <button
-          onClick={handleNext}
+          onClick={handleNextClick}
           disabled={!canProceed()}
           className={`flex items-center gap-2 px-4 py-2 rounded font-semibold transition ${
             !canProceed()

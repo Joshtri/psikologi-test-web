@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import pdqData from "../../../data/questions/pdqQuestion.json";
 import TestHeader from "@/components/Test/TestHeader";
 import { Flame, Star, HeartPulse, ShieldAlert, HelpCircle } from "lucide-react";
+import { PDQ_SCORING } from "../../constants/inference/pdqInference";
 
 export default function PdqScale({
   questions,
@@ -13,17 +14,32 @@ export default function PdqScale({
 }) {
   const { scale, name, instructions } = pdqData;
 
-  const handleChange = (questionId, value) => {
+  const calculateScore = (rawValue) => {
+    return PDQ_SCORING.SCALE_MAPPING[rawValue] || 0;
+  };
+
+  // Function to get the raw value from the stored score
+  const getRawValueFromScore = (score) => {
+    if (score === undefined) return undefined;
+    
+    // Find the key that maps to this score
+    return Object.keys(PDQ_SCORING.SCALE_MAPPING).find(
+      key => PDQ_SCORING.SCALE_MAPPING[key] === score
+    );
+  };
+
+  const handleChange = (questionId, rawValue) => {
     const subQuestions = [34, 35, 36, 37, 38, 39];
 
     if (subQuestions.includes(questionId)) {
-      // Store sub-question answers in parent's persistent state
-      onSubQuestionChange(questionId, value);
+      // Store sub-question answers in parent's persistent state (these don't get scored)
+      onSubQuestionChange(questionId, rawValue);
     } else {
-      // Store regular answers in main state
+      // Calculate score and store in main state
+      const score = calculateScore(rawValue);
       setAnswers((prev) => ({
         ...prev,
-        [`pdq_4-${questionId}`]: value,
+        [`pdq_4-${questionId}`]: score,
       }));
     }
   };
@@ -39,14 +55,15 @@ export default function PdqScale({
     // Only auto-answer if all sub-questions are answered
     if (allSubQuestionsAnswered) {
       const shouldBeTrue = trueAnswers.length >= 2;
-      const currentAnswer = answers[`pdq_4-33`];
-      const targetAnswer = shouldBeTrue ? "true" : "false";
+      const currentScore = answers[`pdq_4-33`];
+      const targetRawValue = shouldBeTrue ? "true" : "false";
+      const targetScore = calculateScore(targetRawValue);
 
-      // Only update if the answer needs to change
-      if (currentAnswer !== targetAnswer) {
+      // Only update if the score needs to change
+      if (currentScore !== targetScore) {
         setAnswers((prev) => ({
           ...prev,
-          [`pdq_4-33`]: targetAnswer,
+          [`pdq_4-33`]: targetScore,
         }));
       }
     }
@@ -82,13 +99,15 @@ export default function PdqScale({
   };
 
   // Helper function to get the checked value for radio inputs
-  const getCheckedValue = (questionId, value) => {
+  const getCheckedValue = (questionId, rawValue) => {
     const subQuestions = [34, 35, 36, 37, 38, 39];
 
     if (subQuestions.includes(questionId)) {
-      return pdqSubQuestions[questionId] === value;
+      return pdqSubQuestions[questionId] === rawValue;
     } else {
-      return answers[`pdq_4-${questionId}`] === value;
+      const currentScore = answers[`pdq_4-${questionId}`];
+      const currentRawValue = getRawValueFromScore(currentScore);
+      return currentRawValue === rawValue;
     }
   };
 

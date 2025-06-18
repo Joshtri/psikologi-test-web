@@ -5,7 +5,7 @@ import { PDQ_SCORING, PDQ_INTERPRETATIONS, getPdqInterpretation } from "../../co
 
 export default function PdqInference({ answers }) {
   const pdqResults = useMemo(() => {
-    // Extract PDQ answers from the answers object
+    // Extract PDQ answers from the answers object (now they're already scores)
     const pdqAnswers = Object.entries(answers)
       .filter(([key]) => key.startsWith("pdq_4-"))
       .reduce((acc, [key, value]) => {
@@ -24,10 +24,9 @@ export default function PdqInference({ answers }) {
         return;
       }
 
-      const answer = pdqAnswers[question.id];
-      if (answer !== undefined && question.label) {
-        let score = PDQ_SCORING.SCALE_MAPPING[answer] || 0;
-
+      const score = pdqAnswers[question.id];
+      if (score !== undefined && question.label) {
+        // Score is already calculated, just add to label
         if (!labelScores[question.label]) {
           labelScores[question.label] = 0;
         }

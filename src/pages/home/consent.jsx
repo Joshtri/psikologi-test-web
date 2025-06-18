@@ -99,8 +99,8 @@ export default function ConsentPage({ onBack }) {
                     <Info className="w-6 h-6 mr-3 mt-1 text-amber-600" />
                     <div>
                       <p className="text-amber-700">
-                        Terima kasih telah mempertimbangkan untuk berpartisipasi. Mohon untuk menandai semua
-                        kotak di bawah ini sebagai tanda persetujuan atas pernyataan tertulis.
+                        Terima kasih telah mempertimbangkan untuk berpartisipasi. Mohon untuk menandai semua kotak di
+                        bawah ini sebagai tanda persetujuan atas pernyataan tertulis.
                       </p>
                     </div>
                   </div>

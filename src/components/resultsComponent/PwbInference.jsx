@@ -5,7 +5,7 @@ import { PWB_SCORING, getPwbInterpretation } from "../../constants/inference/pwb
 
 export default function PwbInference({ answers }) {
   const pwbScore = useMemo(() => {
-    // Extract PWB answers from the answers object
+    // Extract PWB answers from the answers object (now they're already scores)
     const pwbAnswers = Object.entries(answers)
       .filter(([key]) => key.startsWith("pwb-"))
       .reduce((acc, [key, value]) => {
@@ -16,20 +16,10 @@ export default function PwbInference({ answers }) {
 
     let totalScore = 0;
 
-    // Calculate total score
+    // Calculate total score - scores are already calculated, just sum them up
     pwbData.questions.forEach((question) => {
-      const answer = pwbAnswers[question.id];
-      if (answer !== undefined) {
-        let score;
-
-        if (question.label === "favorable") {
-          // For favorable items: use direct mapping
-          score = PWB_SCORING.SCALE_MAPPING.FAVORABLE[answer] || 0;
-        } else if (question.label === "unfavorable") {
-          // For unfavorable items: use reverse mapping
-          score = PWB_SCORING.SCALE_MAPPING.UNFAVORABLE[answer] || 0;
-        }
-
+      const score = pwbAnswers[question.id];
+      if (score !== undefined) {
         totalScore += score;
       }
     });
