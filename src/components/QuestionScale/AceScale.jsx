@@ -40,13 +40,13 @@ export default function AceScale({ questions, answers, setAnswers }) {
 
   const handleChange = (question, rawValue) => {
     const score = calculateScore(question, rawValue);
-    
+
     // Update local state for UI
-    setSelectedValues(prev => ({
+    setSelectedValues((prev) => ({
       ...prev,
-      [question.id]: rawValue
+      [question.id]: rawValue,
     }));
-    
+
     // Only store the calculated score
     setAnswers((prev) => ({
       ...prev,
@@ -83,7 +83,7 @@ export default function AceScale({ questions, answers, setAnswers }) {
                   {q.id}. {q.text}
                 </p>
 
-                <div className="flex flex-wrap gap-4">
+                <div className="flex flex-col md:flex-row gap-4">
                   {Object.keys(q.scoring).map((option) => (
                     <label
                       key={option}

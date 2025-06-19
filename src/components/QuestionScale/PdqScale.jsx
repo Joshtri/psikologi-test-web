@@ -155,7 +155,7 @@ export default function PdqScale({
         return (
           <div
             key={q.id}
-            className={`relative border p-4 pt-8 rounded shadow ${isSub ? "ml-6 border-dashed border-gray-300" : ""}`}
+            className={`relative border p-4 pt-8 rounded shadow ${isSub ? "border-dashed border-gray-300" : ""}`}
           >
             <p className="mb-4 text-sm text-gray-800">
               {q.id}. {q.text}
