@@ -1,13 +1,6 @@
 import { motion } from "framer-motion";
 
-export default function FormField({
-  field,
-  register,
-  errors,
-  watch,
-  getFieldIcon,
-  index,
-}) {
+export default function FormField({ field, register, errors, watch, getFieldIcon, index }) {
   const IconComponent = getFieldIcon(field.name);
   const hasError = errors[field.name] && field.required;
   const isCompleted = watch(field.name);
@@ -62,7 +55,7 @@ export default function FormField({
 
           {field.type === "select" ? (
             <select
-              {...register(field.name, { required: field.required })}
+              {...register(field.name, field.validation)}
               className={`w-full border rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 transition-all duration-200 ${
                 hasError
                   ? "border-red-300 focus:ring-red-500 focus:border-red-500"
@@ -74,7 +67,10 @@ export default function FormField({
             >
               <option value="">Pilih {field.label}</option>
               {field.options?.map((opt) => (
-                <option key={opt} value={opt}>
+                <option
+                  key={opt}
+                  value={opt}
+                >
                   {opt}
                 </option>
               ))}
@@ -83,7 +79,7 @@ export default function FormField({
             <input
               type={field.type}
               disabled={field.disabled}
-              {...register(field.name, { required: field.required })}
+              {...register(field.name, field.validation)}
               className={`w-full border rounded-lg px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 transition-all duration-200 ${
                 field.disabled
                   ? "bg-amber-50 border-amber-200 cursor-not-allowed"
@@ -93,11 +89,8 @@ export default function FormField({
                   ? "border-purple-300 focus:ring-purple-500 focus:border-purple-500"
                   : "border-gray-300 focus:ring-purple-500 focus:border-purple-500"
               }`}
-              placeholder={
-                field.disabled
-                  ? "Akan terisi otomatis"
-                  : `Masukkan ${field.label.toLowerCase()}`
-              }
+              // Apply validation rules
+              placeholder={field.disabled ? "Akan terisi otomatis" : `Masukkan ${field.label.toLowerCase()}`}
             />
           )}
 
@@ -107,7 +100,8 @@ export default function FormField({
               animate={{ opacity: 1, y: 0 }}
               className="text-red-600 text-sm mt-2 inline-block font-medium"
             >
-              {field.label} wajib diisi
+              {/* Display validation error message */}
+              {errors[field.name]?.message}
             </motion.span>
           )}
         </div>

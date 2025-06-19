@@ -4,14 +4,26 @@ export const respondentFormFields = [
     label: "Nama Lengkap",
     type: "text",
     required: true,
-    validation: { required: "Nama wajib diisi" },
+    validation: {
+      required: "Nama wajib diisi",
+      minLength: { value: 3, message: "Nama harus memiliki minimal 3 karakter" },
+    },
   },
   {
     name: "dateOfBirth",
     label: "Tanggal Lahir",
     type: "date",
     required: true,
-    validation: { required: "Tanggal lahir wajib diisi" },
+    validation: {
+      required: "Tanggal lahir wajib diisi",
+      validate: {
+        notFutureDate: (value) => {
+          const selectedDate = new Date(value);
+          const today = new Date();
+          return selectedDate <= today || "Tanggal lahir tidak boleh di masa depan";
+        },
+      },
+    },
   },
   {
     name: "age",
@@ -32,7 +44,13 @@ export const respondentFormFields = [
     label: "Nomor HP",
     type: "tel",
     required: true,
-    validation: { required: "Nomor HP wajib diisi" },
+    validation: {
+      required: "Nomor HP wajib diisi",
+      pattern: {
+        value: /^[0-9]{10,12}$/,
+        message: "Nomor HP harus berupa angka dan memiliki 10-12 digit",
+      },
+    },
   },
   {
     name: "educationLevel",
@@ -51,27 +69,53 @@ export const respondentFormFields = [
   },
   {
     name: "livingWith",
-    label: "Tinggal Dengan",
+    label: "Saat Ini Tinggal Dengan Siapa",
     type: "text",
+    required: true,
+    validation: {
+      required: "Tinggal dengan siapa wajib diisi",
+    },
   },
   {
     name: "address",
     label: "Alamat",
     type: "text",
+    required: true,
+    validation: {
+      required: "Alamat wajib diisi",
+    },
   },
   {
     name: "parentOccupation",
     label: "Pekerjaan Orang Tua",
     type: "text",
+    required: true,
+    validation: {
+      required: "Pekerjaan orang tua wajib diisi",
+      minLength: { value: 3, message: "Pekerjaan harus memiliki minimal 3 karakter" },
+    },
   },
   {
     name: "birthOrder",
     label: "Anak Ke-",
-    type: "text",
+    type: "number",
+    required: true,
+    validation: {
+      required: "Anak ke- wajib diisi dengan angka",
+      min: { value: 1, message: "Anak ke- harus lebih dari 0" },
+      pattern: {
+        value: /^[0-9]+$/, // Regex to allow only numbers
+        message: "Anak ke- hanya boleh berupa angka",
+      },
+    },
   },
   {
     name: "ethnicity",
     label: "Suku / Etnis",
     type: "text",
+    required: true,
+    validation: {
+      required: "Suku / etnis wajib diisi",
+    },
   },
 ];
