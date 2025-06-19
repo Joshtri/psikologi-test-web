@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 export default function CustomCard({ title, description, icon: Icon, link = "#", color = "text-purple-500", onClick }) {
   return (
-    <div
+    <Link
+      to={link}
       onClick={onClick}
       className="block group cursor-pointer"
     >
@@ -20,7 +21,8 @@ export default function CustomCard({ title, description, icon: Icon, link = "#",
             <div
               className={`${color} text-sm font-medium flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity`}
             >
-              Lihat
+              {title !== "Ekspor Data" ? <span>Lihat</span> : <span>Unduh</span>}
+
               <svg
                 width="14"
                 height="14"
@@ -41,6 +43,6 @@ export default function CustomCard({ title, description, icon: Icon, link = "#",
           </div>
         </div>
       </Card>
-    </div>
+    </Link>
   );
 }
