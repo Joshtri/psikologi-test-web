@@ -125,7 +125,7 @@ export default function RespondentForm() {
             transition={{ delay: 0.2 }}
             className="bg-white shadow-xl rounded-b-2xl overflow-hidden"
           >
-            <div className="p-8">
+            <div className="p-0">
               <form
                 onSubmit={handleSubmit(onSubmit)}
                 className="space-y-6"
