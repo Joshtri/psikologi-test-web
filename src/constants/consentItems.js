@@ -27,7 +27,7 @@ export const consentItems = [
     icon: Heart,
     title: "Insentif Penelitian",
     label:
-      "Saya memahami bahwa saya akan mendapatkan insentif berupa finansial sebesar Rp 25,000,- (dua puluh lima ribu rupiah) untuk 10 orang peserta random dari ovo. tambah 1 poin tentang kesediaan diwawancara lebih lanjut",
+      "Saya memahami bahwa saya akan mendapatkan insentif berupa finansial sebesar Rp 25,000,- (dua puluh lima ribu rupiah) untuk 10 orang peserta random dari ovo.",
   },
   {
     key: "confidentiality",

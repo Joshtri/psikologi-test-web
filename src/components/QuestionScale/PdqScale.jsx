@@ -21,11 +21,9 @@ export default function PdqScale({
   // Function to get the raw value from the stored score
   const getRawValueFromScore = (score) => {
     if (score === undefined) return undefined;
-    
+
     // Find the key that maps to this score
-    return Object.keys(PDQ_SCORING.SCALE_MAPPING).find(
-      key => PDQ_SCORING.SCALE_MAPPING[key] === score
-    );
+    return Object.keys(PDQ_SCORING.SCALE_MAPPING).find((key) => PDQ_SCORING.SCALE_MAPPING[key] === score);
   };
 
   const handleChange = (questionId, rawValue) => {
@@ -157,9 +155,7 @@ export default function PdqScale({
         return (
           <div
             key={q.id}
-            className={`relative border p-4 pt-8 pr-20 rounded shadow ${
-              isSub ? "ml-6 border-dashed border-gray-300" : ""
-            }`}
+            className={`relative border p-4 pt-8 rounded shadow ${isSub ? "ml-6 border-dashed border-gray-300" : ""}`}
           >
             <p className="mb-4 text-sm text-gray-800">
               {q.id}. {q.text}
