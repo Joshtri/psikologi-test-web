@@ -3,10 +3,10 @@ import CustomCard from "@/components/ui/CustomCard";
 
 const cards = [
   {
-    title: "Kelola Skala",
-    description: "Tambah, edit, dan hapus skala psikologis.",
+    title: "Data Master",
+    description: "Lihat semua skala penelitian.",
     icon: FileText,
-    link: "/sys/scales",
+    link: "/sys/master",
     color: "text-purple-500",
   },
   {
@@ -20,22 +20,8 @@ const cards = [
     title: "Hasil Pengisian",
     description: "Lihat rekap hasil pengisian skala dari semua responden.",
     icon: BarChart,
-    link: "/sys/results",
+    link: "/sys/respondents-results",
     color: "text-blue-500",
-  },
-  {
-    title: "Tambah Admin",
-    description: "Kelola pengguna admin sistem.",
-    icon: UserPlus,
-    link: "/sys/users",
-    color: "text-teal-500",
-  },
-  {
-    title: "Konfigurasi Sistem",
-    description: "Pengaturan sistem dan preferensi.",
-    icon: Settings,
-    link: "/sys/settings",
-    color: "text-indigo-500",
   },
   {
     title: "Ekspor Data",
