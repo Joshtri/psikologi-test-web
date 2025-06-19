@@ -5,6 +5,11 @@ import { getRespondents } from "@/services/respondent.service";
 import { saveAs } from "file-saver";
 import * as XLSX from "xlsx";
 
+const formatDate = (dateString) => {
+  const options = { year: "numeric", month: "long", day: "numeric" };
+  return new Intl.DateTimeFormat("id-ID", options).format(new Date(dateString));
+};
+
 const cards = [
   {
     title: "Data Master",
@@ -41,21 +46,15 @@ const cards = [
         const flattenObject = (obj, prefix = "") => {
           const flattened = {};
 
-          // Use Object.keys() to preserve the order of keys
-          const keys = Object.keys(obj);
-
-          for (const key of keys) {
+          for (const key of Object.keys(obj)) {
             const newKey = prefix ? `${prefix}_${key}` : key;
 
             if (typeof obj[key] === "object" && obj[key] !== null && !Array.isArray(obj[key])) {
-              // Recursively flatten nested objects
               const nestedFlattened = flattenObject(obj[key], newKey);
-              // Use Object.keys to preserve order when merging
               Object.keys(nestedFlattened).forEach((nestedKey) => {
                 flattened[nestedKey] = nestedFlattened[nestedKey];
               });
             } else if (Array.isArray(obj[key])) {
-              // Convert arrays to comma-separated strings
               flattened[newKey] = obj[key].join(", ");
             } else {
               flattened[newKey] = obj[key];
@@ -67,7 +66,14 @@ const cards = [
 
         // Process and flatten each respondent's data
         const flattenedData = respondents.map((respondent) => {
-          const { answers, summary, ...basicInfo } = respondent;
+          const { answers, summary, dateOfBirth, createdAt, updatedAt, ...basicInfo } = respondent;
+
+          // Format date fields
+          const formattedDates = {
+            dateOfBirth: formatDate(dateOfBirth),
+            createdAt: formatDate(createdAt),
+            updatedAt: formatDate(updatedAt),
+          };
 
           // Group keys by type while preserving original order within each group
           const otherKeys = [];
@@ -75,7 +81,6 @@ const cards = [
           const pdqKeys = [];
           const aceKeys = [];
 
-          // Separate keys into groups while maintaining original order
           for (const key of Object.keys(answers)) {
             if (key.startsWith("pdq_4-")) {
               pdqKeys.push(key);
@@ -88,24 +93,17 @@ const cards = [
             }
           }
 
-          // Combine in desired order: [other, non-pdq-ace, pdq, ace]
-          console.log("other", otherKeys);
-          console.log("nonPdqAce", nonPdqAceKeys);
-          console.log("pdq", pdqKeys);
-          console.log("ace", aceKeys);
-
           const sortedAnswers = {};
           [...otherKeys, ...nonPdqAceKeys, ...pdqKeys, ...aceKeys].forEach((key) => {
             sortedAnswers[key] = answers[key];
           });
-          console.log("sortedAnswers", sortedAnswers);
 
-          // Flatten the answers and summary objects
           const flattenedAnswers = flattenObject(sortedAnswers, "answer");
           const flattenedSummary = flattenObject(summary, "summary");
 
           return {
             ...basicInfo,
+            ...formattedDates,
             ...flattenedAnswers,
             ...flattenedSummary,
           };
