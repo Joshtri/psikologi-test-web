@@ -1,9 +1,12 @@
-import { Card } from "flowbite-react"
-import { Link } from "react-router-dom"
+import { Card } from "flowbite-react";
+import { Link } from "react-router-dom";
 
-export default function CustomCard({ title, description, icon: Icon, link = "#", color = "text-purple-500" }) {
+export default function CustomCard({ title, description, icon: Icon, link = "#", color = "text-purple-500", onClick }) {
   return (
-    <Link to={link} className="block group">
+    <div
+      onClick={onClick}
+      className="block group cursor-pointer"
+    >
       <Card className="h-full border-t-4 border-transparent hover:shadow-md transition-all duration-200">
         <div className="flex flex-col h-full p-5">
           <div className={`${color} mb-4`}>
@@ -38,6 +41,6 @@ export default function CustomCard({ title, description, icon: Icon, link = "#",
           </div>
         </div>
       </Card>
-    </Link>
-  )
+    </div>
+  );
 }
