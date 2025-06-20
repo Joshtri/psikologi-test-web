@@ -6,10 +6,7 @@ export const respondentFormFields = [
     required: true,
     validation: {
       required: "Nama wajib diisi",
-      minLength: {
-        value: 3,
-        message: "Nama harus memiliki minimal 3 karakter",
-      },
+      minLength: { value: 3, message: "Nama harus memiliki minimal 3 karakter" },
     },
   },
   {
@@ -23,9 +20,7 @@ export const respondentFormFields = [
         notFutureDate: (value) => {
           const selectedDate = new Date(value);
           const today = new Date();
-          return (
-            selectedDate <= today || "Tanggal lahir tidak boleh di masa depan"
-          );
+          return selectedDate <= today || "Tanggal lahir tidak boleh di masa depan";
         },
       },
     },
@@ -62,17 +57,7 @@ export const respondentFormFields = [
     label: "Pendidikan Terakhir",
     type: "select",
     required: true,
-    options: [
-      "Belum/Tidak Pernah Sekolah",
-      "Belum/Tidak Tamat SD/SDLB/MI/Paket A",
-      "SD/SDLB/MI/Paket A",
-      "SMP/SMPLB/MTs/Paket B",
-      "SMA/SMLB/MA/SMK/MAK/paket C",
-      "DI/DII/DIII",
-      "DIV/S1",
-      "S2",
-      "S3",
-    ],
+    options: ["SD", "SMP", "SMA", "S1",""],
     validation: { required: "Pendidikan wajib dipilih" },
   },
   {
@@ -107,10 +92,7 @@ export const respondentFormFields = [
     required: true,
     validation: {
       required: "Pekerjaan orang tua wajib diisi",
-      minLength: {
-        value: 3,
-        message: "Pekerjaan harus memiliki minimal 3 karakter",
-      },
+      minLength: { value: 3, message: "Pekerjaan harus memiliki minimal 3 karakter" },
     },
   },
   {
