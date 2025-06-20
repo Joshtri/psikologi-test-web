@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Heart, Brain, Smile, Shield, ChevronDown, CheckCircle, XCircle } from "lucide-react"
-import { Card } from "flowbite-react"
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Heart, Brain, Smile, Shield, ChevronDown, CheckCircle, XCircle } from "lucide-react";
+import { Card } from "flowbite-react";
 
 // Import individual JSON files
 // import hfsData from "../../data/hfs.json"
@@ -11,25 +11,25 @@ import { Card } from "flowbite-react"
 // import pwbData from "../data/pwb.json"
 // import aceData from "../data/ace.json"
 
-import hfsData from "../../../../data/questions/hfsQuestion.json"
-import pdq4Data from "../../../../data/questions/pdqQuestion.json"
-import pwbData from "../../../../data/questions/pwbQuestion.json"
-import aceData from "../../../../data/questions/aceQuestion.json"
-import PageBreadcrumb from "@/components/ui/PageBreadcrumb"
+import hfsData from "../../../../data/questions/hfsQuestion.json";
+import pdq4Data from "../../../../data/questions/pdqQuestion.json";
+import pwbData from "../../../../data/questions/pwbQuestion.json";
+import aceData from "../../../../data/questions/aceQuestion.json";
+import PageBreadcrumb from "@/components/ui/PageBreadcrumb";
 
 const assessments = {
   hfs: hfsData,
   pdq4: pdq4Data,
   pwb: pwbData,
   ace: aceData,
-}
+};
 
 const tabIcons = {
   hfs: Heart,
   pdq4: Brain,
   pwb: Smile,
   ace: Shield,
-}
+};
 
 const subscaleColors = {
   self: "text-purple-600 bg-purple-50",
@@ -45,44 +45,46 @@ const subscaleColors = {
   "Relasi Positif": "text-sky-600 bg-sky-50",
   "Tujuan Hidup": "text-violet-600 bg-violet-50",
   "Penerimaan Diri": "text-fuchsia-600 bg-fuchsia-50",
-}
+};
 
 export default function MasterPage() {
-  const [activeTab, setActiveTab] = useState("hfs")
-  const [expandedSections, setExpandedSections] = useState({})
+  const [activeTab, setActiveTab] = useState("hfs");
+  const [expandedSections, setExpandedSections] = useState({});
 
   const toggleSection = (sectionId) => {
     setExpandedSections((prev) => ({
       ...prev,
       [sectionId]: !prev[sectionId],
-    }))
-  }
+    }));
+  };
 
   const groupQuestionsByCategory = (questions, categoryKey = "subscale") => {
     return questions.reduce((groups, question) => {
-      const category = question[categoryKey] || "Other"
+      const category = question[categoryKey] || "Other";
       if (!groups[category]) {
-        groups[category] = []
+        groups[category] = [];
       }
-      groups[category].push(question)
-      return groups
-    }, {})
-  }
+      groups[category].push(question);
+      return groups;
+    }, {});
+  };
 
   const renderHFSContent = () => {
-    const data = assessments.hfs
-    const groupedQuestions = groupQuestionsByCategory(data.questions, "subscale")
+    const data = assessments.hfs;
+    const groupedQuestions = groupQuestionsByCategory(data.questions, "subscale");
 
     return (
       <div className="space-y-6">
-
         <PageBreadcrumb items={[{ label: "Data Master" }]} />
         <div className="bg-purple-50 p-4 rounded-lg">
           <h3 className="font-semibold text-purple-800 mb-2">Instruksi</h3>
           <p className="text-purple-700">{data.instructions}</p>
           <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
             {Object.entries(data.scale.labels).map(([key, value]) => (
-              <div key={key} className="bg-white p-2 rounded text-center">
+              <div
+                key={key}
+                className="bg-white p-2 rounded text-center"
+              >
                 <span className="font-medium">{key}:</span> {value}
               </div>
             ))}
@@ -90,14 +92,19 @@ export default function MasterPage() {
         </div>
 
         {Object.entries(groupedQuestions).map(([subscale, questions]) => (
-          <Card key={subscale} className="p-4">
+          <Card
+            key={subscale}
+            className="p-4"
+          >
             <div
               className="flex items-center justify-between cursor-pointer"
               onClick={() => toggleSection(`hfs-${subscale}`)}
             >
               <div className="flex items-center space-x-3">
                 <div
-                  className={`px-3 py-1 rounded-full text-sm font-medium ${subscaleColors[subscale] || "text-gray-600 bg-gray-50"}`}
+                  className={`px-3 py-1 rounded-full text-sm font-medium ${
+                    subscaleColors[subscale] || "text-gray-600 bg-gray-50"
+                  }`}
                 >
                   {subscale.charAt(0).toUpperCase() + subscale.slice(1)}
                 </div>
@@ -118,7 +125,10 @@ export default function MasterPage() {
                   className="mt-4 space-y-3"
                 >
                   {questions.map((question) => (
-                    <div key={question.id} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <div
+                      key={question.id}
+                      className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg"
+                    >
                       <div className="flex-shrink-0 w-8 h-8 bg-white rounded-full flex items-center justify-center text-sm font-medium">
                         {question.id}
                       </div>
@@ -141,12 +151,12 @@ export default function MasterPage() {
           </Card>
         ))}
       </div>
-    )
-  }
+    );
+  };
 
   const renderPDQ4Content = () => {
-    const data = assessments.pdq4
-    const groupedQuestions = groupQuestionsByCategory(data.questions, "label")
+    const data = assessments.pdq4;
+    const groupedQuestions = groupQuestionsByCategory(data.questions, "label");
 
     return (
       <div className="space-y-6">
@@ -155,7 +165,10 @@ export default function MasterPage() {
           <p className="text-blue-700">{data.instructions}</p>
           <div className="mt-3 flex space-x-4 text-sm">
             {Object.entries(data.scale.labels).map(([key, value]) => (
-              <div key={key} className="bg-white p-2 rounded">
+              <div
+                key={key}
+                className="bg-white p-2 rounded"
+              >
                 <span className="font-medium capitalize">{key}:</span> {value}
               </div>
             ))}
@@ -163,16 +176,21 @@ export default function MasterPage() {
         </div>
 
         {Object.entries(groupedQuestions).map(([category, questions]) => {
-          if (!category || category === "") return null
+          if (!category || category === "") return null;
           return (
-            <Card key={category} className="p-4">
+            <Card
+              key={category}
+              className="p-4"
+            >
               <div
                 className="flex items-center justify-between cursor-pointer"
                 onClick={() => toggleSection(`pdq4-${category}`)}
               >
                 <div className="flex items-center space-x-3">
                   <div
-                    className={`px-3 py-1 rounded-full text-sm font-medium ${subscaleColors[category] || "text-gray-600 bg-gray-50"}`}
+                    className={`px-3 py-1 rounded-full text-sm font-medium ${
+                      subscaleColors[category] || "text-gray-600 bg-gray-50"
+                    }`}
                   >
                     {category}
                   </div>
@@ -193,7 +211,10 @@ export default function MasterPage() {
                     className="mt-4 space-y-3"
                   >
                     {questions.map((question) => (
-                      <div key={question.id} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                      <div
+                        key={question.id}
+                        className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg"
+                      >
                         <div className="flex-shrink-0 w-8 h-8 bg-white rounded-full flex items-center justify-center text-sm font-medium">
                           {question.id}
                         </div>
@@ -218,15 +239,15 @@ export default function MasterPage() {
                 )}
               </AnimatePresence>
             </Card>
-          )
+          );
         })}
       </div>
-    )
-  }
+    );
+  };
 
   const renderPWBContent = () => {
-    const data = assessments.pwb
-    const groupedQuestions = groupQuestionsByCategory(data.questions, "category")
+    const data = assessments.pwb;
+    const groupedQuestions = groupQuestionsByCategory(data.questions, "category");
 
     return (
       <div className="space-y-6">
@@ -235,7 +256,10 @@ export default function MasterPage() {
           <p className="text-green-700">{data.instructions}</p>
           <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-2 text-sm">
             {Object.entries(data.scale.labels).map(([key, value]) => (
-              <div key={key} className="bg-white p-2 rounded text-center">
+              <div
+                key={key}
+                className="bg-white p-2 rounded text-center"
+              >
                 <span className="font-medium">{key}:</span> {value}
               </div>
             ))}
@@ -243,14 +267,19 @@ export default function MasterPage() {
         </div>
 
         {Object.entries(groupedQuestions).map(([category, questions]) => (
-          <Card key={category} className="p-4">
+          <Card
+            key={category}
+            className="p-4"
+          >
             <div
               className="flex items-center justify-between cursor-pointer"
               onClick={() => toggleSection(`pwb-${category}`)}
             >
               <div className="flex items-center space-x-3">
                 <div
-                  className={`px-3 py-1 rounded-full text-sm font-medium ${subscaleColors[category] || "text-gray-600 bg-gray-50"}`}
+                  className={`px-3 py-1 rounded-full text-sm font-medium ${
+                    subscaleColors[category] || "text-gray-600 bg-gray-50"
+                  }`}
                 >
                   {category}
                 </div>
@@ -271,7 +300,10 @@ export default function MasterPage() {
                   className="mt-4 space-y-3"
                 >
                   {questions.map((question) => (
-                    <div key={question.id} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                    <div
+                      key={question.id}
+                      className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg"
+                    >
                       <div className="flex-shrink-0 w-8 h-8 bg-white rounded-full flex items-center justify-center text-sm font-medium">
                         {question.id}
                       </div>
@@ -294,11 +326,11 @@ export default function MasterPage() {
           </Card>
         ))}
       </div>
-    )
-  }
+    );
+  };
 
   const renderACEContent = () => {
-    const data = assessments.ace
+    const data = assessments.ace;
 
     return (
       <div className="space-y-6">
@@ -308,7 +340,10 @@ export default function MasterPage() {
         </div>
 
         {data.sections.map((section, sectionIndex) => (
-          <Card key={sectionIndex} className="p-4">
+          <Card
+            key={sectionIndex}
+            className="p-4"
+          >
             <div
               className="flex items-center justify-between cursor-pointer"
               onClick={() => toggleSection(`ace-${sectionIndex}`)}
@@ -318,7 +353,9 @@ export default function MasterPage() {
                 <span className="text-gray-600">({section.questions.length} pertanyaan)</span>
               </div>
               <ChevronDown
-                className={`w-5 h-5 transition-transform ${expandedSections[`ace-${sectionIndex}`] ? "rotate-180" : ""}`}
+                className={`w-5 h-5 transition-transform ${
+                  expandedSections[`ace-${sectionIndex}`] ? "rotate-180" : ""
+                }`}
               />
             </div>
 
@@ -334,7 +371,10 @@ export default function MasterPage() {
                   <p className="text-sm text-gray-600 mb-4 italic">{section.instructions}</p>
                   <div className="space-y-3">
                     {section.questions.map((question) => (
-                      <div key={question.id} className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
+                      <div
+                        key={question.id}
+                        className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg"
+                      >
                         <div className="flex-shrink-0 w-8 h-8 bg-white rounded-full flex items-center justify-center text-sm font-medium">
                           {question.id}
                         </div>
@@ -372,23 +412,23 @@ export default function MasterPage() {
           </Card>
         ))}
       </div>
-    )
-  }
+    );
+  };
 
   const renderContent = () => {
     switch (activeTab) {
       case "hfs":
-        return renderHFSContent()
+        return renderHFSContent();
       case "pdq4":
-        return renderPDQ4Content()
+        return renderPDQ4Content();
       case "pwb":
-        return renderPWBContent()
+        return renderPWBContent();
       case "ace":
-        return renderACEContent()
+        return renderACEContent();
       default:
-        return null
+        return null;
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 py-8 px-6">
@@ -401,10 +441,10 @@ export default function MasterPage() {
         {/* Tabs */}
         <div className="mb-8">
           <div className="border-b border-gray-200">
-            <nav className="-mb-px flex space-x-8">
+            <nav className="-mb-px flex space-x-8 scroll-auto overflow-x-auto">
               {Object.entries(assessments).map(([key, assessment]) => {
-                const Icon = tabIcons[key]
-                const isActive = activeTab === key
+                const Icon = tabIcons[key];
+                const isActive = activeTab === key;
 
                 return (
                   <button
@@ -417,11 +457,13 @@ export default function MasterPage() {
                     }`}
                   >
                     <Icon
-                      className={`mr-2 h-5 w-5 ${isActive ? "text-purple-500" : "text-gray-400 group-hover:text-gray-500"}`}
+                      className={`mr-2 h-5 w-5 ${
+                        isActive ? "text-purple-500" : "text-gray-400 group-hover:text-gray-500"
+                      }`}
                     />
                     {assessment.name}
                   </button>
-                )
+                );
               })}
             </nav>
           </div>
@@ -441,5 +483,5 @@ export default function MasterPage() {
         </AnimatePresence>
       </div>
     </div>
-  )
+  );
 }
