@@ -57,7 +57,7 @@ export const respondentFormFields = [
     label: "Pendidikan Terakhir",
     type: "select",
     required: true,
-    options: ["SD", "SMP", "SMA", "S1",""],
+    options: ["SD", "SMP", "SMA", "S1"],
     validation: { required: "Pendidikan wajib dipilih" },
   },
   {
