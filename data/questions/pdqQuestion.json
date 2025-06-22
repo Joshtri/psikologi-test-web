@@ -15,17 +15,17 @@
   "questions": [
     {
       "id": 1,
-      "text": "Saya ingin menjadi pusat perhatian",
+      "text": "Saya berusaha menjadi pusat perhatian",
       "label": "Histrionik"
     },
     {
       "id": 2,
-      "text": "Saya memiliki pencapaian yang jauh lebih besar daripada yang orang ketahui",
+      "text": "Saya telah memiliki banyak pencapaian yang kurang diakui dan dihargai oleh orang lain",
       "label": "Narcissistic"
     },
     {
       "id": 3,
-      "text": "Saya akan melakukan tindakan berbahaya untuk mencegah orang yang saya cintai meninggalkan saya",
+      "text": "Saya akan melakukan apa pun, hingga hal yang ekstrim, agar tidak ditinggalkan oleh orang yang saya cintai.",
       "label": "Borderline"
     },
     {
@@ -35,17 +35,17 @@
     },
     {
       "id": 5,
-      "text": "Saya lebih menarik dibandingkan orang lain",
+      "text": "Saya lebih “menarik” dibandingkan kebanyakan orang",
       "label": "Histrionik"
     },
     {
       "id": 6,
-      "text": "Saya berpikir tentang betapa hebatnya diri saya, baik sekarang maupun di masa depan",
+      "text": "Saya kerap membayangkan betapa hebatnya diri saya, baik sekarang maupun di masa depan",
       "label": "Narcissistic"
     },
     {
       "id": 7,
-      "text": "Saya hanya bisa mencintai seseorang atau membenci mereka, tidak ada perasaan netral",
+      "text": "Saya hanya bisa mencintai seseorang atau membenci seseorang, tidak ada perasaan netral",
       "label": "Borderline"
     },
     {
@@ -60,32 +60,32 @@
     },
     {
       "id": 10,
-      "text": "Hanya orang-orang tertentu yang dapat menghargai dan memahami saya",
+      "text": "Hanya orang-orang istimewa yang dapat menghargai dan memahami saya",
       "label": "Narcissistic"
     },
     {
       "id": 11,
-      "text": "Saya sering bertanya-tanya mengenai jati diri saya",
+      "text": "Saya sering bertanya-tanya siapa saya sebenarnya.",
       "label": "Borderline"
     },
     {
       "id": 12,
-      "text": "Saya mengalami kesulitan dalam membayar tagihan karena saya tidak bertahan lama di satu pekerjaan",
+      "text": "Saya mengalami kesulitan dalam menyelesaikan tanggungjawab karena saya tidak bertahan lama di satu pekerjaan",
       "label": "Antisocial"
     },
     {
       "id": 13,
-      "text": "Saya suka berpura-pura “pemain” untuk mendapatkan perhatian yang saya butuhkan",
+      "text": "Saya menggunakan “penampilan” saya untuk mendapatkan perhatian yang saya butuhkan",
       "label": "Histrionik"
     },
     {
       "id": 14,
-      "text": "Saya sangat membutuhkan perhatian atau pujian dari orang lain",
+      "text": "Saya butuh orang lain memperhatikan atau memuji saya.",
       "label": "Narcissistic"
     },
     {
       "id": 15,
-      "text": "Saya pernah mencoba menyakiti atau membunuh diri saya",
+      "text": "Saya pernah mencoba menyakiti atau mengakhiri hidup saya.",
       "label": "Borderline"
     },
     {
@@ -100,12 +100,12 @@
     },
     {
       "id": 18,
-      "text": "Saya merasa orang lain mau membantu saya meskipun saya tidak selalu memberi mereka perhatian",
+      "text": "Saya berharap agar orang lain mau membantu saya meskipun saya tidak selalu membantu mereka",
       "label": "Narcissistic"
     },
     {
       "id": 19,
-      "text": "Suasana hati saya mudah berubah secara tiba-tiba",
+      "text": "Suasana hati saya bisa berubah drastis dalam waktu singkat",
       "label": "Borderline"
     },
     {
@@ -120,17 +120,17 @@
     },
     {
       "id": 22,
-      "text": "Beberapa orang berpikir bahwa saya suka memanfaatkan orang lain",
+      "text": "Ada yang menganggap saya suka memanfaatkan orang lain",
       "label": "Narcissistic"
     },
     {
       "id": 23,
-      "text": "Saya merasa hidup saya membosankan dan tidak bermakna",
+      "text": "Hidup saya kerap terasa hampa, seolah tidak ada maknanya.",
       "label": "Borderline"
     },
     {
       "id": 24,
-      "text": "Orang-orang sering mengeluh bahwa saya tidak menyadari saat mereka sedang marah",
+      "text": "Orang-orang sering mengeluh bahwa saya tidak menyadari saat mereka sedang kesal",
       "label": "Narcissistic"
     },
     {
@@ -140,12 +140,12 @@
     },
     {
       "id": 26,
-      "text": "Saya kesulitan mengendalikan amarah atau temperamen saya",
+      "text": "Saya sulit mengendalikan kemarahan atau temperamen saya",
       "label": "Borderline"
     },
     {
       "id": 27,
-      "text": "Sebagian orang merasa iri pada saya",
+      "text": "Ada beberapa orang yang merasa iri pada saya",
       "label": "Narcissistic"
     },
     {
@@ -155,17 +155,17 @@
     },
     {
       "id": 29,
-      "text": "Saya lebih serius dalam menjalin hubungan dibandingkan dengan orang yang menjalin hubungan dengan saya",
+      "text": "Saya menganggap hubungan lebih serius dibandingkan mereka yang menjalin hubungan dengan saya",
       "label": "Histrionik"
     },
     {
       "id": 30,
-      "text": "Orang lain menganggap saya sombong",
+      "text": "Orang lain menganggap saya bersikap angkuh",
       "label": "Narcissistic"
     },
     {
       "id": 31,
-      "text": "Saat saya stres, hal-hal tak terduga terjadi. Misalnya saya menjadi paranoid (ketakutan dan curiga berlebihan) atau tiba-tiba kehilangan kesadaran",
+      "text": "Saat saya stres, hal-hal tak terduga terjadi, misalnya saya menjadi paranoid (ketakutan dan curiga berlebihan) atau tiba-tiba kehilangan kesadaran diri",
       "label": "Borderline"
     },
     {
@@ -175,43 +175,43 @@
     },
     {
       "id": 33,
-      "text": "Saya pernah melakukan sesuatu secara impulsif (seperti hal-hal di bawah ini) yang bisa membuat saya dalam masalah",
+      "text": "Saya pernah melakukan sesuatu secara impulsif (seperti hal-hal di bawah ini) yang bisa membuat saya dalam masalah:",
       "label": "Borderline",
       "isInstruction": true
     },
     {
       "id": 34,
-      "text": "Menghabiskan lebih banyak uang dari pada yang saya miliki",
+      "text": "Menghabiskan uang melebihi kemampuan saya",
       "label": "Borderline",
       "parentId": 33
     },
     {
       "id": 35,
-      "text": "Berhubungan intim dengan orang yang belum saya kenal baik",
+      "text": "Berhubungan intim dengan orang yang belum saya kenal dengan baik",
       "label": "Borderline",
       "parentId": 33
     },
     {
       "id": 36,
-      "text": "Terlalu banyak mengonsumsi alkohol",
+      "text": "Mengonsumsi alkohol secara berlebihan",
       "label": "Borderline",
       "parentId": 33
     },
     {
       "id": 37,
-      "text": "Mengonsumsi obat-obatan terlarang",
+      "text": "Menggunakan obat-obatan terlarang",
       "label": "Borderline",
       "parentId": 33
     },
     {
       "id": 38,
-      "text": "Makan secara berlebihan hingga kehilangan kontrol",
+      "text": "Makan secara berlebihan hingga tidak terkontrol",
       "label": "Borderline",
       "parentId": 33
     },
     {
       "id": 39,
-      "text": "Berkendara secara ugal-ugalan",
+      "text": "Berkendara secara sembrono atau berbahaya",
       "label": "Borderline",
       "parentId": 33
     }
