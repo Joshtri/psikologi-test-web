@@ -101,7 +101,7 @@
     {
       "id": 18,
       "text": "Saya merasa orang lain mau membantu saya meskipun saya tidak selalu memberi mereka perhatian",
-      "label": "Borderline"
+      "label": "Narcissistic"
     },
     {
       "id": 19,
@@ -131,7 +131,7 @@
     {
       "id": 24,
       "text": "Orang-orang sering mengeluh bahwa saya tidak menyadari saat mereka sedang marah",
-      "label": "Antisocial"
+      "label": "Narcissistic"
     },
     {
       "id": 25,
@@ -141,12 +141,12 @@
     {
       "id": 26,
       "text": "Saya kesulitan mengendalikan amarah atau temperamen saya",
-      "label": "Antisocial"
+      "label": "Borderline"
     },
     {
       "id": 27,
       "text": "Sebagian orang merasa iri pada saya",
-      "label": "Antisocial"
+      "label": "Narcissistic"
     },
     {
       "id": 28,
@@ -156,12 +156,12 @@
     {
       "id": 29,
       "text": "Saya lebih serius dalam menjalin hubungan dibandingkan dengan orang yang menjalin hubungan dengan saya",
-      "label": "Narcissistic"
+      "label": "Histrionik"
     },
     {
       "id": 30,
       "text": "Orang lain menganggap saya sombong",
-      "label": "Antisocial"
+      "label": "Narcissistic"
     },
     {
       "id": 31,
